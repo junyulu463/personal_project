@@ -1,0 +1,501 @@
+store_number	phone	city_name	city_state	district_number
+481	1634602222	Columbus	Ohio	1
+479	1229803045	Bakersfield	California	6
+480	2750672075	Portland	Oregon	4
+478	9479328065	Glendale	Arizona	5
+477	8620731401	North Las Vegas	Nevada	1
+476	7948944039	Glendale	Arizona	3
+475	4639854061	Garland	Texas	1
+474	2548145019	St. Paul	Minnesota	5
+472	1448888005	Indianapolis	Indiana	5
+473	5531820239	Miami	Florida	6
+471	4582485890	Chesapeake	Virginia	1
+470	8791589930	Scottsdale	Arizona	2
+469	0458534271	Omaha	Nebraska	6
+468	8408378033	Tucson	Arizona	6
+467	9460074593	Durham	North Carolina	5
+466	1826353275	Portland	Oregon	3
+465	4391998983	Mesa	Arizona	2
+464	8866428814	Stockton	California	1
+463	9458536109	Tampa	Florida	4
+462	6237968303	Mesa	Arizona	5
+461	6386304513	Fort Worth	Texas	2
+459	0079249255	Oakland	California	3
+460	2463005650	Mesa	Arizona	2
+458	8298516408	Atlanta	Georgia	1
+457	0499072226	Raleigh	North Carolina	4
+456	1234116232	Corpus Christi	Texas	4
+454	4367928917	San Francisco	California	6
+455	7736431636	Miami	Florida	2
+453	1962276232	Indianapolis	Indiana	5
+452	8873279541	Boston	Massachusetts	3
+451	0093813390	Philadelphia	Pennsylvania	5
+450	0989059420	El Paso	Texas	5
+449	0249477230	Houston	Texas	1
+448	9515025944	Miami	Florida	3
+447	0488898556	Anaheim	California	4
+446	0263642934	Seattle	Washington	4
+445	7963875545	Jacksonville	Florida	1
+443	3107509965	Long Beach	California	5
+444	3946837684	San Jose	California	6
+442	2882142685	Colorado Springs	Colorado	1
+441	7945835822	Philadelphia	Pennsylvania	6
+439	6366441480	Laredo	Texas	2
+440	5843313936	St. Paul	Minnesota	5
+438	1785875818	Los Angeles	California	1
+437	7339905483	Houston	Texas	2
+436	6857304399	Seattle	Washington	2
+435	0822998645	Lubbock	Texas	5
+434	8382709890	Miami	Florida	6
+433	6213637974	Bakersfield	California	6
+432	4840005375	San Francisco	California	2
+430	3508612214	St. Petersburg	Florida	2
+431	9221534925	Fort Worth	Texas	4
+429	1704906563	Long Beach	California	4
+428	0990677462	Anaheim	California	2
+425	4597802201	Colorado Springs	Colorado	6
+426	0199852424	Detroit	Michigan	5
+427	6546823657	Miami	Florida	3
+424	8657345186	Durham	North Carolina	5
+423	1695146186	Arlington	Texas	3
+421	9434757040	Buffalo	New York	1
+422	2583771613	Denver	Colorado	4
+420	5782736083	Newark	New Jersey	3
+418	9232022584	Laredo	Texas	1
+419	6510772752	Cleveland	Ohio	6
+417	8895483375	Winston-Salem	North Carolina	4
+416	0213980782	Austin	Texas	3
+414	8471603547	New York	New York	6
+415	5288706446	Baton Rouge	Louisiana	2
+412	0977226382	Madison	Wisconsin	2
+413	9354385359	Richmond	Virginia	5
+410	0545067370	Jersey City	New Jersey	6
+411	9917773529	Glendale	Arizona	1
+409	8184815839	Los Angeles	California	3
+408	3654492377	Fort Wayne	Indiana	6
+407	3449462674	Bakersfield	California	4
+404	2405566675	Anaheim	California	3
+405	0706591911	Houston	Texas	6
+406	3544225293	El Paso	Texas	6
+402	4891439667	San Antonio	Texas	6
+403	0857346418	Honolulu	Hawaii	1
+401	8145136193	Jacksonville	Florida	3
+400	5284777919	Fresno	California	5
+398	2658516438	Reno	Nevada	2
+399	0677339551	Austin	Texas	6
+397	3755453724	Corpus Christi	Texas	5
+396	2580839404	St. Paul	Minnesota	5
+395	6230275498	Fort Wayne	Indiana	4
+394	1170372520	Dallas	Texas	2
+392	4132559978	New Orleans	Louisiana	2
+393	2441484737	Henderson	Nevada	2
+390	4189948066	Santa Ana	California	5
+391	2578618553	Kansas City	Missouri	4
+389	7209945569	Columbus	Ohio	3
+388	7106485161	Chesapeake	Virginia	4
+387	8736270873	Cleveland	Ohio	1
+386	6421135158	Lincoln	Nebraska	1
+385	4334112672	Pittsburgh	Pennsylvania	1
+384	0565643983	Baltimore	Maryland	6
+383	5991939786	Tampa	Florida	4
+382	3945116159	Honolulu	Hawaii	4
+380	3745398818	Bakersfield	California	1
+381	9430978193	Chesapeake	Virginia	2
+379	6543248341	Portland	Oregon	1
+378	8335492858	Aurora	Colorado	2
+377	4171068544	Lexington-Fayette	Kentucky	3
+376	0521399510	Raleigh	North Carolina	1
+375	8236805802	Tucson	Arizona	5
+374	6849339918	Portland	Oregon	4
+371	6238926251	Cincinnati	Ohio	4
+372	0471579420	Columbus	Ohio	4
+373	0770323230	Bakersfield	California	3
+370	7781305630	Norfolk	Virginia	4
+369	0497140699	Hialeah	Florida	5
+368	0531152214	Detroit	Michigan	1
+367	6491557829	San Francisco	California	6
+366	1244500174	San Jose	California	4
+365	6177750222	Minneapolis	Minnesota	2
+363	2335354170	Glendale	Arizona	1
+364	7974773463	Norfolk	Virginia	2
+362	9929206232	Fremont	California	1
+361	2763165133	Newark	New Jersey	2
+360	5411648344	Greensboro	North Carolina	4
+359	7159778682	Chesapeake	Virginia	4
+358	7292399880	Laredo	Texas	6
+357	7660413089	Tulsa	Oklahoma	6
+356	5568032245	Honolulu	Hawaii	6
+355	9728138288	San Francisco	California	6
+354	8591191507	Raleigh	North Carolina	1
+353	7556631893	Toledo	Ohio	1
+352	5878493922	Chicago	Illinois	4
+350	9567674258	North Las Vegas	Nevada	1
+351	2133112154	Milwaukee	Wisconsin	5
+348	9999524524	Hialeah	Florida	6
+349	2339807138	Baltimore	Maryland	5
+347	1732392593	Henderson	Nevada	1
+346	9142673245	Garland	Texas	3
+345	6199965329	Albuquerque	New Mexico	3
+344	5773706797	Cincinnati	Ohio	4
+343	6814212967	Anaheim	California	4
+342	2799494790	Riverside	California	2
+340	4256901133	Phoenix	Arizona	5
+341	7192186906	Durham	North Carolina	3
+339	5992147693	Corpus Christi	Texas	1
+338	0911933873	Irving	Texas	2
+337	5483815684	Aurora	Colorado	6
+336	7896734194	Henderson	Nevada	6
+334	4532809359	Stockton	California	4
+335	7730110037	North Las Vegas	Nevada	3
+333	0009493779	Fremont	California	4
+331	1579139758	Lubbock	Texas	1
+332	6311656263	Denver	Colorado	1
+329	3543426515	Baton Rouge	Louisiana	4
+330	9380074035	Cincinnati	Ohio	5
+327	5974917067	Kansas City	Missouri	4
+328	9901057954	San Francisco	California	4
+326	9363142169	San Jose	California	6
+325	7665101657	Washington	District of Columbia	5
+324	2518960347	Columbus	Ohio	4
+323	6283213634	New York	New York	5
+322	0011723586	Chicago	Illinois	2
+321	1641114145	Fort Worth	Texas	4
+320	7642337922	Bakersfield	California	6
+318	7249872143	Phoenix	Arizona	6
+319	4250895299	Long Beach	California	4
+317	3257226387	Newark	New Jersey	3
+314	0048035277	Austin	Texas	3
+315	1148802341	Austin	Texas	5
+316	1117761812	Norfolk	Virginia	3
+312	0026734396	Scottsdale	Arizona	1
+313	4401500290	Madison	Wisconsin	2
+311	7287128004	Jersey City	New Jersey	4
+310	5113170541	Plano	Texas	1
+308	5107214718	Laredo	Texas	1
+309	4568268332	El Paso	Texas	4
+307	9908199561	Atlanta	Georgia	6
+306	5416173720	Pittsburgh	Pennsylvania	4
+305	7451026607	Milwaukee	Wisconsin	1
+304	7872178028	Bakersfield	California	3
+302	8392832913	Charlotte	North Carolina	6
+303	4448294348	Aurora	Colorado	2
+301	3435784980	Columbus	Ohio	6
+300	6950048997	Santa Ana	California	3
+299	9181565928	Riverside	California	2
+298	7880553219	Louisville/Jefferson County	Kentucky	6
+297	4391669443	North Las Vegas	Nevada	4
+296	3228286908	Reno	Nevada	4
+295	2938705797	Kansas City	Missouri	1
+294	4753615029	Nashville-Davidson	Tennessee	3
+293	8768046410	Boston	Massachusetts	4
+291	0163092785	Seattle	Washington	2
+292	4545914327	Laredo	Texas	4
+290	8987492959	Lexington-Fayette	Kentucky	6
+289	5731751095	Tulsa	Oklahoma	2
+288	1582325377	Omaha	Nebraska	3
+287	4716968841	Chula Vista	California	5
+286	5867444593	Houston	Texas	4
+285	5126613909	St. Paul	Minnesota	3
+284	3756398877	Kansas City	Missouri	1
+283	9721647890	Houston	Texas	1
+281	3168684021	St. Louis	Missouri	1
+282	0620263213	Chesapeake	Virginia	1
+280	2667863100	Chula Vista	California	5
+279	8560462545	Corpus Christi	Texas	5
+277	8779311289	Austin	Texas	3
+278	0144263020	Cleveland	Ohio	1
+275	0676924997	Kansas City	Missouri	5
+276	3729874200	Irving	Texas	6
+274	2615026546	Cleveland	Ohio	5
+273	5772964207	Oakland	California	5
+271	1917030081	Denver	Colorado	5
+272	7981596925	Lexington-Fayette	Kentucky	5
+270	9425644288	Columbus	Ohio	2
+269	1198193607	Washington	District of Columbia	2
+268	1210530087	Atlanta	Georgia	6
+267	1924030320	Boise City	Idaho	6
+266	4745631629	Anchorage	Alaska	6
+265	3498181792	Lubbock	Texas	6
+264	8396016078	Bakersfield	California	1
+263	6414396896	San Diego	California	3
+262	4949433742	Los Angeles	California	4
+259	0652453186	Tucson	Arizona	3
+260	5265981326	Nashville-Davidson	Tennessee	4
+261	0093641111	Albuquerque	New Mexico	6
+258	6943035684	New Orleans	Louisiana	3
+256	1246464575	Phoenix	Arizona	6
+257	7109321765	Tucson	Arizona	6
+255	9482706408	Honolulu	Hawaii	1
+254	2452412741	San Diego	California	5
+253	8856816870	Mesa	Arizona	3
+252	6647255127	Jersey City	New Jersey	4
+251	5321699713	Newark	New Jersey	2
+250	6568822404	Tampa	Florida	4
+248	0010226195	Pittsburgh	Pennsylvania	5
+249	6123737831	Baltimore	Maryland	2
+247	0227090678	Fort Wayne	Indiana	4
+245	0368914225	Aurora	Colorado	2
+246	0248926350	Lincoln	Nebraska	1
+243	3433952683	San Antonio	Texas	3
+244	6118583880	Anchorage	Alaska	2
+242	6677634593	Wichita	Kansas	4
+240	4240337331	Garland	Texas	4
+241	0305047027	Fresno	California	2
+239	3654884983	Omaha	Nebraska	1
+238	7524432000	Boise City	Idaho	5
+237	5628425423	Seattle	Washington	1
+236	1338079550	North Las Vegas	Nevada	5
+235	0263393529	New York	New York	3
+234	0056053093	Orlando	Florida	2
+233	0696757277	Irvine	California	2
+230	0382625416	Oklahoma City	Oklahoma	5
+231	5890091299	Norfolk	Virginia	6
+232	4928346960	Orlando	Florida	4
+228	1132126102	Philadelphia	Pennsylvania	5
+229	9966598409	Colorado Springs	Colorado	1
+227	4220329058	Washington	District of Columbia	2
+225	0985625931	Phoenix	Arizona	4
+226	4223679555	Portland	Oregon	5
+224	8830546171	Tulsa	Oklahoma	3
+223	4235464296	Hialeah	Florida	3
+222	4198641487	Stockton	California	2
+221	1788493954	Lubbock	Texas	3
+219	3836013464	Scottsdale	Arizona	2
+220	3490141621	Richmond	Virginia	4
+218	9434062756	Lexington-Fayette	Kentucky	1
+217	3252384559	Tampa	Florida	6
+216	1882282876	Mesa	Arizona	4
+215	0322864397	Madison	Wisconsin	4
+213	9546851403	Miami	Florida	6
+214	4603028105	Raleigh	North Carolina	5
+210	8856409505	Toledo	Ohio	2
+211	8112954948	Orlando	Florida	2
+212	8210133470	Houston	Texas	6
+209	7613224581	Pittsburgh	Pennsylvania	6
+207	7388638830	Tulsa	Oklahoma	5
+208	3816477350	Sacramento	California	5
+206	9935380288	Denver	Colorado	1
+205	1191755290	Orlando	Florida	3
+204	3112733954	Minneapolis	Minnesota	4
+203	9617048310	San Francisco	California	5
+200	2975322922	San Antonio	Texas	3
+201	3664284552	Norfolk	Virginia	5
+202	2181010037	Washington	District of Columbia	1
+199	4367981472	Nashville-Davidson	Tennessee	3
+197	5917804501	Washington	District of Columbia	5
+198	9232187927	Reno	Nevada	3
+195	7504425568	San Francisco	California	1
+196	0743016582	Laredo	Texas	4
+194	4232094725	Boise City	Idaho	5
+193	7402105345	Indianapolis	Indiana	6
+192	7528943791	Fort Wayne	Indiana	5
+190	0678923755	Arlington	Texas	2
+191	0589495361	Houston	Texas	5
+189	0889706886	New York	New York	3
+188	8377466564	Louisville/Jefferson County	Kentucky	4
+186	2214277151	Omaha	Nebraska	4
+187	9183052171	Irving	Texas	4
+185	7713830379	Jersey City	New Jersey	1
+184	3696054817	Santa Ana	California	6
+183	1241721514	San Bernardino	California	2
+182	9332072108	Indianapolis	Indiana	6
+181	1333897628	Bakersfield	California	5
+180	6847008671	Baltimore	Maryland	5
+178	0412550817	Mesa	Arizona	4
+179	3407120053	Denver	Colorado	5
+177	3221564870	San Jose	California	3
+175	0678077561	Charlotte	North Carolina	2
+176	6510806839	St. Louis	Missouri	3
+174	0449979091	Albuquerque	New Mexico	3
+173	2782901428	Arlington	Texas	2
+171	8107099783	Cincinnati	Ohio	2
+172	5170541933	Atlanta	Georgia	2
+169	8993213049	Baton Rouge	Louisiana	2
+170	0595927497	Kansas City	Missouri	3
+168	9465348200	New Orleans	Louisiana	4
+167	8261258503	Gilbert	Arizona	5
+166	0993411726	Irvine	California	1
+165	6182765584	Lubbock	Texas	6
+164	4121506460	Milwaukee	Wisconsin	2
+163	6198436089	St. Petersburg	Florida	2
+161	3554182931	Lubbock	Texas	5
+162	5508888905	Oklahoma City	Oklahoma	2
+160	6294237168	Lincoln	Nebraska	5
+158	3562086204	Las Vegas	Nevada	3
+159	2544340833	Fremont	California	2
+157	9136707003	Bakersfield	California	5
+156	4467359654	Plano	Texas	6
+155	9512129468	Aurora	Colorado	3
+154	4973915088	Bakersfield	California	1
+152	6994460879	Aurora	Colorado	4
+153	5331305596	Charlotte	North Carolina	5
+151	1531773822	Aurora	Colorado	4
+150	5888112006	Mesa	Arizona	5
+149	4272234578	Fresno	California	2
+148	0734658317	Houston	Texas	5
+147	9628087973	Tucson	Arizona	3
+144	6917138913	Milwaukee	Wisconsin	3
+145	7800775551	Austin	Texas	3
+146	1558369437	Las Vegas	Nevada	5
+143	0787879045	Irving	Texas	3
+141	1428008931	Hialeah	Florida	2
+142	0474875198	Philadelphia	Pennsylvania	2
+140	4985020502	Cleveland	Ohio	2
+139	0379502055	Charlotte	North Carolina	4
+138	7234826991	Jersey City	New Jersey	5
+137	9239284200	Santa Ana	California	6
+135	5670342923	Reno	Nevada	6
+136	5586568775	Baton Rouge	Louisiana	6
+134	7263522516	Baltimore	Maryland	5
+132	0223428523	Arlington	Texas	3
+133	9223571130	St. Paul	Minnesota	1
+131	1764780960	Fort Wayne	Indiana	1
+130	2876434661	Anchorage	Alaska	3
+129	0541660492	Cincinnati	Ohio	5
+128	6679218562	Omaha	Nebraska	4
+127	0449615972	San Antonio	Texas	4
+126	2163176759	Durham	North Carolina	4
+124	0880561678	Lubbock	Texas	2
+125	8787430152	Fremont	California	1
+123	4100537942	Plano	Texas	3
+122	4381038457	Raleigh	North Carolina	6
+121	4729165843	Irving	Texas	3
+120	3202187777	Buffalo	New York	6
+119	0221163925	Lubbock	Texas	5
+118	3120377976	Stockton	California	4
+116	6545516448	Glendale	Arizona	3
+117	9593588360	Aurora	Colorado	4
+115	0459372845	Pittsburgh	Pennsylvania	2
+114	7582520761	Mesa	Arizona	5
+113	3530896686	Long Beach	California	5
+112	3858998863	Washington	District of Columbia	6
+111	8790628082	Gilbert	Arizona	4
+110	3795673718	Columbus	Ohio	1
+109	0695470072	Lexington-Fayette	Kentucky	6
+108	0727521510	Jersey City	New Jersey	5
+107	0176371388	Garland	Texas	5
+106	4236898553	Charlotte	North Carolina	6
+104	9320529863	Lincoln	Nebraska	6
+105	4256386701	Indianapolis	Indiana	3
+103	7273997565	Raleigh	North Carolina	5
+102	0741823531	Detroit	Michigan	6
+101	8446764886	Phoenix	Arizona	3
+100	6296477590	Anchorage	Alaska	2
+99	3440482008	Fort Worth	Texas	4
+98	8441428859	St. Petersburg	Florida	4
+97	8290883158	Austin	Texas	3
+96	9240037483	Tampa	Florida	2
+95	9931343096	Henderson	Nevada	2
+93	9209598115	Laredo	Texas	5
+94	5494587705	Miami	Florida	1
+92	3141191048	Denver	Colorado	3
+91	4532956654	Minneapolis	Minnesota	5
+90	1500077171	Glendale	Arizona	2
+89	1675962429	Mesa	Arizona	2
+87	5158517556	Garland	Texas	6
+88	6348365470	Fresno	California	5
+86	1805326817	Santa Ana	California	6
+85	5331976404	Winston-Salem	North Carolina	3
+84	4137800227	Irvine	California	2
+83	7853662357	Riverside	California	6
+82	6369202325	Miami	Florida	3
+81	8107141638	Tampa	Florida	1
+80	0789064207	Chandler	Arizona	6
+79	4990184930	El Paso	Texas	3
+77	2670186135	Dallas	Texas	6
+78	1264760266	Chula Vista	California	2
+76	2967479208	Fort Worth	Texas	3
+75	6739136218	Norfolk	Virginia	3
+74	9463016809	Memphis	Tennessee	6
+73	6808276814	Philadelphia	Pennsylvania	4
+72	0667600824	Scottsdale	Arizona	5
+71	2308789104	Nashville-Davidson	Tennessee	3
+70	4130906517	Denver	Colorado	3
+69	1898053954	Kansas City	Missouri	1
+68	0548196953	St. Petersburg	Florida	3
+67	3726498262	Tampa	Florida	3
+66	4382326181	Austin	Texas	1
+65	0875959792	San Bernardino	California	3
+64	9129693296	Bakersfield	California	2
+63	3887268006	Oakland	California	6
+61	0292033963	Wichita	Kansas	2
+62	9964785061	Los Angeles	California	4
+59	5417041845	El Paso	Texas	1
+60	4863657060	Madison	Wisconsin	1
+57	4699666080	Irving	Texas	5
+58	9342740815	Houston	Texas	1
+56	9999182419	Portland	Oregon	3
+55	4184490206	Dallas	Texas	3
+54	3286785192	Arlington	Texas	1
+53	3765938888	Pittsburgh	Pennsylvania	6
+52	2451968434	Madison	Wisconsin	5
+51	0027769598	Boston	Massachusetts	1
+50	7568116687	Cincinnati	Ohio	5
+49	5241491229	Lubbock	Texas	5
+48	4224130401	Reno	Nevada	6
+47	6666364253	Fort Worth	Texas	4
+46	2389716259	Chicago	Illinois	5
+45	1186839183	Anchorage	Alaska	3
+44	8455169484	Glendale	Arizona	5
+43	1678867259	Laredo	Texas	2
+42	7221430995	Corpus Christi	Texas	6
+41	3248769516	Boise City	Idaho	1
+40	2927590092	Jacksonville	Florida	6
+39	7660706609	Lincoln	Nebraska	1
+38	9935855402	Portland	Oregon	4
+37	8393937644	Cincinnati	Ohio	4
+36	3831202332	Detroit	Michigan	2
+35	0281248790	Fremont	California	1
+34	0629196370	Chandler	Arizona	6
+33	5826188612	Virginia Beach	Virginia	3
+32	1296070885	Kansas City	Missouri	5
+31	0966844750	Houston	Texas	3
+30	6857008091	Albuquerque	New Mexico	3
+29	0913669390	North Las Vegas	Nevada	1
+28	3550854909	El Paso	Texas	6
+27	3299991360	San Antonio	Texas	2
+26	4718020329	Cincinnati	Ohio	1
+25	8150511114	Dallas	Texas	4
+24	7400837800	San Bernardino	California	3
+23	9105070482	Buffalo	New York	6
+22	6770052013	Long Beach	California	5
+21	3318612738	St. Petersburg	Florida	2
+20	0494027157	Reno	Nevada	6
+19	2685900473	Raleigh	North Carolina	1
+18	7872365529	Scottsdale	Arizona	2
+17	9389274791	Raleigh	North Carolina	3
+16	9320858949	Washington	District of Columbia	1
+15	2509678175	Wichita	Kansas	5
+14	3930579416	Fresno	California	1
+13	5929116164	Arlington	Texas	1
+12	9369562052	Tucson	Arizona	6
+11	0185610994	Oklahoma City	Oklahoma	1
+10	7312999806	Laredo	Texas	5
+9	8185929158	Newark	New Jersey	1
+8	0590794416	El Paso	Texas	4
+7	8103428832	Anaheim	California	3
+6	7748628426	Hialeah	Florida	2
+5	5155298197	Madison	Wisconsin	2
+4	0591914989	Tucson	Arizona	3
+3	5832650603	Orlando	Florida	2
+2	4204736385	Arlington	Texas	2
+1	1620834749	Columbus	Ohio	1
+482	4747097620	Buffalo	New York	2
+483	5221525612	St. Paul	Minnesota	2
+484	1240779970	Virginia Beach	Virginia	4
+485	0664351961	Winston-Salem	North Carolina	5
+486	5850396376	Buffalo	New York	2
+487	9762402017	Dallas	Texas	5
+488	1564465086	Omaha	Nebraska	3
+489	7764106246	Charlotte	North Carolina	5
+490	0108587449	St. Louis	Missouri	2
+491	6350301618	Reno	Nevada	3
+492	0484089769	Irvine	California	1
+493	4703485907	Memphis	Tennessee	6
+494	0080068211	Fort Worth	Texas	6
+495	2796059363	Los Angeles	California	4
+496	3375542294	Fort Wayne	Indiana	5
+497	6751274359	New York	New York	4
+498	9484530283	Corpus Christi	Texas	3
+499	1133548145	Riverside	California	1
+500	8499010510	Columbus	Ohio	1
