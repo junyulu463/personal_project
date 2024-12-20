@@ -1,0 +1,124 @@
+{
+  "users": [
+    {
+      "username": "user01",
+      "password": "password01",
+      "email": "user01@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user02",
+      "password": "password02",
+      "email": "user02@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user03",
+      "password": "password03",
+      "email": "user03@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user04",
+      "password": "password04",
+      "email": "user04@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user05",
+      "password": "password05",
+      "email": "user05@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user06",
+      "password": "password06",
+      "email": "user06@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user07",
+      "password": "password07",
+      "email": "user07@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user08",
+      "password": "password08",
+      "email": "user08@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user09",
+      "password": "password09",
+      "email": "user09@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user10",
+      "password": "password10",
+      "email": "user10@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user11",
+      "password": "password11",
+      "email": "user11@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user12",
+      "password": "password12",
+      "email": "user12@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user13",
+      "password": "password13",
+      "email": "user13@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user14",
+      "password": "password14",
+      "email": "user14@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user15",
+      "password": "password15",
+      "email": "user15@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user16",
+      "password": "password16",
+      "email": "user16@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user17",
+      "password": "password17",
+      "email": "user17@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user18",
+      "password": "password18",
+      "email": "user18@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user19",
+      "password": "password19",
+      "email": "user19@example.com",
+      "reservationData": []
+    },
+    {
+      "username": "user20",
+      "password": "password20",
+      "email": "user20@example.com",
+      "reservationData": []
+    }
+  ]
+}

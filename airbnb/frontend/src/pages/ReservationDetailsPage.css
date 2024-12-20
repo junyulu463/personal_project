@@ -1,0 +1,92 @@
+/* General container styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  .reservation-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Header */
+  .reservation-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #4CAF50; /* Success green */
+  }
+  
+  /* Reservation details styling */
+  .reservation-details {
+    text-align: left;
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .reservation-details p {
+    margin: 8px 0;
+  }
+  
+  .reservation-details strong {
+    color: #333;
+  }
+  
+  /* Address and price emphasis */
+  .reservation-details .property-address {
+    color: #555;
+    font-style: italic;
+  }
+  
+  .reservation-details .price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4CAF50;
+  }
+  
+  /* Back button */
+  .reservation-container button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .reservation-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive design */
+  @media screen and (max-width: 768px) {
+    .reservation-container {
+      margin: 20px auto;
+      padding: 15px;
+    }
+  
+    .reservation-container h1 {
+      font-size: 20px;
+    }
+  
+    .reservation-details {
+      font-size: 14px;
+    }
+  
+    .reservation-container button {
+      font-size: 14px;
+      padding: 8px 15px;
+    }
+  }
+  

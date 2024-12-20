@@ -1,0 +1,242 @@
+[
+  {
+    "title": "Spacious Apartment in City Center",
+    "main_image": "images/apartment/1/main.jpg",
+    "images": ["images/apartment/1/livingRoom.jpg", "images/apartment/1/bedroom.jpg", "images/apartment/1/kitchen.jpg", "images/apartment/1/bathroom.jpg", "images/apartment/1/pool.jpg", "images/apartment/1/gym.jpg"],
+    "location": {
+      "state": "California",
+      "city": "Los Angeles",
+      "zipcode": "90001",
+      "address": "123 Main St"
+    },
+    "price": 150,
+    "amenities": ["Wifi", "Pool", "Gym", "Air Conditioning"],
+    "propertyType": "apartment",
+    "rating": 4.7,
+    "availableFrom": "2024-12-01",
+    "availableTo": "2025-06-30",
+    "maxGuests": 4,
+    "bookedDates": ["2025-01-15", "2025-03-20"],
+    "contactInfo": {
+      "email": "info@cityapartment.com",
+      "phoneNumber": "+1-123-456-7890",
+      "website": "https://cityapartment.com"
+    }
+  },
+  {
+    "title": "Urban Loft with Skyline View",
+    "main_image": "images/apartment/2/main.jpg",
+    "images": ["images/apartment/2/livingRoom.jpg", "images/apartment/2/bedroom.jpg", "images/apartment/2/kitchen.jpg", "images/apartment/2/balcony.jpg"],
+    "location": {
+      "state": "CA",
+      "city": "Los Angeles",
+      "zipcode": "90012",
+      "address": "456 Sunset Blvd"
+    },
+    "price": 180,
+    "amenities": ["Wifi", "Air Conditioning", "Gym", "Kitchen"],
+    "propertyType": "apartment",
+    "rating": 4.8,
+    "availableFrom": "2023-10-01",
+    "availableTo": "2023-12-31",
+    "maxGuests": 4,
+    "bookedDates": ["2023-11-05", "2023-12-01"],
+    "contactInfo": {
+      "email": "info@skylineview.com",
+      "phoneNumber": "+1-987-654-3210",
+      "website": "https://skylineview.com"
+    }
+  },
+  {
+    "title": "Cozy apartment Near Central Park",
+    "main_image": "images/apartment/3/main.jpg",
+    "images": ["images/apartment/3/bedroom.jpg", "images/apartment/3/kitchen.jpg", "images/apartment/3/view.jpg"],
+    "location": {
+      "state": "NY",
+      "city": "New York",
+      "zipcode": "10023",
+      "address": "789 Park Ave"
+    },
+    "price": 150,
+    "amenities": ["Wifi", "Kitchen", "Heating"],
+    "propertyType": "apartment",
+    "rating": 4.5,
+    "availableFrom": "2023-10-15",
+    "availableTo": "2024-01-15",
+    "maxGuests": 2,
+    "bookedDates": ["2023-11-20", "2023-12-25"],
+    "contactInfo": {
+      "email": "contact@centralparkapt.com",
+      "phoneNumber": "+1-234-567-8910",
+      "website": "https://centralparkapt.com"
+    }
+  },
+  {
+    "title": "Luxury Downtown Apartment with Pool",
+    "main_image": "images/apartment/4/main.jpg",
+    "images": ["images/apartment/4/livingRoom.jpg", "images/apartment/4/pool.jpg", "images/apartment/4/gym.jpg"],
+    "location": {
+      "state": "TX",
+      "city": "Austin",
+      "zipcode": "73301",
+      "address": "123 Congress Ave"
+    },
+    "price": 220,
+    "amenities": ["Wifi", "Pool", "Gym", "Air Conditioning", "Kitchen"],
+    "propertyType": "apartment",
+    "rating": 4.9,
+    "availableFrom": "2023-11-01",
+    "availableTo": "2024-03-01",
+    "maxGuests": 4,
+    "bookedDates": ["2023-11-15", "2024-01-05"],
+    "contactInfo": {
+      "email": "stay@downtownapt.com",
+      "phoneNumber": "+1-345-678-9012",
+      "website": "https://downtownapt.com"
+    }
+  },
+  {
+    "title": "Beachfront Apartment with Ocean View",
+    "main_image": "images/apartment/5/main.jpg",
+    "images": ["images/apartment/5/livingRoom.jpg", "images/apartment/5/bedroom.jpg", "images/apartment/5/view.jpg", "images/apartment/5/pool.jpg"],
+    "location": {
+      "state": "FL",
+      "city": "Miami",
+      "zipcode": "33139",
+      "address": "456 Ocean Dr"
+    },
+    "price": 250,
+    "amenities": ["Wifi", "Pool", "Air Conditioning", "Kitchen", "Parking"],
+    "propertyType": "apartment",
+    "rating": 4.7,
+    "availableFrom": "2023-12-01",
+    "availableTo": "2024-04-01",
+    "maxGuests": 5,
+    "bookedDates": ["2023-12-15", "2024-02-10"],
+    "contactInfo": {
+      "email": "contact@beachfrontapt.com",
+      "phoneNumber": "+1-456-789-0123",
+      "website": "https://beachfrontapt.com"
+    }
+  },
+  {
+    "title": "Charming Apartment Near Golden Gate",
+    "main_image": "images/apartment/6/main.jpg",
+    "images": ["images/apartment/6/livingRoom.jpg", "images/apartment/6/bedroom.jpg", "images/apartment/6/kitchen.jpg"],
+    "location": {
+      "state": "CA",
+      "city": "San Francisco",
+      "zipcode": "94109",
+      "address": "789 Marina Blvd"
+    },
+    "price": 200,
+    "amenities": ["Wifi", "Kitchen", "Heating"],
+    "propertyType": "apartment",
+    "rating": 4.6,
+    "availableFrom": "2023-11-15",
+    "availableTo": "2024-02-15",
+    "maxGuests": 3,
+    "bookedDates": ["2023-11-25", "2023-12-20"],
+    "contactInfo": {
+      "email": "info@goldengateapartment.com",
+      "phoneNumber": "+1-567-890-1234",
+      "website": "https://goldengateapartment.com"
+    }
+  },
+  {
+    "title": "Downtown Apartment with Rooftop Garden",
+    "main_image": "images/apartment/7/main.jpg",
+    "images": ["images/apartment/7/livingRoom.jpg", "images/apartment/7/bedroom.jpg", "images/apartment/7/rooftop.jpg"],
+    "location": {
+      "state": "IL",
+      "city": "Chicago",
+      "zipcode": "60601",
+      "address": "123 Michigan Ave"
+    },
+    "price": 195,
+    "amenities": ["Wifi", "Kitchen", "Rooftop Access", "Gym"],
+    "propertyType": "apartment",
+    "rating": 4.7,
+    "availableFrom": "2023-10-10",
+    "availableTo": "2024-01-10",
+    "maxGuests": 4,
+    "bookedDates": ["2023-10-20", "2023-12-05"],
+    "contactInfo": {
+      "email": "stay@rooftopgarden.com",
+      "phoneNumber": "+1-678-901-2345",
+      "website": "https://rooftopgarden.com"
+    }
+  },
+  {
+    "title": "Modern Apartment with Private Gym",
+    "main_image": "images/apartment/8/main.jpg",
+    "images": ["images/apartment/8/livingRoom.jpg", "images/apartment/8/bedroom.jpg", "images/apartment/8/gym.jpg"],
+    "location": {
+      "state": "NV",
+      "city": "Las Vegas",
+      "zipcode": "89101",
+      "address": "456 Fremont St"
+    },
+    "price": 210,
+    "amenities": ["Wifi", "Gym", "Air Conditioning"],
+    "propertyType": "apartment",
+    "rating": 4.4,
+    "availableFrom": "2023-09-01",
+    "availableTo": "2024-02-01",
+    "maxGuests": 3,
+    "bookedDates": ["2023-09-15", "2023-10-25"],
+    "contactInfo": {
+      "email": "info@modernapartment.com",
+      "phoneNumber": "+1-789-012-3456",
+      "website": "https://modernapartment.com"
+    }
+  },
+  {
+    "title": "Penthouse with Skyline Terrace",
+    "main_image": "images/apartment/9/main.jpg",
+    "images": ["images/apartment/9/livingRoom.jpg", "images/apartment/9/bedroom.jpg", "images/apartment/9/terrace.jpg"],
+    "location": {
+      "state": "NY",
+      "city": "New York",
+      "zipcode": "10001",
+      "address": "123 5th Ave"
+    },
+    "price": 300,
+    "amenities": ["Wifi", "Terrace", "Air Conditioning", "Kitchen", "Gym"],
+    "propertyType": "apartment",
+    "rating": 4.9,
+    "availableFrom": "2023-11-01",
+    "availableTo": "2024-04-01",
+    "maxGuests": 6,
+    "bookedDates": ["2023-12-01", "2024-02-15"],
+    "contactInfo": {
+      "email": "info@skylinepenthouse.com",
+      "phoneNumber": "+1-890-123-4567",
+      "website": "https://skylinepenthouse.com"
+    }
+  },
+  {
+    "title": "Quiet Apartment Near Central Station",
+    "main_image": "images/apartment/10/main.jpg",
+    "images": ["images/apartment/10/livingRoom.jpg", "images/apartment/10/bedroom.jpg", "images/apartment/10/view.jpg"],
+    "location": {
+      "state": "WA",
+      "city": "Seattle",
+      "zipcode": "98101",
+      "address": "456 Pine St"
+    },
+    "price": 175,
+    "amenities": ["Wifi", "Kitchen", "Heating"],
+    "propertyType": "apartment",
+    "rating": 4.5,
+    "availableFrom": "2023-12-01",
+    "availableTo": "2024-03-01",
+    "maxGuests": 2,
+    "bookedDates": ["2024-01-10", "2024-02-05"],
+    "contactInfo": {
+      "email": "info@centralstationapt.com",
+      "phoneNumber": "+1-901-234-5678",
+      "website": "https://centralstationapt.com"
+    }
+  }
+]

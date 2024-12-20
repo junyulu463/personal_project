@@ -1,0 +1,1202 @@
+[
+  {
+    "title": "Spacious Apartment in City Center",
+    "main_image": "images/apartment/1/main.jpg",
+    "images": ["images/apartment/1/livingRoom.jpg", "images/apartment/1/bedroom.jpg", "images/apartment/1/kitchen.jpg", "images/apartment/1/bathroom.jpg", "images/apartment/1/pool.jpg", "images/apartment/1/gym.jpg"],
+    "location": {
+      "state": "California",
+      "city": "Los Angeles",
+      "zipcode": "90001",
+      "address": "123 Main St"
+    },
+    "price": 150,
+    "amenities": ["Wifi", "Pool", "Gym", "Air Conditioning"],
+    "propertyType": "apartment",
+    "rating": 4.7,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 2,
+    "bookedDates": ["2025-01-16", "2025-03-21"],
+    "contactInfo": {
+      "email": "info@cityapartment.com",
+      "phoneNumber": "+1-123-456-7890",
+      "website": "https://cityapartment.com"
+    }
+  },
+  {
+    "title": "Urban Loft with Skyline View",
+    "main_image": "images/apartment/2/main.jpg",
+    "images": ["images/apartment/2/livingRoom.jpg", "images/apartment/2/bedroom.jpg", "images/apartment/2/kitchen.jpg", "images/apartment/2/balcony.jpg"],
+    "location": {
+      "state": "CA",
+      "city": "Los Angeles",
+      "zipcode": "90012",
+      "address": "456 Sunset Blvd"
+    },
+    "price": 180,
+    "amenities": ["Wifi", "Air Conditioning", "Gym", "Kitchen"],
+    "propertyType": "apartment",
+    "rating": 4.8,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 4,
+    "bookedDates": ["2025-02-15", "2025-03-20"],
+    "contactInfo": {
+      "email": "info@skylineview.com",
+      "phoneNumber": "+1-987-654-3210",
+      "website": "https://skylineview.com"
+    }
+  },
+  {
+    "title": "Cozy apartment Near Central Park",
+    "main_image": "images/apartment/3/main.jpg",
+    "images": ["images/apartment/3/bedroom.jpg", "images/apartment/3/kitchen.jpg", "images/apartment/3/view.jpg"],
+    "location": {
+      "state": "NY",
+      "city": "New York",
+      "zipcode": "10023",
+      "address": "789 Park Ave"
+    },
+    "price": 150,
+    "amenities": ["Wifi", "Kitchen", "Heating"],
+    "propertyType": "apartment",
+    "rating": 4.5,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 2,
+    "bookedDates": ["2025-02-15", "2025-04-21"],
+    "contactInfo": {
+      "email": "contact@centralparkapt.com",
+      "phoneNumber": "+1-234-567-8910",
+      "website": "https://centralparkapt.com"
+    }
+  },
+  {
+    "title": "Luxury Downtown Apartment with Pool",
+    "main_image": "images/apartment/4/main.jpg",
+    "images": ["images/apartment/4/livingRoom.jpg", "images/apartment/4/pool.jpg", "images/apartment/4/gym.jpg"],
+    "location": {
+      "state": "TX",
+      "city": "Austin",
+      "zipcode": "73301",
+      "address": "123 Congress Ave"
+    },
+    "price": 220,
+    "amenities": ["Wifi", "Pool", "Gym", "Air Conditioning", "Kitchen"],
+    "propertyType": "apartment",
+    "rating": 4.9,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 3,
+    "bookedDates": ["2025-01-17", "2025-03-20"],
+    "contactInfo": {
+      "email": "stay@downtownapt.com",
+      "phoneNumber": "+1-345-678-9012",
+      "website": "https://downtownapt.com"
+    }
+  },
+  {
+    "title": "Beachfront Apartment with Ocean View",
+    "main_image": "images/apartment/5/main.jpg",
+    "images": ["images/apartment/5/livingRoom.jpg", "images/apartment/5/bedroom.jpg", "images/apartment/5/view.jpg", "images/apartment/5/pool.jpg"],
+    "location": {
+      "state": "FL",
+      "city": "Miami",
+      "zipcode": "33139",
+      "address": "456 Ocean Dr"
+    },
+    "price": 250,
+    "amenities": ["Wifi", "Pool", "Air Conditioning", "Kitchen", "Parking"],
+    "propertyType": "apartment",
+    "rating": 4.7,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 6,
+    "bookedDates": ["2025-01-01", "2025-03-20"],
+    "contactInfo": {
+      "email": "contact@beachfrontapt.com",
+      "phoneNumber": "+1-456-789-0123",
+      "website": "https://beachfrontapt.com"
+    }
+  },
+  {
+    "title": "Charming Apartment Near Golden Gate",
+    "main_image": "images/apartment/6/main.jpg",
+    "images": ["images/apartment/6/livingRoom.jpg", "images/apartment/6/bedroom.jpg", "images/apartment/6/kitchen.jpg"],
+    "location": {
+      "state": "CA",
+      "city": "San Francisco",
+      "zipcode": "94109",
+      "address": "789 Marina Blvd"
+    },
+    "price": 200,
+    "amenities": ["Wifi", "Kitchen", "Heating"],
+    "propertyType": "apartment",
+    "rating": 4.6,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 2,
+    "bookedDates": ["2025-01-14", "2025-03-10"],
+    "contactInfo": {
+      "email": "info@goldengateapartment.com",
+      "phoneNumber": "+1-567-890-1234",
+      "website": "https://goldengateapartment.com"
+    }
+  },
+  {
+    "title": "Downtown Apartment with Rooftop Garden",
+    "main_image": "images/apartment/7/main.jpg",
+    "images": ["images/apartment/7/livingRoom.jpg", "images/apartment/7/bedroom.jpg", "images/apartment/7/rooftop.jpg"],
+    "location": {
+      "state": "IL",
+      "city": "Chicago",
+      "zipcode": "60601",
+      "address": "123 Michigan Ave"
+    },
+    "price": 195,
+    "amenities": ["Wifi", "Kitchen", "Rooftop Access", "Gym"],
+    "propertyType": "apartment",
+    "rating": 4.7,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 4,
+    "bookedDates": ["2025-01-15", "2025-03-22"],
+    "contactInfo": {
+      "email": "stay@rooftopgarden.com",
+      "phoneNumber": "+1-678-901-2345",
+      "website": "https://rooftopgarden.com"
+    }
+  },
+  {
+    "title": "Modern Apartment with Private Gym",
+    "main_image": "images/apartment/8/main.jpg",
+    "images": ["images/apartment/8/livingRoom.jpg", "images/apartment/8/bedroom.jpg", "images/apartment/8/gym.jpg"],
+    "location": {
+      "state": "NV",
+      "city": "Las Vegas",
+      "zipcode": "89101",
+      "address": "456 Fremont St"
+    },
+    "price": 210,
+    "amenities": ["Wifi", "Gym", "Air Conditioning"],
+    "propertyType": "apartment",
+    "rating": 4.4,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 3,
+    "bookedDates": ["2025-01-05", "2025-05-20"],
+    "contactInfo": {
+      "email": "info@modernapartment.com",
+      "phoneNumber": "+1-789-012-3456",
+      "website": "https://modernapartment.com"
+    }
+  },
+  {
+    "title": "Penthouse with Skyline Terrace",
+    "main_image": "images/apartment/9/main.jpg",
+    "images": ["images/apartment/9/livingRoom.jpg", "images/apartment/9/bedroom.jpg", "images/apartment/9/terrace.jpg"],
+    "location": {
+      "state": "NY",
+      "city": "New York",
+      "zipcode": "10001",
+      "address": "123 5th Ave"
+    },
+    "price": 300,
+    "amenities": ["Wifi", "Terrace", "Air Conditioning", "Kitchen", "Gym"],
+    "propertyType": "apartment",
+    "rating": 4.9,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 2,
+    "bookedDates": ["2025-01-21", "2025-03-10"],
+    "contactInfo": {
+      "email": "info@skylinepenthouse.com",
+      "phoneNumber": "+1-890-123-4567",
+      "website": "https://skylinepenthouse.com"
+    }
+  },
+  {
+    "title": "Quiet Apartment Near Central Station",
+    "main_image": "images/apartment/10/main.jpg",
+    "images": ["images/apartment/10/livingRoom.jpg", "images/apartment/10/bedroom.jpg", "images/apartment/10/view.jpg"],
+    "location": {
+      "state": "WA",
+      "city": "Seattle",
+      "zipcode": "98101",
+      "address": "456 Pine St"
+    },
+    "price": 175,
+    "amenities": ["Wifi", "Kitchen", "Heating"],
+    "propertyType": "apartment",
+    "rating": 4.5,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 9,
+    "bookedDates": ["2025-01-19", "2025-03-20"],
+    "contactInfo": {
+      "email": "info@centralstationapt.com",
+      "phoneNumber": "+1-901-234-5678",
+      "website": "https://centralstationapt.com"
+    }
+  },
+  {
+    "title": "Rustic Lakefront Cottage",
+    "main_image": "images/cottage/1/main.jpg",
+    "images": ["images/cottage/1/livingRoom.jpg", "images/cottage/1/bedroom.jpg", "images/cottage/1/lakeView.jpg", "images/cottage/1/garden.jpg"],
+    "location": {
+      "state": "ME",
+      "city": "Bar Harbor",
+      "zipcode": "04609",
+      "address": "101 Lakeside Dr"
+    },
+    "price": 180,
+    "amenities": ["Wifi", "Fireplace", "Lake View", "Kitchen", "BBQ Grill"],
+    "propertyType": "cottage",
+    "rating": 4.8,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 3,
+    "bookedDates": ["2025-01-13", "2025-03-22"],
+    "contactInfo": {
+      "email": "info@lakefrontcottage.com",
+      "phoneNumber": "+1-207-123-4567",
+      "website": "https://lakefrontcottage.com"
+    }
+  },
+  {
+    "title": "Secluded Mountain Cottage",
+    "main_image": "images/cottage/2/main.jpg",
+    "images": ["images/cottage/2/livingRoom.jpg", "images/cottage/2/bedroom.jpg", "images/cottage/2/mountainView.jpg"],
+    "location": {
+      "state": "CO",
+      "city": "Aspen",
+      "zipcode": "81611",
+      "address": "202 Rocky Rd"
+    },
+    "price": 220,
+    "amenities": ["Wifi", "Mountain View", "Fireplace", "Hot Tub", "Kitchen"],
+    "propertyType": "cottage",
+    "rating": 4.7,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 8,
+    "bookedDates": ["2025-01-19", "2025-04-20"],
+    "contactInfo": {
+      "email": "stay@mountaincottage.com",
+      "phoneNumber": "+1-970-987-6543",
+      "website": "https://mountaincottage.com"
+    }
+  },
+  {
+    "title": "Charming Countryside Cottage",
+    "main_image": "images/cottage/3/main.jpg",
+    "images": ["images/cottage/3/livingRoom.jpg", "images/cottage/3/bedroom.jpg", "images/cottage/3/garden.jpg"],
+    "location": {
+      "state": "VT",
+      "city": "Woodstock",
+      "zipcode": "05091",
+      "address": "303 Country Ln"
+    },
+    "price": 150,
+    "amenities": ["Wifi", "Fireplace", "Kitchen", "Garden", "BBQ Grill"],
+    "propertyType": "cottage",
+    "rating": 4.6,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 9,
+    "bookedDates": ["2025-02-15", "2025-03-20"],
+    "contactInfo": {
+      "email": "info@countrysidecottage.com",
+      "phoneNumber": "+1-802-456-7890",
+      "website": "https://countrysidecottage.com"
+    }
+  },
+  {
+    "title": "Cozy Woodland Cottage",
+    "main_image": "images/cottage/4/main.jpg",
+    "images": ["images/cottage/4/livingRoom.jpg", "images/cottage/4/bedroom.jpg", "images/cottage/4/woods.jpg"],
+    "location": {
+      "state": "OR",
+      "city": "Bend",
+      "zipcode": "97701",
+      "address": "404 Forest Way"
+    },
+    "price": 170,
+    "amenities": ["Wifi", "Fireplace", "Hiking Trails", "Kitchen"],
+    "propertyType": "cottage",
+    "rating": 4.5,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 1,
+    "bookedDates": ["2025-01-20", "2025-03-20"],
+    "contactInfo": {
+      "email": "contact@woodlandcottage.com",
+      "phoneNumber": "+1-541-321-4567",
+      "website": "https://woodlandcottage.com"
+    }
+  },
+  {
+    "title": "Lakeside Family Cottage",
+    "main_image": "images/cottage/5/main.jpg",
+    "images": ["images/cottage/5/livingRoom.jpg", "images/cottage/5/bedroom.jpg", "images/cottage/5/patio.jpg", "images/cottage/5/lake.jpg"],
+    "location": {
+      "state": "MN",
+      "city": "Ely",
+      "zipcode": "55731",
+      "address": "505 Lakeside Loop"
+    },
+    "price": 200,
+    "amenities": ["Wifi", "Lake Access", "Fireplace", "Kitchen", "Outdoor Dining"],
+    "propertyType": "cottage",
+    "rating": 4.9,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 2,
+    "bookedDates": ["2025-01-19", "2025-07-20"],
+    "contactInfo": {
+      "email": "contact@lakesidefamilycottage.com",
+      "phoneNumber": "+1-218-456-7890",
+      "website": "https://lakesidefamilycottage.com"
+    }
+  },
+  {
+    "title": "Historical Stone Cottage",
+    "main_image": "images/cottage/6/main.jpg",
+    "images": ["images/cottage/6/livingRoom.jpg", "images/cottage/6/bedroom.jpg", "images/cottage/6/fireplace.jpg"],
+    "location": {
+      "state": "PA",
+      "city": "Gettysburg",
+      "zipcode": "17325",
+      "address": "606 Old Stone Rd"
+    },
+    "price": 190,
+    "amenities": ["Wifi", "Fireplace", "Historical Charm", "Kitchen"],
+    "propertyType": "cottage",
+    "rating": 4.8,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 3,
+    "bookedDates": ["2025-02-07", "2025-04-20"],
+    "contactInfo": {
+      "email": "info@historicalstonecottage.com",
+      "phoneNumber": "+1-717-123-4567",
+      "website": "https://historicalstonecottage.com"
+    }
+  },
+  {
+    "title": "Beachside Sunset Cottage",
+    "main_image": "images/cottage/7/main.jpg",
+    "images": ["images/cottage/7/livingRoom.jpg", "images/cottage/7/bedroom.jpg", "images/cottage/7/beachView.jpg"],
+    "location": {
+      "state": "FL",
+      "city": "Naples",
+      "zipcode": "34102",
+      "address": "707 Sunset Blvd"
+    },
+    "price": 260,
+    "amenities": ["Wifi", "Beach Access", "Kitchen", "Outdoor Shower"],
+    "propertyType": "cottage",
+    "rating": 4.9,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 7,
+    "bookedDates": ["2025-02-05", "2025-03-20"],
+    "contactInfo": {
+      "email": "stay@beachsidecottage.com",
+      "phoneNumber": "+1-239-678-9012",
+      "website": "https://beachsidecottage.com"
+    }
+  },
+  {
+    "title": "Coastal Fishing Cottage",
+    "main_image": "images/cottage/8/main.jpg",
+    "images": ["images/cottage/8/livingRoom.jpg", "images/cottage/8/bedroom.jpg", "images/cottage/8/dock.jpg"],
+    "location": {
+      "state": "NC",
+      "city": "Nags Head",
+      "zipcode": "27959",
+      "address": "808 Fisherman's Dock"
+    },
+    "price": 175,
+    "amenities": ["Wifi", "Dock Access", "Kitchen", "BBQ Grill"],
+    "propertyType": "cottage",
+    "rating": 4.7,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 10,
+    "bookedDates": ["2025-01-18", "2025-03-20"],
+    "contactInfo": {
+      "email": "info@fishingcottage.com",
+      "phoneNumber": "+1-252-456-7890",
+      "website": "https://fishingcottage.com"
+    }
+  },
+  {
+    "title": "Romantic Valley Cottage",
+    "main_image": "images/cottage/9/main.jpg",
+    "images": ["images/cottage/9/livingRoom.jpg", "images/cottage/9/bedroom.jpg", "images/cottage/9/valleyView.jpg"],
+    "location": {
+      "state": "TN",
+      "city": "Gatlinburg",
+      "zipcode": "37738",
+      "address": "909 Valley View Rd"
+    },
+    "price": 210,
+    "amenities": ["Wifi", "Valley View", "Fireplace", "Hot Tub", "Kitchen"],
+    "propertyType": "cottage",
+    "rating": 4.8,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 2,
+    "bookedDates": ["2025-01-17", "2025-03-10"],
+    "contactInfo": {
+      "email": "contact@valleycottage.com",
+      "phoneNumber": "+1-865-123-4567",
+      "website": "https://valleycottage.com"
+    }
+  },
+  {
+    "title": "Quaint Garden Cottage",
+    "main_image": "images/cottage/10/main.jpg",
+    "images": ["images/cottage/10/livingRoom.jpg", "images/cottage/10/bedroom.jpg", "images/cottage/10/garden.jpg"],
+    "location": {
+      "state": "OR",
+      "city": "Ashland",
+      "zipcode": "97520",
+      "address": "1010 Rose Path"
+    },
+    "price": 160,
+    "amenities": ["Wifi", "Garden", "Kitchen", "Fireplace"],
+    "propertyType": "cottage",
+    "rating": 4.6,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 2,
+    "bookedDates": ["2025-01-26", "2025-03-20"],
+    "contactInfo": {
+      "email": "info@gardencottage.com",
+      "phoneNumber": "+1-541-123-4567",
+      "website": "https://gardencottage.com"
+    }
+  },
+  {
+    "title": "Charming Victorian House",
+    "main_image": "images/house/1/main.jpg",
+    "images": ["images/house/1/livingRoom.jpg", "images/house/1/bedroom.jpg", "images/house/1/kitchen.jpg", "images/house/1/garden.jpg"],
+    "location": {
+      "state": "CA",
+      "city": "San Francisco",
+      "zipcode": "94114",
+      "address": "123 Market St"
+    },
+    "price": 320,
+    "amenities": ["Wifi", "Garden", "Kitchen", "Fireplace", "Washer"],
+    "propertyType": "house",
+    "rating": 4.9,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 3,
+    "bookedDates": ["2025-01-25", "2025-03-20"],
+    "contactInfo": {
+      "email": "info@victorianhouse.com",
+      "phoneNumber": "+1-415-123-4567",
+      "website": "https://victorianhouse.com"
+    }
+  },
+  {
+    "title": "Modern House with Private Pool",
+    "main_image": "images/house/2/main.jpg",
+    "images": ["images/house/2/livingRoom.jpg", "images/house/2/bedroom.jpg", "images/house/2/pool.jpg", "images/house/2/kitchen.jpg"],
+    "location": {
+      "state": "FL",
+      "city": "Miami",
+      "zipcode": "33101",
+      "address": "456 Ocean Dr"
+    },
+    "price": 450,
+    "amenities": ["Wifi", "Pool", "Air Conditioning", "Kitchen", "Parking"],
+    "propertyType": "house",
+    "rating": 5.0,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 6,
+    "bookedDates": ["2025-01-15", "2025-04-20"],
+    "contactInfo": {
+      "email": "stay@modernhousemiami.com",
+      "phoneNumber": "+1-305-987-6543",
+      "website": "https://modernhousemiami.com"
+    }
+  },
+  {
+    "title": "Lakefront Family House",
+    "main_image": "images/house/3/main.jpg",
+    "images": ["images/house/3/livingRoom.jpg", "images/house/3/bedroom.jpg", "images/house/3/lakeView.jpg"],
+    "location": {
+      "state": "MN",
+      "city": "Minneapolis",
+      "zipcode": "55401",
+      "address": "789 Lakeview Dr"
+    },
+    "price": 280,
+    "amenities": ["Wifi", "Lake Access", "Heating", "Kitchen", "Fireplace"],
+    "propertyType": "house",
+    "rating": 4.7,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 4,
+    "bookedDates": ["2025-01-15", "2025-03-25"],
+    "contactInfo": {
+      "email": "info@lakefamilyhouse.com",
+      "phoneNumber": "+1-612-456-7890",
+      "website": "https://lakefamilyhouse.com"
+    }
+  },
+  {
+    "title": "Rustic Country House with Garden",
+    "main_image": "images/house/4/main.jpg",
+    "images": ["images/house/4/livingRoom.jpg", "images/house/4/bedroom.jpg", "images/house/4/garden.jpg"],
+    "location": {
+      "state": "TX",
+      "city": "Austin",
+      "zipcode": "78701",
+      "address": "321 Ranch Rd"
+    },
+    "price": 300,
+    "amenities": ["Wifi", "Garden", "Kitchen", "BBQ Grill", "Washer"],
+    "propertyType": "house",
+    "rating": 4.6,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 2,
+    "bookedDates": ["2025-01-15", "2025-03-27"],
+    "contactInfo": {
+      "email": "stay@countryhouseaustin.com",
+      "phoneNumber": "+1-512-123-4567",
+      "website": "https://countryhouseaustin.com"
+    }
+  },
+  {
+    "title": "Luxury Mountain House",
+    "main_image": "images/house/5/main.jpg",
+    "images": ["images/house/5/livingRoom.jpg", "images/house/5/bedroom.jpg", "images/house/5/mountainView.jpg", "images/house/5/patio.jpg"],
+    "location": {
+      "state": "CO",
+      "city": "Aspen",
+      "zipcode": "81611",
+      "address": "654 Summit Ave"
+    },
+    "price": 600,
+    "amenities": ["Wifi", "Mountain View", "Hot Tub", "Kitchen", "Fireplace"],
+    "propertyType": "house",
+    "rating": 4.9,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 4,
+    "bookedDates": ["2025-01-15", "2025-03-25"],
+    "contactInfo": {
+      "email": "info@luxurymountainhouse.com",
+      "phoneNumber": "+1-970-987-6543",
+      "website": "https://luxurymountainhouse.com"
+    }
+  },
+  {
+    "title": "Historic House in Downtown",
+    "main_image": "images/house/6/main.jpg",
+    "images": ["images/house/6/livingRoom.jpg", "images/house/6/bedroom.jpg", "images/house/6/kitchen.jpg"],
+    "location": {
+      "state": "GA",
+      "city": "Savannah",
+      "zipcode": "31401",
+      "address": "789 Liberty St"
+    },
+    "price": 260,
+    "amenities": ["Wifi", "Garden", "Kitchen", "Air Conditioning", "Washer"],
+    "propertyType": "house",
+    "rating": 4.8,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 3,
+    "bookedDates": ["2025-01-15", "2025-04-21"],
+    "contactInfo": {
+      "email": "contact@historichousedowntown.com",
+      "phoneNumber": "+1-912-987-6543",
+      "website": "https://historichousedowntown.com"
+    }
+  },
+  {
+    "title": "Cozy House Near the Beach",
+    "main_image": "images/house/7/main.jpg",
+    "images": ["images/house/7/livingRoom.jpg", "images/house/7/bedroom.jpg", "images/house/7/beach.jpg"],
+    "location": {
+      "state": "CA",
+      "city": "Santa Barbara",
+      "zipcode": "93101",
+      "address": "123 Shoreline Dr"
+    },
+    "price": 340,
+    "amenities": ["Wifi", "Beach Access", "Kitchen", "BBQ Grill"],
+    "propertyType": "house",
+    "rating": 4.7,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 4,
+    "bookedDates": ["2025-01-15", "2025-02-20"],
+    "contactInfo": {
+      "email": "stay@cozybeachhouse.com",
+      "phoneNumber": "+1-805-123-4567",
+      "website": "https://cozybeachhouse.com"
+    }
+  },
+  {
+    "title": "Stylish House with Rooftop Deck",
+    "main_image": "images/house/8/main.jpg",
+    "images": ["images/house/8/livingRoom.jpg", "images/house/8/bedroom.jpg", "images/house/8/rooftop.jpg"],
+    "location": {
+      "state": "NY",
+      "city": "Brooklyn",
+      "zipcode": "11201",
+      "address": "456 Atlantic Ave"
+    },
+    "price": 370,
+    "amenities": ["Wifi", "Rooftop Access", "Kitchen", "Air Conditioning"],
+    "propertyType": "house",
+    "rating": 4.6,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 1,
+    "bookedDates": ["2025-01-15", "2025-02-24"],
+    "contactInfo": {
+      "email": "info@stylishbrooklynhouse.com",
+      "phoneNumber": "+1-718-987-6543",
+      "website": "https://stylishbrooklynhouse.com"
+    }
+  },
+  {
+    "title": "Family House with Spacious Backyard",
+    "main_image": "images/house/9/main.jpg",
+    "images": ["images/house/9/livingRoom.jpg", "images/house/9/bedroom.jpg", "images/house/9/backyard.jpg"],
+    "location": {
+      "state": "WA",
+      "city": "Seattle",
+      "zipcode": "98101",
+      "address": "654 Green St"
+    },
+    "price": 310,
+    "amenities": ["Wifi", "Backyard", "Kitchen", "BBQ Grill", "Washer"],
+    "propertyType": "house",
+    "rating": 4.5,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 2,
+    "bookedDates": ["2025-01-15", "2025-04-21"],
+    "contactInfo": {
+      "email": "stay@familyhousebackyard.com",
+      "phoneNumber": "+1-206-123-4567",
+      "website": "https://familyhousebackyard.com"
+    }
+  },
+  {
+    "title": "House with Scenic Valley View",
+    "main_image": "images/house/10/main.jpg",
+    "images": ["images/house/10/livingRoom.jpg", "images/house/10/bedroom.jpg", "images/house/10/view.jpg"],
+    "location": {
+      "state": "OR",
+      "city": "Portland",
+      "zipcode": "97201",
+      "address": "789 Hilltop Rd"
+    },
+    "price": 290,
+    "amenities": ["Wifi", "Scenic View", "Kitchen", "Fireplace"],
+    "propertyType": "house",
+    "rating": 4.8,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 4,
+    "bookedDates": ["2025-01-15", "2025-09-20"],
+    "contactInfo": {
+      "email": "info@scenicvalleyhouse.com",
+      "phoneNumber": "+1-503-987-6543",
+      "website": "https://scenicvalleyhouse.com"
+    }
+  },
+  {
+    "title": "Modern Studio Downtown",
+    "main_image": "images/studio/1/main.jpg",
+    "images": ["images/studio/1/livingArea.jpg", "images/studio/1/kitchen.jpg", "images/studio/1/bathroom.jpg"],
+    "location": {
+      "state": "NY",
+      "city": "New York",
+      "zipcode": "10001",
+      "address": "123 Manhattan Ave"
+    },
+    "price": 150,
+    "amenities": ["Wifi", "Kitchen", "Air Conditioning", "Elevator"],
+    "propertyType": "studio",
+    "rating": 4.5,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 2,
+    "bookedDates": ["2025-01-15", "2025-07-22"],
+    "contactInfo": {
+      "email": "info@modernstudiodowntown.com",
+      "phoneNumber": "+1-212-555-6789",
+      "website": "https://modernstudiodowntown.com"
+    }
+  },
+  {
+    "title": "Cozy Studio Near the Beach",
+    "main_image": "images/studio/2/main.jpg",
+    "images": ["images/studio/2/livingArea.jpg", "images/studio/2/kitchenette.jpg", "images/studio/2/balcony.jpg"],
+    "location": {
+      "state": "CA",
+      "city": "Santa Monica",
+      "zipcode": "90401",
+      "address": "456 Ocean Dr"
+    },
+    "price": 180,
+    "amenities": ["Wifi", "Beach Access", "Kitchenette", "Balcony"],
+    "propertyType": "studio",
+    "rating": 4.8,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 3,
+    "bookedDates": ["2025-01-15", "2025-08-10"],
+    "contactInfo": {
+      "email": "stay@cozystudiobeach.com",
+      "phoneNumber": "+1-310-555-1234",
+      "website": "https://cozystudiobeach.com"
+    }
+  },
+  {
+    "title": "Stylish Studio with City View",
+    "main_image": "images/studio/3/main.jpg",
+    "images": ["images/studio/3/livingArea.jpg", "images/studio/3/kitchen.jpg", "images/studio/3/view.jpg"],
+    "location": {
+      "state": "IL",
+      "city": "Chicago",
+      "zipcode": "60614",
+      "address": "789 Lakeshore Dr"
+    },
+    "price": 160,
+    "amenities": ["Wifi", "City View", "Kitchen", "Smart TV"],
+    "propertyType": "studio",
+    "rating": 4.6,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 4,
+    "bookedDates": ["2025-01-15", "2025-03-03"],
+    "contactInfo": {
+      "email": "info@stylishstudiocityview.com",
+      "phoneNumber": "+1-312-555-7890",
+      "website": "https://stylishstudiocityview.com"
+    }
+  },
+  {
+    "title": "Charming Studio in Arts District",
+    "main_image": "images/studio/4/main.jpg",
+    "images": ["images/studio/4/livingArea.jpg", "images/studio/4/kitchenette.jpg", "images/studio/4/courtyard.jpg"],
+    "location": {
+      "state": "TX",
+      "city": "Austin",
+      "zipcode": "78701",
+      "address": "101 Red River St"
+    },
+    "price": 140,
+    "amenities": ["Wifi", "Kitchenette", "Courtyard Access", "Pet Friendly"],
+    "propertyType": "studio",
+    "rating": 4.7,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 7,
+    "bookedDates": ["2025-01-15", "2025-03-21"],
+    "contactInfo": {
+      "email": "info@charmingartsdistrictstudio.com",
+      "phoneNumber": "+1-512-555-4567",
+      "website": "https://charmingartsdistrictstudio.com"
+    }
+  },
+  {
+    "title": "Bright and Airy Studio",
+    "main_image": "images/studio/5/main.jpg",
+    "images": ["images/studio/5/livingArea.jpg", "images/studio/5/kitchen.jpg", "images/studio/5/garden.jpg"],
+    "location": {
+      "state": "OR",
+      "city": "Portland",
+      "zipcode": "97205",
+      "address": "202 Rose Ave"
+    },
+    "price": 120,
+    "amenities": ["Wifi", "Garden Access", "Kitchen", "Pet Friendly"],
+    "propertyType": "studio",
+    "rating": 4.4,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 10,
+    "bookedDates": ["2025-01-15", "2025-03-10"],
+    "contactInfo": {
+      "email": "stay@brightairystudio.com",
+      "phoneNumber": "+1-503-555-6789",
+      "website": "https://brightairystudio.com"
+    }
+  },
+  {
+    "title": "Studio with Private Terrace",
+    "main_image": "images/studio/6/main.jpg",
+    "images": ["images/studio/6/livingArea.jpg", "images/studio/6/kitchenette.jpg", "images/studio/6/terrace.jpg"],
+    "location": {
+      "state": "FL",
+      "city": "Miami",
+      "zipcode": "33139",
+      "address": "303 Ocean Blvd"
+    },
+    "price": 190,
+    "amenities": ["Wifi", "Terrace", "Kitchenette", "Air Conditioning"],
+    "propertyType": "studio",
+    "rating": 4.9,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 4,
+    "bookedDates": ["2025-01-15", "2025-03-22"],
+    "contactInfo": {
+      "email": "info@studioprivateterrace.com",
+      "phoneNumber": "+1-305-555-4321",
+      "website": "https://studioprivateterrace.com"
+    }
+  },
+  {
+    "title": "Studio in Historic Building",
+    "main_image": "images/studio/7/main.jpg",
+    "images": ["images/studio/7/livingArea.jpg", "images/studio/7/kitchen.jpg", "images/studio/7/lobby.jpg"],
+    "location": {
+      "state": "MA",
+      "city": "Boston",
+      "zipcode": "02108",
+      "address": "404 Beacon St"
+    },
+    "price": 175,
+    "amenities": ["Wifi", "Historic Building", "Kitchen", "Smart TV"],
+    "propertyType": "studio",
+    "rating": 4.6,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 6,
+    "bookedDates": ["2025-01-02", "2025-03-20"],
+    "contactInfo": {
+      "email": "info@historicbuildingstudio.com",
+      "phoneNumber": "+1-617-555-5678",
+      "website": "https://historicbuildingstudio.com"
+    }
+  },
+  {
+    "title": "Minimalist Studio Loft",
+    "main_image": "images/studio/8/main.jpg",
+    "images": ["images/studio/8/livingArea.jpg", "images/studio/8/kitchenette.jpg", "images/studio/8/loft.jpg"],
+    "location": {
+      "state": "WA",
+      "city": "Seattle",
+      "zipcode": "98101",
+      "address": "505 Pine St"
+    },
+    "price": 160,
+    "amenities": ["Wifi", "Loft", "Kitchenette", "Washer/Dryer"],
+    "propertyType": "studio",
+    "rating": 4.7,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 2,
+    "bookedDates": ["2025-01-03", "2025-03-20"],
+    "contactInfo": {
+      "email": "stay@minimalistloft.com",
+      "phoneNumber": "+1-206-555-4321",
+      "website": "https://minimalistloft.com"
+    }
+  },
+  {
+    "title": "Beachfront Studio Suite",
+    "main_image": "images/studio/9/main.jpg",
+    "images": ["images/studio/9/livingArea.jpg", "images/studio/9/kitchen.jpg", "images/studio/9/beachView.jpg"],
+    "location": {
+      "state": "HI",
+      "city": "Honolulu",
+      "zipcode": "96815",
+      "address": "606 Oceanfront Ln"
+    },
+    "price": 200,
+    "amenities": ["Wifi", "Beach View", "Kitchen", "Private Balcony"],
+    "propertyType": "studio",
+    "rating": 4.8,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 8,
+    "bookedDates": ["2025-01-04", "2025-03-20"],
+    "contactInfo": {
+      "email": "info@beachfrontstudiosuite.com",
+      "phoneNumber": "+1-808-555-9876",
+      "website": "https://beachfrontstudiosuite.com"
+    }
+  },
+  {
+    "title": "Downtown Studio with Balcony",
+    "main_image": "images/studio/10/main.jpg",
+    "images": ["images/studio/10/livingArea.jpg", "images/studio/10/kitchenette.jpg", "images/studio/10/balcony.jpg"],
+    "location": {
+      "state": "GA",
+      "city": "Atlanta",
+      "zipcode": "30303",
+      "address": "707 Peachtree St"
+    },
+    "price": 130,
+    "amenities": ["Wifi", "Balcony", "Kitchenette", "Air Conditioning"],
+    "propertyType": "studio",
+    "rating": 4.5,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 7,
+    "bookedDates": ["2025-01-05", "2025-03-20"],
+    "contactInfo": {
+      "email": "stay@downtownstudiobalcony.com",
+      "phoneNumber": "+1-404-555-8765",
+      "website": "https://downtownstudiobalcony.com"
+    }
+  },
+  {
+    "title": "Seaside Luxury Villa",
+    "main_image": "images/villa/1/main.jpg",
+    "images": ["images/villa/1/livingRoom.jpg", "images/villa/1/bedroom.jpg", "images/villa/1/pool.jpg", "images/villa/1/beachView.jpg"],
+    "location": {
+      "state": "CA",
+      "city": "Malibu",
+      "zipcode": "90265",
+      "address": "100 Beachfront Blvd"
+    },
+    "price": 950,
+    "amenities": ["Wifi", "Pool", "Ocean View", "Kitchen", "BBQ Grill", "Air Conditioning"],
+    "propertyType": "villa",
+    "rating": 4.9,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 3,
+    "bookedDates": ["2025-01-06", "2025-03-20"],
+    "contactInfo": {
+      "email": "stay@seasideluxuryvilla.com",
+      "phoneNumber": "+1-310-555-1234",
+      "website": "https://seasideluxuryvilla.com"
+    }
+  },
+  {
+    "title": "Countryside Villa with Private Vineyard",
+    "main_image": "images/villa/2/main.jpg",
+    "images": ["images/villa/2/livingRoom.jpg", "images/villa/2/bedroom.jpg", "images/villa/2/vineyard.jpg", "images/villa/2/dining.jpg"],
+    "location": {
+      "state": "CA",
+      "city": "Napa Valley",
+      "zipcode": "94558",
+      "address": "200 Vineyard Way"
+    },
+    "price": 750,
+    "amenities": ["Wifi", "Kitchen", "Private Vineyard", "Fireplace", "Hot Tub"],
+    "propertyType": "villa",
+    "rating": 5.0,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 4,
+    "bookedDates": ["2025-01-07", "2025-03-20"],
+    "contactInfo": {
+      "email": "contact@vineyardvilla.com",
+      "phoneNumber": "+1-707-555-5678",
+      "website": "https://vineyardvilla.com"
+    }
+  },
+  {
+    "title": "Luxurious Hilltop Villa",
+    "main_image": "images/villa/3/main.jpg",
+    "images": ["images/villa/3/livingRoom.jpg", "images/villa/3/bedroom.jpg", "images/villa/3/pool.jpg", "images/villa/3/mountainView.jpg"],
+    "location": {
+      "state": "HI",
+      "city": "Honolulu",
+      "zipcode": "96816",
+      "address": "300 Island View Dr"
+    },
+    "price": 1050,
+    "amenities": ["Wifi", "Infinity Pool", "Mountain View", "Kitchen", "Air Conditioning"],
+    "propertyType": "villa",
+    "rating": 4.8,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 4,
+    "bookedDates": ["2025-01-08", "2025-03-20"],
+    "contactInfo": {
+      "email": "info@hilltopvillahonolulu.com",
+      "phoneNumber": "+1-808-555-8765",
+      "website": "https://hilltopvillahonolulu.com"
+    }
+  },
+  {
+    "title": "Tropical Garden Villa",
+    "main_image": "images/villa/4/main.jpg",
+    "images": ["images/villa/4/livingRoom.jpg", "images/villa/4/bedroom.jpg", "images/villa/4/garden.jpg"],
+    "location": {
+      "state": "FL",
+      "city": "Orlando",
+      "zipcode": "32801",
+      "address": "400 Palm Lane"
+    },
+    "price": 820,
+    "amenities": ["Wifi", "Private Garden", "Hot Tub", "Kitchen", "BBQ Grill"],
+    "propertyType": "villa",
+    "rating": 4.7,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 2,
+    "bookedDates": ["2025-01-09", "2025-03-20"],
+    "contactInfo": {
+      "email": "stay@tropicalgardenvilla.com",
+      "phoneNumber": "+1-407-555-4321",
+      "website": "https://tropicalgardenvilla.com"
+    }
+  },
+  {
+    "title": "Mediterranean-Style Villa",
+    "main_image": "images/villa/5/main.jpg",
+    "images": ["images/villa/5/livingRoom.jpg", "images/villa/5/bedroom.jpg", "images/villa/5/patio.jpg"],
+    "location": {
+      "state": "AZ",
+      "city": "Scottsdale",
+      "zipcode": "85251",
+      "address": "500 Desert Ridge Rd"
+    },
+    "price": 680,
+    "amenities": ["Wifi", "Patio", "Kitchen", "Fireplace"],
+    "propertyType": "villa",
+    "rating": 4.6,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 3,
+    "bookedDates": ["2025-01-10", "2025-03-20"],
+    "contactInfo": {
+      "email": "reservations@mediterraneanvilla.com",
+      "phoneNumber": "+1-480-555-6789",
+      "website": "https://mediterraneanvilla.com"
+    }
+  },
+  {
+    "title": "Art Deco Beach Villa",
+    "main_image": "images/villa/6/main.jpg",
+    "images": ["images/villa/6/livingRoom.jpg", "images/villa/6/bedroom.jpg", "images/villa/6/pool.jpg", "images/villa/6/beachView.jpg"],
+    "location": {
+      "state": "FL",
+      "city": "Miami Beach",
+      "zipcode": "33139",
+      "address": "600 Ocean Dr"
+    },
+    "price": 1100,
+    "amenities": ["Wifi", "Pool", "Beach Access", "Kitchen", "Air Conditioning"],
+    "propertyType": "villa",
+    "rating": 5.0,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 1,
+    "bookedDates": ["2025-01-11", "2025-03-20"],
+    "contactInfo": {
+      "email": "contact@artdecobeachvilla.com",
+      "phoneNumber": "+1-305-555-9876",
+      "website": "https://artdecobeachvilla.com"
+    }
+  },
+  {
+    "title": "Hillside Villa with Panoramic Views",
+    "main_image": "images/villa/7/main.jpg",
+    "images": ["images/villa/7/livingRoom.jpg", "images/villa/7/bedroom.jpg", "images/villa/7/view.jpg"],
+    "location": {
+      "state": "CA",
+      "city": "Santa Barbara",
+      "zipcode": "93101",
+      "address": "700 Cliffside Rd"
+    },
+    "price": 970,
+    "amenities": ["Wifi", "Panoramic Views", "Kitchen", "BBQ Grill", "Fireplace"],
+    "propertyType": "villa",
+    "rating": 4.9,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 5,
+    "bookedDates": ["2025-01-12", "2025-03-20"],
+    "contactInfo": {
+      "email": "stay@panoramicviews.com",
+      "phoneNumber": "+1-805-555-5678",
+      "website": "https://panoramicviews.com"
+    }
+  },
+  {
+    "title": "Eco-Friendly Villa with Solar Power",
+    "main_image": "images/villa/8/main.jpg",
+    "images": ["images/villa/8/livingRoom.jpg", "images/villa/8/bedroom.jpg", "images/villa/8/solarPanels.jpg"],
+    "location": {
+      "state": "CO",
+      "city": "Boulder",
+      "zipcode": "80301",
+      "address": "800 Greenway St"
+    },
+    "price": 780,
+    "amenities": ["Wifi", "Solar Power", "Kitchen", "Fireplace"],
+    "propertyType": "villa",
+    "rating": 4.7,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 6,
+    "bookedDates": ["2025-01-13", "2025-03-20"],
+    "contactInfo": {
+      "email": "info@ecofriendlyvilla.com",
+      "phoneNumber": "+1-303-555-8765",
+      "website": "https://ecofriendlyvilla.com"
+    }
+  },
+  {
+    "title": "Desert Oasis Villa",
+    "main_image": "images/villa/9/main.jpg",
+    "images": ["images/villa/9/livingRoom.jpg", "images/villa/9/bedroom.jpg", "images/villa/9/pool.jpg", "images/villa/9/garden.jpg"],
+    "location": {
+      "state": "NV",
+      "city": "Las Vegas",
+      "zipcode": "89101",
+      "address": "900 Oasis Rd"
+    },
+    "price": 1050,
+    "amenities": ["Wifi", "Pool", "Garden", "Kitchen", "BBQ Grill"],
+    "propertyType": "villa",
+    "rating": 4.9,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 2,
+    "bookedDates": ["2025-01-14", "2025-03-20"],
+    "contactInfo": {
+      "email": "contact@desertoasisvilla.com",
+      "phoneNumber": "+1-702-555-1234",
+      "website": "https://desertoasisvilla.com"
+    }
+  },
+  {
+    "title": "Cliffside Villa with Infinity Pool",
+    "main_image": "images/villa/10/main.jpg",
+    "images": ["images/villa/10/livingRoom.jpg", "images/villa/10/bedroom.jpg", "images/villa/10/pool.jpg", "images/villa/10/cliffView.jpg"],
+    "location": {
+      "state": "HI",
+      "city": "Maui",
+      "zipcode": "96761",
+      "address": "1000 Cliff Dr"
+    },
+    "price": 1250,
+    "amenities": ["Wifi", "Infinity Pool", "Ocean View", "Kitchen", "Air Conditioning"],
+    "propertyType": "villa",
+    "rating": 5.0,
+    "availableFrom": "2025-01-01",
+    "availableTo": "2025-12-31",
+    "maxGuests": 3,
+    "bookedDates": ["2025-01-19", "2025-03-20"],
+    "contactInfo": {
+      "email": "stay@cliffsidevilla.com",
+      "phoneNumber": "+1-808-555-4321",
+      "website": "https://cliffsidevilla.com"
+    }
+  }
+]

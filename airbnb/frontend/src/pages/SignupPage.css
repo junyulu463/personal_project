@@ -1,0 +1,73 @@
+/* Center the sign-up container with padding and shadow */
+.signup-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  /* Title styling */
+  .signup-container h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Form styling to center content */
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Style for input fields */
+  .signup-form input {
+    width: 70%;
+    max-width: 300px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+  }
+  
+  /* Primary button styling for 'Sign Up' */
+  .signup-button {
+    width: 50%;
+    max-width: 300px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: #ff5a5f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .signup-button:hover {
+    background-color: #ff1c1f;
+  }
+  
+  /* Home button styling */
+  .home-button {
+    margin-top: 1rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.9rem;
+    background-color: #ff5a5f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .home-button:hover {
+    background-color: #ff1c1f;
+  }
+  

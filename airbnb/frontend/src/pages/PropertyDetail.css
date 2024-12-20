@@ -1,0 +1,135 @@
+/* PropertyDetail.css */
+
+.property-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .property-main-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .property-detail p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 5px 0;
+  }
+  
+  .property-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .property-image-item {
+    text-align: center;
+  }
+  
+  .property-gallery-image {
+    width: 120px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+  
+  .property-gallery-image:hover {
+    transform: scale(1.05);
+  }
+  
+  .image-title {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  /* Lightbox Styles */
+  .lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+  }
+  
+  .lightbox-image {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+  }
+  
+  /* Star Rating Styles */
+  .star-container {
+    display: inline-flex;
+  }
+  
+  .star {
+    font-size: 1.2rem;
+    color: #FFD700;
+    margin-right: 2px;
+  }
+  
+  .star.empty {
+    color: #e0e0e0;
+  }
+  
+  .star.half {
+    position: relative;
+    display: inline-block;
+    color: #e0e0e0;
+    overflow: hidden;
+  }
+  
+  .half-star-overlay {
+    color: #FFD700;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  
+  /* Button Styles */
+  .button-container {
+    margin-bottom: 20px;
+  }
+  
+  button {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #ff85c2;
+  }
+  

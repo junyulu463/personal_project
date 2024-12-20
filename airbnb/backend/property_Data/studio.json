@@ -1,0 +1,242 @@
+[
+  {
+    "title": "Modern Studio Downtown",
+    "main_image": "images/studio/1/main.jpg",
+    "images": ["images/studio/1/livingArea.jpg", "images/studio/1/kitchen.jpg", "images/studio/1/bathroom.jpg"],
+    "location": {
+      "state": "NY",
+      "city": "New York",
+      "zipcode": "10001",
+      "address": "123 Manhattan Ave"
+    },
+    "price": 150,
+    "amenities": ["Wifi", "Kitchen", "Air Conditioning", "Elevator"],
+    "propertyType": "studio",
+    "rating": 4.5,
+    "availableFrom": "2024-01-01",
+    "availableTo": "2024-12-31",
+    "maxGuests": 2,
+    "bookedDates": ["2024-02-14", "2024-05-22"],
+    "contactInfo": {
+      "email": "info@modernstudiodowntown.com",
+      "phoneNumber": "+1-212-555-6789",
+      "website": "https://modernstudiodowntown.com"
+    }
+  },
+  {
+    "title": "Cozy Studio Near the Beach",
+    "main_image": "images/studio/2/main.jpg",
+    "images": ["images/studio/2/livingArea.jpg", "images/studio/2/kitchenette.jpg", "images/studio/2/balcony.jpg"],
+    "location": {
+      "state": "CA",
+      "city": "Santa Monica",
+      "zipcode": "90401",
+      "address": "456 Ocean Dr"
+    },
+    "price": 180,
+    "amenities": ["Wifi", "Beach Access", "Kitchenette", "Balcony"],
+    "propertyType": "studio",
+    "rating": 4.8,
+    "availableFrom": "2024-03-15",
+    "availableTo": "2024-09-15",
+    "maxGuests": 2,
+    "bookedDates": ["2024-04-05", "2024-06-18"],
+    "contactInfo": {
+      "email": "stay@cozystudiobeach.com",
+      "phoneNumber": "+1-310-555-1234",
+      "website": "https://cozystudiobeach.com"
+    }
+  },
+  {
+    "title": "Stylish Studio with City View",
+    "main_image": "images/studio/3/main.jpg",
+    "images": ["images/studio/3/livingArea.jpg", "images/studio/3/kitchen.jpg", "images/studio/3/view.jpg"],
+    "location": {
+      "state": "IL",
+      "city": "Chicago",
+      "zipcode": "60614",
+      "address": "789 Lakeshore Dr"
+    },
+    "price": 160,
+    "amenities": ["Wifi", "City View", "Kitchen", "Smart TV"],
+    "propertyType": "studio",
+    "rating": 4.6,
+    "availableFrom": "2024-02-01",
+    "availableTo": "2024-11-01",
+    "maxGuests": 2,
+    "bookedDates": ["2024-03-15", "2024-08-22"],
+    "contactInfo": {
+      "email": "info@stylishstudiocityview.com",
+      "phoneNumber": "+1-312-555-7890",
+      "website": "https://stylishstudiocityview.com"
+    }
+  },
+  {
+    "title": "Charming Studio in Arts District",
+    "main_image": "images/studio/4/main.jpg",
+    "images": ["images/studio/4/livingArea.jpg", "images/studio/4/kitchenette.jpg", "images/studio/4/courtyard.jpg"],
+    "location": {
+      "state": "TX",
+      "city": "Austin",
+      "zipcode": "78701",
+      "address": "101 Red River St"
+    },
+    "price": 140,
+    "amenities": ["Wifi", "Kitchenette", "Courtyard Access", "Pet Friendly"],
+    "propertyType": "studio",
+    "rating": 4.7,
+    "availableFrom": "2024-04-01",
+    "availableTo": "2024-10-31",
+    "maxGuests": 2,
+    "bookedDates": ["2024-05-03", "2024-07-15"],
+    "contactInfo": {
+      "email": "info@charmingartsdistrictstudio.com",
+      "phoneNumber": "+1-512-555-4567",
+      "website": "https://charmingartsdistrictstudio.com"
+    }
+  },
+  {
+    "title": "Bright and Airy Studio",
+    "main_image": "images/studio/5/main.jpg",
+    "images": ["images/studio/5/livingArea.jpg", "images/studio/5/kitchen.jpg", "images/studio/5/garden.jpg"],
+    "location": {
+      "state": "OR",
+      "city": "Portland",
+      "zipcode": "97205",
+      "address": "202 Rose Ave"
+    },
+    "price": 120,
+    "amenities": ["Wifi", "Garden Access", "Kitchen", "Pet Friendly"],
+    "propertyType": "studio",
+    "rating": 4.4,
+    "availableFrom": "2024-05-01",
+    "availableTo": "2024-10-01",
+    "maxGuests": 2,
+    "bookedDates": ["2024-06-12", "2024-08-19"],
+    "contactInfo": {
+      "email": "stay@brightairystudio.com",
+      "phoneNumber": "+1-503-555-6789",
+      "website": "https://brightairystudio.com"
+    }
+  },
+  {
+    "title": "Studio with Private Terrace",
+    "main_image": "images/studio/6/main.jpg",
+    "images": ["images/studio/6/livingArea.jpg", "images/studio/6/kitchenette.jpg", "images/studio/6/terrace.jpg"],
+    "location": {
+      "state": "FL",
+      "city": "Miami",
+      "zipcode": "33139",
+      "address": "303 Ocean Blvd"
+    },
+    "price": 190,
+    "amenities": ["Wifi", "Terrace", "Kitchenette", "Air Conditioning"],
+    "propertyType": "studio",
+    "rating": 4.9,
+    "availableFrom": "2024-06-01",
+    "availableTo": "2024-11-01",
+    "maxGuests": 2,
+    "bookedDates": ["2024-06-20", "2024-09-10"],
+    "contactInfo": {
+      "email": "info@studioprivateterrace.com",
+      "phoneNumber": "+1-305-555-4321",
+      "website": "https://studioprivateterrace.com"
+    }
+  },
+  {
+    "title": "Studio in Historic Building",
+    "main_image": "images/studio/7/main.jpg",
+    "images": ["images/studio/7/livingArea.jpg", "images/studio/7/kitchen.jpg", "images/studio/7/lobby.jpg"],
+    "location": {
+      "state": "MA",
+      "city": "Boston",
+      "zipcode": "02108",
+      "address": "404 Beacon St"
+    },
+    "price": 175,
+    "amenities": ["Wifi", "Historic Building", "Kitchen", "Smart TV"],
+    "propertyType": "studio",
+    "rating": 4.6,
+    "availableFrom": "2024-03-01",
+    "availableTo": "2024-12-01",
+    "maxGuests": 2,
+    "bookedDates": ["2024-04-22", "2024-10-12"],
+    "contactInfo": {
+      "email": "info@historicbuildingstudio.com",
+      "phoneNumber": "+1-617-555-5678",
+      "website": "https://historicbuildingstudio.com"
+    }
+  },
+  {
+    "title": "Minimalist Studio Loft",
+    "main_image": "images/studio/8/main.jpg",
+    "images": ["images/studio/8/livingArea.jpg", "images/studio/8/kitchenette.jpg", "images/studio/8/loft.jpg"],
+    "location": {
+      "state": "WA",
+      "city": "Seattle",
+      "zipcode": "98101",
+      "address": "505 Pine St"
+    },
+    "price": 160,
+    "amenities": ["Wifi", "Loft", "Kitchenette", "Washer/Dryer"],
+    "propertyType": "studio",
+    "rating": 4.7,
+    "availableFrom": "2024-02-01",
+    "availableTo": "2024-08-01",
+    "maxGuests": 2,
+    "bookedDates": ["2024-03-12", "2024-06-30"],
+    "contactInfo": {
+      "email": "stay@minimalistloft.com",
+      "phoneNumber": "+1-206-555-4321",
+      "website": "https://minimalistloft.com"
+    }
+  },
+  {
+    "title": "Beachfront Studio Suite",
+    "main_image": "images/studio/9/main.jpg",
+    "images": ["images/studio/9/livingArea.jpg", "images/studio/9/kitchen.jpg", "images/studio/9/beachView.jpg"],
+    "location": {
+      "state": "HI",
+      "city": "Honolulu",
+      "zipcode": "96815",
+      "address": "606 Oceanfront Ln"
+    },
+    "price": 200,
+    "amenities": ["Wifi", "Beach View", "Kitchen", "Private Balcony"],
+    "propertyType": "studio",
+    "rating": 4.8,
+    "availableFrom": "2024-05-01",
+    "availableTo": "2024-10-01",
+    "maxGuests": 2,
+    "bookedDates": ["2024-07-01", "2024-09-15"],
+    "contactInfo": {
+      "email": "info@beachfrontstudiosuite.com",
+      "phoneNumber": "+1-808-555-9876",
+      "website": "https://beachfrontstudiosuite.com"
+    }
+  },
+  {
+    "title": "Downtown Studio with Balcony",
+    "main_image": "images/studio/10/main.jpg",
+    "images": ["images/studio/10/livingArea.jpg", "images/studio/10/kitchenette.jpg", "images/studio/10/balcony.jpg"],
+    "location": {
+      "state": "GA",
+      "city": "Atlanta",
+      "zipcode": "30303",
+      "address": "707 Peachtree St"
+    },
+    "price": 130,
+    "amenities": ["Wifi", "Balcony", "Kitchenette", "Air Conditioning"],
+    "propertyType": "studio",
+    "rating": 4.5,
+    "availableFrom": "2024-04-01",
+    "availableTo": "2024-09-01",
+    "maxGuests": 2,
+    "bookedDates": ["2024-05-18", "2024-08-20"],
+    "contactInfo": {
+      "email": "stay@downtownstudiobalcony.com",
+      "phoneNumber": "+1-404-555-8765",
+      "website": "https://downtownstudiobalcony.com"
+    }
+  }
+]

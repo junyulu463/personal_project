@@ -1,0 +1,242 @@
+[
+  {
+    "title": "Rustic Lakefront Cottage",
+    "main_image": "images/cottage/1/main.jpg",
+    "images": ["images/cottage/1/livingRoom.jpg", "images/cottage/1/bedroom.jpg", "images/cottage/1/lakeView.jpg", "images/cottage/1/garden.jpg"],
+    "location": {
+      "state": "ME",
+      "city": "Bar Harbor",
+      "zipcode": "04609",
+      "address": "101 Lakeside Dr"
+    },
+    "price": 180,
+    "amenities": ["Wifi", "Fireplace", "Lake View", "Kitchen", "BBQ Grill"],
+    "propertyType": "cottage",
+    "rating": 4.8,
+    "availableFrom": "2024-05-01",
+    "availableTo": "2024-10-01",
+    "maxGuests": 4,
+    "bookedDates": ["2024-05-10", "2024-07-15"],
+    "contactInfo": {
+      "email": "info@lakefrontcottage.com",
+      "phoneNumber": "+1-207-123-4567",
+      "website": "https://lakefrontcottage.com"
+    }
+  },
+  {
+    "title": "Secluded Mountain Cottage",
+    "main_image": "images/cottage/2/main.jpg",
+    "images": ["images/cottage/2/livingRoom.jpg", "images/cottage/2/bedroom.jpg", "images/cottage/2/mountainView.jpg"],
+    "location": {
+      "state": "CO",
+      "city": "Aspen",
+      "zipcode": "81611",
+      "address": "202 Rocky Rd"
+    },
+    "price": 220,
+    "amenities": ["Wifi", "Mountain View", "Fireplace", "Hot Tub", "Kitchen"],
+    "propertyType": "cottage",
+    "rating": 4.7,
+    "availableFrom": "2024-03-15",
+    "availableTo": "2024-09-15",
+    "maxGuests": 5,
+    "bookedDates": ["2024-04-01", "2024-06-20"],
+    "contactInfo": {
+      "email": "stay@mountaincottage.com",
+      "phoneNumber": "+1-970-987-6543",
+      "website": "https://mountaincottage.com"
+    }
+  },
+  {
+    "title": "Charming Countryside Cottage",
+    "main_image": "images/cottage/3/main.jpg",
+    "images": ["images/cottage/3/livingRoom.jpg", "images/cottage/3/bedroom.jpg", "images/cottage/3/garden.jpg"],
+    "location": {
+      "state": "VT",
+      "city": "Woodstock",
+      "zipcode": "05091",
+      "address": "303 Country Ln"
+    },
+    "price": 150,
+    "amenities": ["Wifi", "Fireplace", "Kitchen", "Garden", "BBQ Grill"],
+    "propertyType": "cottage",
+    "rating": 4.6,
+    "availableFrom": "2024-06-01",
+    "availableTo": "2024-11-01",
+    "maxGuests": 4,
+    "bookedDates": ["2024-07-01", "2024-09-15"],
+    "contactInfo": {
+      "email": "info@countrysidecottage.com",
+      "phoneNumber": "+1-802-456-7890",
+      "website": "https://countrysidecottage.com"
+    }
+  },
+  {
+    "title": "Cozy Woodland Cottage",
+    "main_image": "images/cottage/4/main.jpg",
+    "images": ["images/cottage/4/livingRoom.jpg", "images/cottage/4/bedroom.jpg", "images/cottage/4/woods.jpg"],
+    "location": {
+      "state": "OR",
+      "city": "Bend",
+      "zipcode": "97701",
+      "address": "404 Forest Way"
+    },
+    "price": 170,
+    "amenities": ["Wifi", "Fireplace", "Hiking Trails", "Kitchen"],
+    "propertyType": "cottage",
+    "rating": 4.5,
+    "availableFrom": "2024-04-01",
+    "availableTo": "2024-09-01",
+    "maxGuests": 3,
+    "bookedDates": ["2024-05-20", "2024-06-30"],
+    "contactInfo": {
+      "email": "contact@woodlandcottage.com",
+      "phoneNumber": "+1-541-321-4567",
+      "website": "https://woodlandcottage.com"
+    }
+  },
+  {
+    "title": "Lakeside Family Cottage",
+    "main_image": "images/cottage/5/main.jpg",
+    "images": ["images/cottage/5/livingRoom.jpg", "images/cottage/5/bedroom.jpg", "images/cottage/5/patio.jpg", "images/cottage/5/lake.jpg"],
+    "location": {
+      "state": "MN",
+      "city": "Ely",
+      "zipcode": "55731",
+      "address": "505 Lakeside Loop"
+    },
+    "price": 200,
+    "amenities": ["Wifi", "Lake Access", "Fireplace", "Kitchen", "Outdoor Dining"],
+    "propertyType": "cottage",
+    "rating": 4.9,
+    "availableFrom": "2024-05-15",
+    "availableTo": "2024-10-15",
+    "maxGuests": 6,
+    "bookedDates": ["2024-06-15", "2024-09-01"],
+    "contactInfo": {
+      "email": "contact@lakesidefamilycottage.com",
+      "phoneNumber": "+1-218-456-7890",
+      "website": "https://lakesidefamilycottage.com"
+    }
+  },
+  {
+    "title": "Historical Stone Cottage",
+    "main_image": "images/cottage/6/main.jpg",
+    "images": ["images/cottage/6/livingRoom.jpg", "images/cottage/6/bedroom.jpg", "images/cottage/6/fireplace.jpg"],
+    "location": {
+      "state": "PA",
+      "city": "Gettysburg",
+      "zipcode": "17325",
+      "address": "606 Old Stone Rd"
+    },
+    "price": 190,
+    "amenities": ["Wifi", "Fireplace", "Historical Charm", "Kitchen"],
+    "propertyType": "cottage",
+    "rating": 4.8,
+    "availableFrom": "2024-07-01",
+    "availableTo": "2024-12-01",
+    "maxGuests": 4,
+    "bookedDates": ["2024-08-10", "2024-10-20"],
+    "contactInfo": {
+      "email": "info@historicalstonecottage.com",
+      "phoneNumber": "+1-717-123-4567",
+      "website": "https://historicalstonecottage.com"
+    }
+  },
+  {
+    "title": "Beachside Sunset Cottage",
+    "main_image": "images/cottage/7/main.jpg",
+    "images": ["images/cottage/7/livingRoom.jpg", "images/cottage/7/bedroom.jpg", "images/cottage/7/beachView.jpg"],
+    "location": {
+      "state": "FL",
+      "city": "Naples",
+      "zipcode": "34102",
+      "address": "707 Sunset Blvd"
+    },
+    "price": 260,
+    "amenities": ["Wifi", "Beach Access", "Kitchen", "Outdoor Shower"],
+    "propertyType": "cottage",
+    "rating": 4.9,
+    "availableFrom": "2024-05-01",
+    "availableTo": "2024-09-01",
+    "maxGuests": 5,
+    "bookedDates": ["2024-06-05", "2024-08-15"],
+    "contactInfo": {
+      "email": "stay@beachsidecottage.com",
+      "phoneNumber": "+1-239-678-9012",
+      "website": "https://beachsidecottage.com"
+    }
+  },
+  {
+    "title": "Coastal Fishing Cottage",
+    "main_image": "images/cottage/8/main.jpg",
+    "images": ["images/cottage/8/livingRoom.jpg", "images/cottage/8/bedroom.jpg", "images/cottage/8/dock.jpg"],
+    "location": {
+      "state": "NC",
+      "city": "Nags Head",
+      "zipcode": "27959",
+      "address": "808 Fisherman's Dock"
+    },
+    "price": 175,
+    "amenities": ["Wifi", "Dock Access", "Kitchen", "BBQ Grill"],
+    "propertyType": "cottage",
+    "rating": 4.7,
+    "availableFrom": "2024-04-15",
+    "availableTo": "2024-08-15",
+    "maxGuests": 4,
+    "bookedDates": ["2024-05-10", "2024-07-25"],
+    "contactInfo": {
+      "email": "info@fishingcottage.com",
+      "phoneNumber": "+1-252-456-7890",
+      "website": "https://fishingcottage.com"
+    }
+  },
+  {
+    "title": "Romantic Valley Cottage",
+    "main_image": "images/cottage/9/main.jpg",
+    "images": ["images/cottage/9/livingRoom.jpg", "images/cottage/9/bedroom.jpg", "images/cottage/9/valleyView.jpg"],
+    "location": {
+      "state": "TN",
+      "city": "Gatlinburg",
+      "zipcode": "37738",
+      "address": "909 Valley View Rd"
+    },
+    "price": 210,
+    "amenities": ["Wifi", "Valley View", "Fireplace", "Hot Tub", "Kitchen"],
+    "propertyType": "cottage",
+    "rating": 4.8,
+    "availableFrom": "2024-03-01",
+    "availableTo": "2024-09-01",
+    "maxGuests": 4,
+    "bookedDates": ["2024-04-10", "2024-06-25"],
+    "contactInfo": {
+      "email": "contact@valleycottage.com",
+      "phoneNumber": "+1-865-123-4567",
+      "website": "https://valleycottage.com"
+    }
+  },
+  {
+    "title": "Quaint Garden Cottage",
+    "main_image": "images/cottage/10/main.jpg",
+    "images": ["images/cottage/10/livingRoom.jpg", "images/cottage/10/bedroom.jpg", "images/cottage/10/garden.jpg"],
+    "location": {
+      "state": "OR",
+      "city": "Ashland",
+      "zipcode": "97520",
+      "address": "1010 Rose Path"
+    },
+    "price": 160,
+    "amenities": ["Wifi", "Garden", "Kitchen", "Fireplace"],
+    "propertyType": "cottage",
+    "rating": 4.6,
+    "availableFrom": "2024-04-01",
+    "availableTo": "2024-10-01",
+    "maxGuests": 4,
+    "bookedDates": ["2024-06-01", "2024-08-01"],
+    "contactInfo": {
+      "email": "info@gardencottage.com",
+      "phoneNumber": "+1-541-123-4567",
+      "website": "https://gardencottage.com"
+    }
+  }
+]

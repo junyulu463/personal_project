@@ -1,0 +1,242 @@
+[
+  {
+    "title": "Charming Victorian House",
+    "main_image": "images/house/1/main.jpg",
+    "images": ["images/house/1/livingRoom.jpg", "images/house/1/bedroom.jpg", "images/house/1/kitchen.jpg", "images/house/1/garden.jpg"],
+    "location": {
+      "state": "CA",
+      "city": "San Francisco",
+      "zipcode": "94114",
+      "address": "123 Market St"
+    },
+    "price": 320,
+    "amenities": ["Wifi", "Garden", "Kitchen", "Fireplace", "Washer"],
+    "propertyType": "house",
+    "rating": 4.9,
+    "availableFrom": "2023-11-01",
+    "availableTo": "2024-03-01",
+    "maxGuests": 6,
+    "bookedDates": ["2023-11-20", "2024-01-10"],
+    "contactInfo": {
+      "email": "info@victorianhouse.com",
+      "phoneNumber": "+1-415-123-4567",
+      "website": "https://victorianhouse.com"
+    }
+  },
+  {
+    "title": "Modern House with Private Pool",
+    "main_image": "images/house/2/main.jpg",
+    "images": ["images/house/2/livingRoom.jpg", "images/house/2/bedroom.jpg", "images/house/2/pool.jpg", "images/house/2/kitchen.jpg"],
+    "location": {
+      "state": "FL",
+      "city": "Miami",
+      "zipcode": "33101",
+      "address": "456 Ocean Dr"
+    },
+    "price": 450,
+    "amenities": ["Wifi", "Pool", "Air Conditioning", "Kitchen", "Parking"],
+    "propertyType": "house",
+    "rating": 5.0,
+    "availableFrom": "2023-12-01",
+    "availableTo": "2024-05-01",
+    "maxGuests": 8,
+    "bookedDates": ["2023-12-15", "2024-02-10"],
+    "contactInfo": {
+      "email": "stay@modernhousemiami.com",
+      "phoneNumber": "+1-305-987-6543",
+      "website": "https://modernhousemiami.com"
+    }
+  },
+  {
+    "title": "Lakefront Family House",
+    "main_image": "images/house/3/main.jpg",
+    "images": ["images/house/3/livingRoom.jpg", "images/house/3/bedroom.jpg", "images/house/3/lakeView.jpg"],
+    "location": {
+      "state": "MN",
+      "city": "Minneapolis",
+      "zipcode": "55401",
+      "address": "789 Lakeview Dr"
+    },
+    "price": 280,
+    "amenities": ["Wifi", "Lake Access", "Heating", "Kitchen", "Fireplace"],
+    "propertyType": "house",
+    "rating": 4.7,
+    "availableFrom": "2023-10-15",
+    "availableTo": "2024-03-15",
+    "maxGuests": 7,
+    "bookedDates": ["2023-11-01", "2024-01-20"],
+    "contactInfo": {
+      "email": "info@lakefamilyhouse.com",
+      "phoneNumber": "+1-612-456-7890",
+      "website": "https://lakefamilyhouse.com"
+    }
+  },
+  {
+    "title": "Rustic Country House with Garden",
+    "main_image": "images/house/4/main.jpg",
+    "images": ["images/house/4/livingRoom.jpg", "images/house/4/bedroom.jpg", "images/house/4/garden.jpg"],
+    "location": {
+      "state": "TX",
+      "city": "Austin",
+      "zipcode": "78701",
+      "address": "321 Ranch Rd"
+    },
+    "price": 300,
+    "amenities": ["Wifi", "Garden", "Kitchen", "BBQ Grill", "Washer"],
+    "propertyType": "house",
+    "rating": 4.6,
+    "availableFrom": "2023-09-20",
+    "availableTo": "2024-02-20",
+    "maxGuests": 5,
+    "bookedDates": ["2023-10-25", "2023-12-05"],
+    "contactInfo": {
+      "email": "stay@countryhouseaustin.com",
+      "phoneNumber": "+1-512-123-4567",
+      "website": "https://countryhouseaustin.com"
+    }
+  },
+  {
+    "title": "Luxury Mountain House",
+    "main_image": "images/house/5/main.jpg",
+    "images": ["images/house/5/livingRoom.jpg", "images/house/5/bedroom.jpg", "images/house/5/mountainView.jpg", "images/house/5/patio.jpg"],
+    "location": {
+      "state": "CO",
+      "city": "Aspen",
+      "zipcode": "81611",
+      "address": "654 Summit Ave"
+    },
+    "price": 600,
+    "amenities": ["Wifi", "Mountain View", "Hot Tub", "Kitchen", "Fireplace"],
+    "propertyType": "house",
+    "rating": 4.9,
+    "availableFrom": "2023-12-15",
+    "availableTo": "2024-04-15",
+    "maxGuests": 10,
+    "bookedDates": ["2024-01-05", "2024-03-10"],
+    "contactInfo": {
+      "email": "info@luxurymountainhouse.com",
+      "phoneNumber": "+1-970-987-6543",
+      "website": "https://luxurymountainhouse.com"
+    }
+  },
+  {
+    "title": "Historic House in Downtown",
+    "main_image": "images/house/6/main.jpg",
+    "images": ["images/house/6/livingRoom.jpg", "images/house/6/bedroom.jpg", "images/house/6/kitchen.jpg"],
+    "location": {
+      "state": "GA",
+      "city": "Savannah",
+      "zipcode": "31401",
+      "address": "789 Liberty St"
+    },
+    "price": 260,
+    "amenities": ["Wifi", "Garden", "Kitchen", "Air Conditioning", "Washer"],
+    "propertyType": "house",
+    "rating": 4.8,
+    "availableFrom": "2023-10-10",
+    "availableTo": "2024-02-10",
+    "maxGuests": 4,
+    "bookedDates": ["2023-11-10", "2023-12-25"],
+    "contactInfo": {
+      "email": "contact@historichousedowntown.com",
+      "phoneNumber": "+1-912-987-6543",
+      "website": "https://historichousedowntown.com"
+    }
+  },
+  {
+    "title": "Cozy House Near the Beach",
+    "main_image": "images/house/7/main.jpg",
+    "images": ["images/house/7/livingRoom.jpg", "images/house/7/bedroom.jpg", "images/house/7/beach.jpg"],
+    "location": {
+      "state": "CA",
+      "city": "Santa Barbara",
+      "zipcode": "93101",
+      "address": "123 Shoreline Dr"
+    },
+    "price": 340,
+    "amenities": ["Wifi", "Beach Access", "Kitchen", "BBQ Grill"],
+    "propertyType": "house",
+    "rating": 4.7,
+    "availableFrom": "2023-11-01",
+    "availableTo": "2024-04-01",
+    "maxGuests": 5,
+    "bookedDates": ["2023-11-20", "2024-02-10"],
+    "contactInfo": {
+      "email": "stay@cozybeachhouse.com",
+      "phoneNumber": "+1-805-123-4567",
+      "website": "https://cozybeachhouse.com"
+    }
+  },
+  {
+    "title": "Stylish House with Rooftop Deck",
+    "main_image": "images/house/8/main.jpg",
+    "images": ["images/house/8/livingRoom.jpg", "images/house/8/bedroom.jpg", "images/house/8/rooftop.jpg"],
+    "location": {
+      "state": "NY",
+      "city": "Brooklyn",
+      "zipcode": "11201",
+      "address": "456 Atlantic Ave"
+    },
+    "price": 370,
+    "amenities": ["Wifi", "Rooftop Access", "Kitchen", "Air Conditioning"],
+    "propertyType": "house",
+    "rating": 4.6,
+    "availableFrom": "2023-09-01",
+    "availableTo": "2024-03-01",
+    "maxGuests": 6,
+    "bookedDates": ["2023-12-01", "2024-02-15"],
+    "contactInfo": {
+      "email": "info@stylishbrooklynhouse.com",
+      "phoneNumber": "+1-718-987-6543",
+      "website": "https://stylishbrooklynhouse.com"
+    }
+  },
+  {
+    "title": "Family House with Spacious Backyard",
+    "main_image": "images/house/9/main.jpg",
+    "images": ["images/house/9/livingRoom.jpg", "images/house/9/bedroom.jpg", "images/house/9/backyard.jpg"],
+    "location": {
+      "state": "WA",
+      "city": "Seattle",
+      "zipcode": "98101",
+      "address": "654 Green St"
+    },
+    "price": 310,
+    "amenities": ["Wifi", "Backyard", "Kitchen", "BBQ Grill", "Washer"],
+    "propertyType": "house",
+    "rating": 4.5,
+    "availableFrom": "2023-08-15",
+    "availableTo": "2024-01-15",
+    "maxGuests": 6,
+    "bookedDates": ["2023-11-15", "2024-01-05"],
+    "contactInfo": {
+      "email": "stay@familyhousebackyard.com",
+      "phoneNumber": "+1-206-123-4567",
+      "website": "https://familyhousebackyard.com"
+    }
+  },
+  {
+    "title": "House with Scenic Valley View",
+    "main_image": "images/house/10/main.jpg",
+    "images": ["images/house/10/livingRoom.jpg", "images/house/10/bedroom.jpg", "images/house/10/view.jpg"],
+    "location": {
+      "state": "OR",
+      "city": "Portland",
+      "zipcode": "97201",
+      "address": "789 Hilltop Rd"
+    },
+    "price": 290,
+    "amenities": ["Wifi", "Scenic View", "Kitchen", "Fireplace"],
+    "propertyType": "house",
+    "rating": 4.8,
+    "availableFrom": "2023-10-01",
+    "availableTo": "2024-02-01",
+    "maxGuests": 5,
+    "bookedDates": ["2023-11-01", "2024-01-25"],
+    "contactInfo": {
+      "email": "info@scenicvalleyhouse.com",
+      "phoneNumber": "+1-503-987-6543",
+      "website": "https://scenicvalleyhouse.com"
+    }
+  }
+]
