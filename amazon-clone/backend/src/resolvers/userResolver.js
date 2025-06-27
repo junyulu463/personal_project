@@ -105,6 +105,8 @@ const userResolver = {
       const user = await User.findById(userId);
       if (!user) throw new Error('User not found');
       user.unpaidOrders = user.unpaidOrders.filter(entry => entry.order.toString() !== orderId);
+      // Also remove from orderHistory if present (for unpaid, not paid)
+      user.orderHistory = user.orderHistory.filter(ref => ref.order.toString() !== orderId);      
       await user.save();
       return user;
     },
