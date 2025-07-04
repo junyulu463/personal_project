@@ -14,7 +14,7 @@ export default function UnpaidOrdersPage() {
   const [unpaidOrders, setUnpaidOrders] = useState([]);
   const navigate = useNavigate();
 
-  const { data, loading, error } = useQuery(GET_USERS, { skip: !authUser });
+  const { data, loading, error,refetch } = useQuery(GET_USERS, { skip: !authUser, fetchPolicy: "network-only", });
 
   const [removeUnpaidOrder] = useMutation(REMOVE_UNPAID_ORDER, {
     refetchQueries: [{ query: GET_USERS }]
@@ -32,6 +32,12 @@ export default function UnpaidOrdersPage() {
       alert("Failed to remove order: " + err.message);
     }
   };    
+
+  useEffect(() => {
+    if (authUser) {
+      refetch();
+    }
+  }, [authUser, refetch]);
 
   useEffect(() => {
     if (data && authUser) {

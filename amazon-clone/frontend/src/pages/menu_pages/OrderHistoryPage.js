@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useQuery } from "@apollo/client";
-// import { useMutation } from "@apollo/client";
 import { GET_USERS } from "../../graphql/userQueries";
 import {GET_ORDER } from "../../graphql/orderQueries";
 import { useNavigate } from "react-router-dom";
@@ -14,21 +13,7 @@ function OrderEntry({ entry }) {
   const { data, loading, error } = useQuery(GET_ORDER, {
     variables: { id: entry.order },
   });
-  const order = data?.getOrder;
-  // const [cancelOrder] = useMutation(CANCEL_ORDER, {
-  //   refetchQueries: [{ query: GET_USERS }], // refetch user data
-  // });
-
-  // const handleCancel = async () => {
-  //   if (!window.confirm("Are you sure you want to cancel this order?")) return;
-  //   try {
-  //     await cancelOrder({ variables: { orderId: entry.order } });
-  //     alert("Order canceled successfully.");
-  //     // Optionally: reload the page or refetch order here
-  //   } catch (err) {
-  //     alert("Cancel failed: " + err.message);
-  //   }
-  // };     
+  const order = data?.getOrder;  
 
   return (
     <li
@@ -187,30 +172,6 @@ function OrderEntry({ entry }) {
           </div>            
         </>
       )}
-      
-      {/* {order && !order.isDelivered && (
-        <button
-          style={{
-            marginTop: 14,
-            background: "#d9534f",
-            color: "#fff",
-            border: "none",
-            borderRadius: 4,
-            padding: "8px 18px",
-            fontWeight: "bold",
-            cursor: "pointer"
-          }}
-          onClick={handleCancel}
-          disabled={order.isDelivered}
-        >
-          Cancel Order
-        </button>
-      )}
-      {order && order.isDelivered && (
-        <div style={{ marginTop: 14, color: "#888" }}>
-          Delivered orders cannot be cancelled.
-        </div>
-      )} */}
 
     </li>
   );
@@ -221,7 +182,11 @@ export default function OrderHistoryPage() {
   const [orderHistory, setOrderHistory] = useState([]);
   const navigate = useNavigate();
 
-  const { data, loading, error } = useQuery(GET_USERS, { skip: !authUser });
+  const { data, loading, error, refetch } = useQuery(GET_USERS, { skip: !authUser, fetchPolicy: "network-only"  });
+
+  useEffect(() => {
+    if (authUser) refetch();
+  }, [authUser, refetch]);
 
   useEffect(() => {
     if (data && authUser) {
