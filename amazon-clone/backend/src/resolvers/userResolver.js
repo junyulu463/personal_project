@@ -64,6 +64,14 @@ const userResolver = {
       return user;
     },
 
+    removeManyFromCart: async (_, { userId, productIds }) => {
+      const user = await User.findById(userId);
+      if (!user) throw new Error('User not found');
+      user.cart = user.cart.filter(i => !productIds.includes(i.product.toString()));
+      await user.save();
+      return user;
+    },    
+
     clearCart: async (_, { userId }) => {
       const user = await User.findById(userId);
       if (!user) throw new Error('User not found');
@@ -171,7 +179,105 @@ const userResolver = {
       );
       await user.save();
       return user;
-    },      
+    }, 
+    
+    // Add a new address
+    addAddress: async (_, { userId, address }) => {
+      const user = await User.findById(userId);
+      if (!user) throw new Error('User not found');
+      if (address.isDefault) {
+        user.addresses.forEach(addr => addr.isDefault = false); // Only one default
+      }
+      user.addresses.push(address);
+      await user.save();
+      return user;
+    },
+
+    // Update an address
+    updateAddress: async (_, { userId, addressId, address }) => {
+      const user = await User.findById(userId);
+      if (!user) throw new Error('User not found');
+      const addr = user.addresses.id(addressId);
+      if (!addr) throw new Error('Address not found');
+      Object.assign(addr, address);
+      if (address.isDefault) {
+        user.addresses.forEach(a => { if (a._id.toString() !== addressId) a.isDefault = false; });
+      }
+      await user.save();
+      return user;
+    },
+
+    // Delete an address
+    deleteAddress: async (_, { userId, addressId }) => {
+      const user = await User.findById(userId);
+      if (!user) throw new Error('User not found');
+      user.addresses = user.addresses.filter(addr => addr._id.toString() !== addressId);
+      await user.save();
+      return user;
+    },
+
+    // Set default shipping/billing address
+    setDefaultShippingAddress: async (_, { userId, addressId }) => {
+      const user = await User.findById(userId);
+      if (!user) throw new Error('User not found');
+      user.addresses.forEach(addr => addr.isDefault = addr._id.toString() === addressId);
+      user.defaultShippingAddress = user.addresses.id(addressId);
+      await user.save();
+      return user;
+    },
+    setDefaultBillingAddress: async (_, { userId, addressId }) => {
+      const user = await User.findById(userId);
+      if (!user) throw new Error('User not found');
+      user.addresses.forEach(addr => addr.isBilling = addr._id.toString() === addressId);
+      user.defaultBillingAddress = user.addresses.id(addressId);
+      await user.save();
+      return user;
+    },   
+
+        // Add a new payment method
+    addPaymentMethod: async (_, { userId, paymentMethod }) => {
+      const user = await User.findById(userId);
+      if (!user) throw new Error('User not found');
+      if (paymentMethod.isDefault) {
+        user.paymentMethods.forEach(pm => pm.isDefault = false);
+      }
+      user.paymentMethods.push(paymentMethod);
+      await user.save();
+      return user;
+    },
+
+    // Update payment method
+    updatePaymentMethod: async (_, { userId, paymentMethodId, paymentMethod }) => {
+      const user = await User.findById(userId);
+      if (!user) throw new Error('User not found');
+      const pm = user.paymentMethods.id(paymentMethodId);
+      if (!pm) throw new Error('Payment method not found');
+      Object.assign(pm, paymentMethod);
+      if (paymentMethod.isDefault) {
+        user.paymentMethods.forEach(p => { if (p._id.toString() !== paymentMethodId) p.isDefault = false; });
+      }
+      await user.save();
+      return user;
+    },
+
+    // Delete payment method
+    deletePaymentMethod: async (_, { userId, paymentMethodId }) => {
+      const user = await User.findById(userId);
+      if (!user) throw new Error('User not found');
+      user.paymentMethods = user.paymentMethods.filter(pm => pm._id.toString() !== paymentMethodId);
+      await user.save();
+      return user;
+    },
+
+    // Set default payment method
+    setDefaultPaymentMethod: async (_, { userId, paymentMethodId }) => {
+      const user = await User.findById(userId);
+      if (!user) throw new Error('User not found');
+      user.paymentMethods.forEach(pm => pm.isDefault = pm._id.toString() === paymentMethodId);
+      user.defaultPaymentMethod = user.paymentMethods.id(paymentMethodId);
+      await user.save();
+      return user;
+    },
   }
 };
 
