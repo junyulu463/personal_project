@@ -181,58 +181,110 @@ const userResolver = {
       return user;
     }, 
     
-    // Add a new address
-    addAddress: async (_, { userId, address }) => {
+    // --- Shipping Addresses ---
+    addShippingAddress: async (_, { userId, address }) => {
       const user = await User.findById(userId);
       if (!user) throw new Error('User not found');
       if (address.isDefault) {
-        user.addresses.forEach(addr => addr.isDefault = false); // Only one default
+        user.shippingAddresses.forEach(addr => addr.isDefault = false);
+        user.defaultShippingAddressId = undefined;
       }
-      user.addresses.push(address);
+      user.shippingAddresses.push(address);
+      // If new address is default, set defaultShippingAddressId to it
+      if (address.isDefault) {
+        const lastAddr = user.shippingAddresses[user.shippingAddresses.length - 1];
+        user.defaultShippingAddressId = lastAddr._id;
+      }
       await user.save();
       return user;
     },
 
-    // Update an address
-    updateAddress: async (_, { userId, addressId, address }) => {
+    updateShippingAddress: async (_, { userId, addressId, address }) => {
+      console.log("shipping arraive");
       const user = await User.findById(userId);
       if (!user) throw new Error('User not found');
-      const addr = user.addresses.id(addressId);
+      const addr = user.shippingAddresses.id(addressId);
       if (!addr) throw new Error('Address not found');
       Object.assign(addr, address);
       if (address.isDefault) {
-        user.addresses.forEach(a => { if (a._id.toString() !== addressId) a.isDefault = false; });
+        user.shippingAddresses.forEach(a => { if (!a._id.equals(addressId)) a.isDefault = false; });
+        user.defaultShippingAddressId = addr._id;
       }
       await user.save();
       return user;
     },
 
-    // Delete an address
-    deleteAddress: async (_, { userId, addressId }) => {
+    deleteShippingAddress: async (_, { userId, addressId }) => {
       const user = await User.findById(userId);
       if (!user) throw new Error('User not found');
-      user.addresses = user.addresses.filter(addr => addr._id.toString() !== addressId);
+      user.shippingAddresses = user.shippingAddresses.filter(addr => addr._id.toString() !== addressId);
+      // If default is deleted, clear defaultShippingAddressId
+      if (user.defaultShippingAddressId && user.defaultShippingAddressId.toString() === addressId) {
+        user.defaultShippingAddressId = undefined;
+      }
       await user.save();
       return user;
     },
 
-    // Set default shipping/billing address
     setDefaultShippingAddress: async (_, { userId, addressId }) => {
       const user = await User.findById(userId);
       if (!user) throw new Error('User not found');
-      user.addresses.forEach(addr => addr.isDefault = addr._id.toString() === addressId);
-      user.defaultShippingAddress = user.addresses.id(addressId);
+      user.shippingAddresses.forEach(addr => addr.isDefault = addr._id.toString() === addressId);
+      user.defaultShippingAddressId = addressId;
       await user.save();
       return user;
     },
+
+    // --- Billing Addresses (same structure as shipping) ---
+    addBillingAddress: async (_, { userId, address }) => {
+      const user = await User.findById(userId);
+      if (!user) throw new Error('User not found');
+      if (address.isDefault) {
+        user.billingAddresses.forEach(addr => addr.isDefault = false);
+        user.defaultBillingAddressId = undefined;
+      }
+      user.billingAddresses.push(address);
+      if (address.isDefault) {
+        const lastAddr = user.billingAddresses[user.billingAddresses.length - 1];
+        user.defaultBillingAddressId = lastAddr._id;
+      }
+      await user.save();
+      return user;
+    },
+
+    updateBillingAddress: async (_, { userId, addressId, address }) => {
+      const user = await User.findById(userId);
+      if (!user) throw new Error('User not found');
+      const addr = user.billingAddresses.id(addressId);
+      if (!addr) throw new Error('Address not found');
+      Object.assign(addr, address);
+      if (address.isDefault) {
+        user.billingAddresses.forEach(a => { if (!a._id.equals(addressId)) a.isDefault = false; });
+        user.defaultBillingAddressId = addr._id;
+      }
+      await user.save();
+      return user;
+    },
+
+    deleteBillingAddress: async (_, { userId, addressId }) => {
+      const user = await User.findById(userId);
+      if (!user) throw new Error('User not found');
+      user.billingAddresses = user.billingAddresses.filter(addr => addr._id.toString() !== addressId);
+      if (user.defaultBillingAddressId && user.defaultBillingAddressId.toString() === addressId) {
+        user.defaultBillingAddressId = undefined;
+      }
+      await user.save();
+      return user;
+    },
+
     setDefaultBillingAddress: async (_, { userId, addressId }) => {
       const user = await User.findById(userId);
       if (!user) throw new Error('User not found');
-      user.addresses.forEach(addr => addr.isBilling = addr._id.toString() === addressId);
-      user.defaultBillingAddress = user.addresses.id(addressId);
+      user.billingAddresses.forEach(addr => addr.isDefault = addr._id.toString() === addressId);
+      user.defaultBillingAddressId = addressId;
       await user.save();
       return user;
-    },   
+    },  
 
         // Add a new payment method
     addPaymentMethod: async (_, { userId, paymentMethod }) => {
@@ -274,7 +326,7 @@ const userResolver = {
       const user = await User.findById(userId);
       if (!user) throw new Error('User not found');
       user.paymentMethods.forEach(pm => pm.isDefault = pm._id.toString() === paymentMethodId);
-      user.defaultPaymentMethod = user.paymentMethods.id(paymentMethodId);
+      user.defaultPaymentMethodId = paymentMethodId;
       await user.save();
       return user;
     },

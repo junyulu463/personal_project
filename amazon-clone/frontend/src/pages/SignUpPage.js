@@ -1,9 +1,7 @@
-// src/pages/SignUpPage.js
-
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { ADD_USER,GET_USERS } from '../graphql/userQueries';
+import { ADD_USER, GET_USERS } from '../graphql/userQueries';
 import { useAuth } from '../context/AuthContext';
 
 const initialForm = {
@@ -13,10 +11,10 @@ const initialForm = {
   name: "",
   phone: "",
   role: "buyer",
-  address: "",         // REMOVE this
+  street: "",
   city: "",
-  postalCode: "",
   country: "",
+  postalCode: "",
 };
 
 export default function SignUpPage() {
@@ -37,22 +35,26 @@ export default function SignUpPage() {
   const handleSignUp = async (e) => {
     e.preventDefault();
     setError('');
+
+    // Combine address fields (no state)
+    const addressParts = [
+      form.street,
+      form.city,
+      form.country,
+      form.postalCode
+    ].filter(Boolean);
+    const address = addressParts.join(', ');
+
     try {
-      // Build addresses array
-      const addresses = [{
-        address: form.address,
-        city: form.city,
-        postalCode: form.postalCode,
-        country: form.country,
-        label: "Default",
-        isDefault: true,
-      }];
-
-      // Prepare variables (remove raw address fields)
-      const { address, city, postalCode, country, ...rest } = form;
-
+      const { street, city, country, postalCode, ...rest } = form;
       const { data } = await addUser({
-        variables: { ...rest, addresses }
+        variables: {
+          ...rest,
+          address,
+          shippingAddresses: [],
+          billingAddresses: [],
+          paymentMethods: [],
+        }
       });
       setAuthUser(data.addUser);
       navigate(from);
@@ -75,28 +77,29 @@ export default function SignUpPage() {
     <div style={{ padding: "2rem" }}>
       <h2>Sign Up</h2>
       <form onSubmit={handleSignUp} style={{ maxWidth: 350 }}>
-        {/* Basic Info... */}
+        {/* Basic Info */}
         <input placeholder="Username" name="username" value={form.username} onChange={handleChange} required />
         <input placeholder="Password" name="password" type="password" value={form.password} onChange={handleChange} required />
         <input placeholder="Email" name="email" value={form.email} onChange={handleChange} required />
         <input placeholder="Name" name="name" value={form.name} onChange={handleChange} />
         <input placeholder="Phone" name="phone" value={form.phone} onChange={handleChange} />
 
-        {/* New Address Fields */}
-        <input placeholder="Address" name="address" value={form.address} onChange={handleChange} required />
-        <input placeholder="City" name="city" value={form.city} onChange={handleChange} required />
-        <input placeholder="Postal Code" name="postalCode" value={form.postalCode} onChange={handleChange} required />
-        <input placeholder="Country" name="country" value={form.country} onChange={handleChange} required />
-
+        {/* Address Fields */}
+        <div>
+          <h3>Address:</h3>
+          <input placeholder="Street Address" name="street" value={form.street} onChange={handleChange} required />
+          <input placeholder="City" name="city" value={form.city} onChange={handleChange} required />
+          <input placeholder="Country" name="country" value={form.country} onChange={handleChange} required />
+          <input placeholder="Postal Code" name="postalCode" value={form.postalCode} onChange={handleChange} required />
+        </div>
         {/* Role dropdown */}
-        <label>
-          Role:&nbsp;
-          <select name="role" value={form.role} onChange={handleChange} style={{ width: 120 }}>
-            <option value="buyer">Buyer</option>
-            <option value="seller">Seller</option>
-          </select>
-        </label>
-
+          <label>
+            Role:&nbsp;
+            <select name="role" value={form.role} onChange={handleChange} style={{ width: 120 }}>
+              <option value="buyer">Buyer</option>
+              <option value="seller">Seller</option>
+            </select>
+          </label>
         <button type="submit" style={{ marginRight: 12 }}>Sign Up</button>
         <button type="button" onClick={handleCancel}>Cancel</button>
       </form>

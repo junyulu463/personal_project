@@ -8,60 +8,9 @@ export const GET_USER = gql`
       password
       email
       name
+      address
       phone
       role
-
-      # NEW
-      addresses {
-        _id
-        label
-        recipient
-        address
-        city
-        postalCode
-        country
-        isDefault
-        isBilling
-      }
-      defaultShippingAddress {
-        _id
-        address
-        city
-        postalCode
-        country
-      }
-      defaultBillingAddress {
-        _id
-        address
-        city
-        postalCode
-        country
-      }
-
-      paymentMethods {
-        _id
-        cardType
-        cardNumber
-        nameOnCard
-        expiryMonth
-        expiryYear
-        isDefault
-        billingAddress {
-          _id
-          address
-          city
-        }
-      }
-      defaultPaymentMethod {
-        _id
-        cardType
-        cardNumber
-        nameOnCard
-        expiryMonth
-        expiryYear
-      }
-
-      # keep these
       cart {
         _id
         product
@@ -87,6 +36,49 @@ export const GET_USER = gql`
         product
         timestamp
       }
+      shippingAddresses {
+        _id
+        label
+        recipient
+        address
+        city
+        postalCode
+        country
+        isDefault
+      }
+      defaultShippingAddressId
+      billingAddresses {
+        _id
+        label
+        recipient
+        address
+        city
+        postalCode
+        country
+        isDefault
+      }
+      defaultBillingAddressId
+      paymentMethods {
+        _id
+        cardType
+        cardNumber
+        cardholderName
+        expMonth
+        expYear
+        cvv
+        billingAddress {
+          _id
+          label
+          recipient
+          address
+          city
+          postalCode
+          country
+          isDefault
+        }
+        isDefault
+      }
+      defaultPaymentMethodId
     }
   }
 `;
@@ -101,55 +93,9 @@ export const GET_USERS = gql`
       password
       email
       name
+      address
       phone
       role
-      addresses {
-        _id
-        label
-        recipient
-        address
-        city
-        postalCode
-        country
-        isDefault
-        isBilling
-      }
-      defaultShippingAddress {
-        _id
-        address
-        city
-        postalCode
-        country
-      }
-      defaultBillingAddress {
-        _id
-        address
-        city
-        postalCode
-        country
-      }
-      paymentMethods {
-        _id
-        cardType
-        cardNumber
-        nameOnCard
-        expiryMonth
-        expiryYear
-        isDefault
-        billingAddress {
-          _id
-          address
-          city
-        }
-      }
-      defaultPaymentMethod {
-        _id
-        cardType
-        cardNumber
-        nameOnCard
-        expiryMonth
-        expiryYear
-      }
       cart {
         _id
         product
@@ -175,6 +121,49 @@ export const GET_USERS = gql`
         product
         timestamp
       }
+      shippingAddresses {
+        _id
+        label
+        recipient
+        address
+        city
+        postalCode
+        country
+        isDefault
+      }
+      defaultShippingAddressId
+      billingAddresses {
+        _id
+        label
+        recipient
+        address
+        city
+        postalCode
+        country
+        isDefault
+      }
+      defaultBillingAddressId
+      paymentMethods {
+        _id
+        cardType
+        cardNumber
+        cardholderName
+        expMonth
+        expYear
+        cvv
+        billingAddress {
+          _id
+          label
+          recipient
+          address
+          city
+          postalCode
+          country
+          isDefault
+        }
+        isDefault
+      }
+      defaultPaymentMethodId
     }
   }
 `;
@@ -186,9 +175,11 @@ export const ADD_USER = gql`
     $password: String!
     $email: String!
     $name: String
+    $address: String
     $phone: String
     $role: String
-    $addresses: [AddressInput]
+    $shippingAddresses: [AddressInput]
+    $billingAddresses: [AddressInput]
     $paymentMethods: [PaymentMethodInput]
   ) {
     addUser(
@@ -196,27 +187,29 @@ export const ADD_USER = gql`
       password: $password
       email: $email
       name: $name
+      address: $address
       phone: $phone
       role: $role
-      addresses: $addresses
+      shippingAddresses: $shippingAddresses
+      billingAddresses: $billingAddresses
       paymentMethods: $paymentMethods
     ) {
       _id
       username
       email
-      addresses {
-        _id
-        label
-        address
-        city
-      }
+      name
+      address
+      phone
+      role
+      shippingAddresses { _id label address city }
+      billingAddresses { _id label address city }
       paymentMethods {
         _id
         cardType
         cardNumber
-        nameOnCard
-        expiryMonth
-        expiryYear
+        cardholderName
+        expMonth
+        expYear
       }
     }
   }
@@ -230,9 +223,11 @@ export const UPDATE_USER = gql`
     $password: String
     $email: String
     $name: String
+    $address: String
     $phone: String
     $role: String
-    $addresses: [AddressInput]
+    $shippingAddresses: [AddressInput]
+    $billingAddresses: [AddressInput]
     $paymentMethods: [PaymentMethodInput]
     $defaultShippingAddressId: ID
     $defaultBillingAddressId: ID
@@ -244,9 +239,11 @@ export const UPDATE_USER = gql`
       password: $password
       email: $email
       name: $name
+      address: $address
       phone: $phone
       role: $role
-      addresses: $addresses
+      shippingAddresses: $shippingAddresses
+      billingAddresses: $billingAddresses
       paymentMethods: $paymentMethods
       defaultShippingAddressId: $defaultShippingAddressId
       defaultBillingAddressId: $defaultBillingAddressId
@@ -255,37 +252,21 @@ export const UPDATE_USER = gql`
       _id
       username
       email
-      addresses {
-        _id
-        label
-        address
-        city
-        isDefault
-      }
+      address
+      shippingAddresses { _id label address city isDefault }
+      billingAddresses { _id label address city isDefault }
       paymentMethods {
         _id
         cardType
         cardNumber
-        nameOnCard
-        expiryMonth
-        expiryYear
+        cardholderName
+        expMonth
+        expYear
         isDefault
       }
-      defaultShippingAddress {
-        _id
-        address
-        city
-      }
-      defaultBillingAddress {
-        _id
-        address
-        city
-      }
-      defaultPaymentMethod {
-        _id
-        cardType
-        cardNumber
-      }
+      defaultShippingAddressId
+      defaultBillingAddressId
+      defaultPaymentMethodId
     }
   }
 `;
@@ -456,42 +437,32 @@ export const REMOVE_FROM_CART = gql`
   }
 `;
 
-export const ADD_ADDRESS = gql`
-  mutation AddAddress($userId: ID!, $address: AddressInput!) {
-    addAddress(userId: $userId, address: $address) {
+export const ADD_SHIPPING_ADDRESS = gql`
+  mutation AddShippingAddress($userId: ID!, $address: AddressInput!) {
+    addShippingAddress(userId: $userId, address: $address) {
       _id
-      addresses {
-        _id
-        label
-        address
-        isDefault
-      }
+      shippingAddresses { _id label address isDefault }
+      defaultShippingAddressId
     }
   }
 `;
 
-export const UPDATE_ADDRESS = gql`
-  mutation UpdateAddress($userId: ID!, $addressId: ID!, $address: AddressInput!) {
-    updateAddress(userId: $userId, addressId: $addressId, address: $address) {
+export const UPDATE_SHIPPING_ADDRESS = gql`
+  mutation UpdateShippingAddress($userId: ID!, $addressId: ID!, $address: AddressInput!) {
+    updateShippingAddress(userId: $userId, addressId: $addressId, address: $address) {
       _id
-      addresses {
-        _id
-        label
-        address
-        isDefault
-      }
+      shippingAddresses { _id label address isDefault }
+      defaultShippingAddressId
     }
   }
 `;
 
-export const DELETE_ADDRESS = gql`
-  mutation DeleteAddress($userId: ID!, $addressId: ID!) {
-    deleteAddress(userId: $userId, addressId: $addressId) {
+export const DELETE_SHIPPING_ADDRESS = gql`
+  mutation DeleteShippingAddress($userId: ID!, $addressId: ID!) {
+    deleteShippingAddress(userId: $userId, addressId: $addressId) {
       _id
-      addresses {
-        _id
-        label
-      }
+      shippingAddresses { _id label }
+      defaultShippingAddressId
     }
   }
 `;
@@ -500,14 +471,38 @@ export const SET_DEFAULT_SHIPPING_ADDRESS = gql`
   mutation SetDefaultShippingAddress($userId: ID!, $addressId: ID!) {
     setDefaultShippingAddress(userId: $userId, addressId: $addressId) {
       _id
-      defaultShippingAddress {
-        _id
-        address
-      }
-      addresses {
-        _id
-        isDefault
-      }
+      defaultShippingAddressId
+      shippingAddresses { _id isDefault }
+    }
+  }
+`;
+
+export const ADD_BILLING_ADDRESS = gql`
+  mutation AddBillingAddress($userId: ID!, $address: AddressInput!) {
+    addBillingAddress(userId: $userId, address: $address) {
+      _id
+      billingAddresses { _id label address isDefault }
+      defaultBillingAddressId
+    }
+  }
+`;
+
+export const UPDATE_BILLING_ADDRESS = gql`
+  mutation UpdateBillingAddress($userId: ID!, $addressId: ID!, $address: AddressInput!) {
+    updateBillingAddress(userId: $userId, addressId: $addressId, address: $address) {
+      _id
+      billingAddresses { _id label address isDefault }
+      defaultBillingAddressId
+    }
+  }
+`;
+
+export const DELETE_BILLING_ADDRESS = gql`
+  mutation DeleteBillingAddress($userId: ID!, $addressId: ID!) {
+    deleteBillingAddress(userId: $userId, addressId: $addressId) {
+      _id
+      billingAddresses { _id label }
+      defaultBillingAddressId
     }
   }
 `;
@@ -516,17 +511,14 @@ export const SET_DEFAULT_BILLING_ADDRESS = gql`
   mutation SetDefaultBillingAddress($userId: ID!, $addressId: ID!) {
     setDefaultBillingAddress(userId: $userId, addressId: $addressId) {
       _id
-      defaultBillingAddress {
-        _id
-        address
-      }
-      addresses {
-        _id
-        isBilling
-      }
+      defaultBillingAddressId
+      billingAddresses { _id isDefault }
     }
   }
 `;
+
+
+
 
 export const ADD_PAYMENT_METHOD = gql`
   mutation AddPaymentMethod($userId: ID!, $paymentMethod: PaymentMethodInput!) {
@@ -596,5 +588,4 @@ export const REMOVE_MANY_FROM_CART = gql`
     }
   }
 `;
-
 

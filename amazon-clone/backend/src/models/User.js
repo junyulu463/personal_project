@@ -24,6 +24,7 @@ const searchHistorySchema = new mongoose.Schema({
 
 const addressSchema = new mongoose.Schema({
   label:      { type: String }, // e.g. "Home", "Work"
+  recipient:  { type: String }, // <-- Add this line
   address:    { type: String, required: true },
   city:       { type: String, required: true },
   postalCode: { type: String, required: true },
@@ -48,7 +49,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true }, // Hashed!
   email:    { type: String, required: true, unique: true },
-  name:     { type: String },
+  name:     { type: String }, 
   address:  { type: String },
   phone:    { type: String },
   role:     { type: String, enum: ['admin', 'seller', 'buyer'], default: 'buyer' },

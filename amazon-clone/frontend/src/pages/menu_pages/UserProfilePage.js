@@ -1,17 +1,27 @@
+// src/pages/profile/UserProfilePage.js
+
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USERS, UPDATE_USER } from '../../graphql/userQueries';
+import AddressForm from './AddressForm.js';
 
-// --- NEW: Address Mutations ---
+// ---- Address/Billing/Shipping Mutations ----
 import {
-  ADD_ADDRESS,
-  UPDATE_ADDRESS,
-  DELETE_ADDRESS,
+  ADD_SHIPPING_ADDRESS,
+  UPDATE_SHIPPING_ADDRESS,
+  DELETE_SHIPPING_ADDRESS,
   SET_DEFAULT_SHIPPING_ADDRESS,
-  SET_DEFAULT_BILLING_ADDRESS
-} from '../../graphql/userQueries'; // you need to define these if not already
+  ADD_BILLING_ADDRESS,
+  UPDATE_BILLING_ADDRESS,
+  DELETE_BILLING_ADDRESS,
+  SET_DEFAULT_BILLING_ADDRESS,
+  ADD_PAYMENT_METHOD,
+  UPDATE_PAYMENT_METHOD,
+  DELETE_PAYMENT_METHOD,
+  SET_DEFAULT_PAYMENT_METHOD
+} from '../../graphql/userQueries';
 
 export default function UserProfilePage() {
   const { authUser, setAuthUser } = useAuth();
@@ -23,24 +33,37 @@ export default function UserProfilePage() {
   });
 
   const [updateUser] = useMutation(UPDATE_USER);
-  // --- NEW: Address Mutations
-  const [addAddress] = useMutation(ADD_ADDRESS, { onCompleted: refetch });
-  const [updateAddress] = useMutation(UPDATE_ADDRESS, { onCompleted: refetch });
-  const [deleteAddress] = useMutation(DELETE_ADDRESS, { onCompleted: refetch });
+
+  // Address Mutations
+  const [addShippingAddress] = useMutation(ADD_SHIPPING_ADDRESS, { onCompleted: refetch });
+  const [updateShippingAddress] = useMutation(UPDATE_SHIPPING_ADDRESS, { onCompleted: refetch });
+  const [deleteShippingAddress] = useMutation(DELETE_SHIPPING_ADDRESS, { onCompleted: refetch });
   const [setDefaultShipping] = useMutation(SET_DEFAULT_SHIPPING_ADDRESS, { onCompleted: refetch });
+
+  const [addBillingAddress] = useMutation(ADD_BILLING_ADDRESS, { onCompleted: refetch });
+  const [updateBillingAddress] = useMutation(UPDATE_BILLING_ADDRESS, { onCompleted: refetch });
+  const [deleteBillingAddress] = useMutation(DELETE_BILLING_ADDRESS, { onCompleted: refetch });
   const [setDefaultBilling] = useMutation(SET_DEFAULT_BILLING_ADDRESS, { onCompleted: refetch });
+
+  // Payment Method Mutations
+  const [addPaymentMethod] = useMutation(ADD_PAYMENT_METHOD, { onCompleted: refetch });
+  const [updatePaymentMethod] = useMutation(UPDATE_PAYMENT_METHOD, { onCompleted: refetch });
+  const [deletePaymentMethod] = useMutation(DELETE_PAYMENT_METHOD, { onCompleted: refetch });
+  const [setDefaultPaymentMethod] = useMutation(SET_DEFAULT_PAYMENT_METHOD, { onCompleted: refetch });
 
   const currentUser = data?.getUsers?.find(u => u._id === authUser?._id);
 
-  // Edit state
+  // Edit state for profile
   const [editMode, setEditMode] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
-    phone: ""
+    phone: "",
+    address: ""
   });
 
-  // --- NEW: Address Edit State
+  // Address edit state
+  const [editingType, setEditingType] = useState(null); // 'shipping' or 'billing'
   const [addressEditIdx, setAddressEditIdx] = useState(null);
   const [addressForm, setAddressForm] = useState({
     label: "",
@@ -49,8 +72,20 @@ export default function UserProfilePage() {
     city: "",
     postalCode: "",
     country: "",
+    isDefault: false
+  });
+
+  // Payment method edit state
+  const [editingPaymentIdx, setEditingPaymentIdx] = useState(null);
+  const [paymentForm, setPaymentForm] = useState({
+    cardType: "",
+    cardNumber: "",
+    cardholderName: "",
+    expMonth: "",
+    expYear: "",
+    cvv: "",
     isDefault: false,
-    isBilling: false
+    //billingAddress: { ... }
   });
 
   const [message, setMessage] = useState('');
@@ -60,7 +95,8 @@ export default function UserProfilePage() {
       setForm({
         name: currentUser.name || "",
         email: currentUser.email || "",
-        phone: currentUser.phone || ""
+        phone: currentUser.phone || "",
+        address: currentUser.address || ""
       });
     }
   }, [currentUser]);
@@ -70,87 +106,22 @@ export default function UserProfilePage() {
   if (error) return <div style={{ color: 'red', padding: 32 }}>Error: {error.message}</div>;
   if (!currentUser) return <div style={{ padding: 32 }}>User not found.</div>;
 
+  // --------- Profile Edit Handlers ----------
   const handleEdit = () => { setEditMode(true); setMessage(""); };
   const handleCancel = () => {
     setEditMode(false);
     setForm({
       name: currentUser.name || "",
       email: currentUser.email || "",
-      phone: currentUser.phone || ""
+      phone: currentUser.phone || "",
+      address: currentUser.address || ""
     });
     setMessage('');
   };
-
   const handleChange = e => {
     const { name, value } = e.target;
     setForm(f => ({ ...f, [name]: value }));
   };
-
-  // --- NEW: Address Handlers ---
-  const openAddressEdit = (idx) => {
-    setAddressEditIdx(idx);
-    if (idx === -1) {
-      setAddressForm({
-        label: "",
-        recipient: "",
-        address: "",
-        city: "",
-        postalCode: "",
-        country: "",
-        isDefault: false,
-        isBilling: false
-      });
-    } else {
-      const addr = currentUser.addresses[idx];
-      setAddressForm({ ...addr });
-    }
-  };
-
-  const handleAddressFormChange = e => {
-    const { name, value, type, checked } = e.target;
-    setAddressForm(f => ({
-      ...f,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-  };
-
-  const handleSaveAddress = async e => {
-    e.preventDefault();
-    if (addressEditIdx === -1) {
-      // Add
-      await addAddress({ variables: { userId: currentUser._id, address: addressForm } });
-    } else {
-      // Update
-      await updateAddress({ variables: { userId: currentUser._id, addressId: currentUser.addresses[addressEditIdx]._id, address: addressForm } });
-    }
-    setAddressEditIdx(null);
-    setAddressForm({
-      label: "",
-      recipient: "",
-      address: "",
-      city: "",
-      postalCode: "",
-      country: "",
-      isDefault: false,
-      isBilling: false
-    });
-  };
-
-  const handleDeleteAddress = async (addressId) => {
-    if (window.confirm("Delete this address?")) {
-      await deleteAddress({ variables: { userId: currentUser._id, addressId } });
-    }
-  };
-
-  const handleSetDefaultShipping = async (addressId) => {
-    await setDefaultShipping({ variables: { userId: currentUser._id, addressId } });
-  };
-
-  const handleSetDefaultBilling = async (addressId) => {
-    await setDefaultBilling({ variables: { userId: currentUser._id, addressId } });
-  };
-
-  // --- END NEW ---
 
   const handleSave = async e => {
     e.preventDefault();
@@ -171,10 +142,167 @@ export default function UserProfilePage() {
     }
   };
 
+  // --------- Address Management Handlers ----------
+  const openAddressEdit = (type, idx) => {
+    setEditingType(type);
+    setAddressEditIdx(idx);
+    if (idx === -1) {
+      setAddressForm({
+        label: "",
+        recipient: "",
+        address: "",
+        city: "",
+        postalCode: "",
+        country: "",
+        isDefault: false
+      });
+    } else {
+      const arr = type === 'shipping'
+        ? currentUser.shippingAddresses
+        : currentUser.billingAddresses;
+      setAddressForm({ ...arr[idx] });
+    }
+  };
+
+  const handleAddressFormChange = e => {
+    const { name, value, type, checked } = e.target;
+    setAddressForm(f => ({
+      ...f,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleSaveAddress = async e => {
+    e.preventDefault();
+    if (editingType === 'shipping') {
+      if (addressEditIdx === -1) {
+        await addShippingAddress({ variables: { userId: currentUser._id, address: addressForm } });
+      } else {
+        const addrId = currentUser.shippingAddresses[addressEditIdx]._id;
+        const {__typename, _id, ...addressPayload } = addressForm;
+        //alert(JSON.stringify(addressPayload, null, 2));
+        await updateShippingAddress({ variables: { userId: currentUser._id, addressId: addrId, address: addressPayload } });
+      }
+    } else if (editingType === 'billing') {
+      if (addressEditIdx === -1) {
+        await addBillingAddress({ variables: { userId: currentUser._id, address: addressForm } });
+      } else {
+        const {__typename, _id, ...addressPayload } = addressForm;      
+        const addrId = currentUser.billingAddresses[addressEditIdx]._id;
+        await updateBillingAddress({ variables: { userId: currentUser._id, addressId: addrId, address: addressPayload } });
+      }
+    }
+    setAddressEditIdx(null);
+    setEditingType(null);
+    setAddressForm({
+      label: "",
+      recipient: "",
+      address: "",
+      city: "",
+      postalCode: "",
+      country: "",
+      isDefault: false
+    });
+  };
+
+  const handleDeleteAddress = async (type, addressId) => {
+    if (window.confirm("Delete this address?")) {
+      if (type === 'shipping') {
+        await deleteShippingAddress({ variables: { userId: currentUser._id, addressId } });
+      } else {
+        await deleteBillingAddress({ variables: { userId: currentUser._id, addressId } });
+      }
+    }
+  };
+
+  const handleSetDefaultShipping = async (addressId) => {
+    await setDefaultShipping({ variables: { userId: currentUser._id, addressId } });
+  };
+
+  const handleSetDefaultBilling = async (addressId) => {
+    await setDefaultBilling({ variables: { userId: currentUser._id, addressId } });
+  };
+
+  // --------- Payment Method Management Handlers ----------
+  const openPaymentEdit = (idx) => {
+    setEditingPaymentIdx(idx);
+    if (idx === -1) {
+      setPaymentForm({
+        cardType: "",
+        cardNumber: "",
+        cardholderName: "",
+        expMonth: "",
+        expYear: "",
+        cvv: "",
+        isDefault: false
+      });
+    } else {
+      setPaymentForm({ ...currentUser.paymentMethods[idx] });
+    }
+  };
+
+  const handlePaymentFormChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setPaymentForm(f => ({
+      ...f,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleSavePaymentMethod = async e => {
+    e.preventDefault();
+    if (editingPaymentIdx === -1) {
+      const paymentInput = {
+        ...paymentForm,
+        expMonth: Number(paymentForm.expMonth),
+        expYear: Number(paymentForm.expYear),
+        billingAddress: paymentForm.billingAddress || null
+      };       
+      await addPaymentMethod({ variables: { userId: currentUser._id, paymentMethod: paymentInput } });
+    } else {
+      const paymentInput = {
+        ...paymentForm,
+        expMonth: Number(paymentForm.expMonth),
+        expYear: Number(paymentForm.expYear),
+        billingAddress: paymentForm.billingAddress || null,
+      };
+      const {__typename, _id, ...addressPayload } = paymentInput;
+      
+      const pmId = currentUser.paymentMethods[editingPaymentIdx]._id;
+      //alert(JSON.stringify(addressPayload, null, 2)); 
+      await updatePaymentMethod({ variables: { userId: currentUser._id, paymentMethodId: pmId, paymentMethod: addressPayload } });
+    }
+    setEditingPaymentIdx(null);
+    setPaymentForm({
+      cardType: "",
+      cardNumber: "",
+      cardholderName: "",
+      expMonth: "",
+      expYear: "",
+      cvv: "",
+      isDefault: false
+    });
+  };
+
+  const handleDeletePaymentMethod = async (pmId) => {
+    if (window.confirm("Delete this payment method?")) {
+      await deletePaymentMethod({ variables: { userId: currentUser._id, paymentMethodId: pmId } });
+    }
+  };
+
+  const handleSetDefaultPaymentMethod = async (pmId) => {
+    //alert(JSON.stringify(addressPayload, null, 2));
+    alert(pmId);
+    alert(currentUser._id);
+    await setDefaultPaymentMethod({ variables: { userId: currentUser._id, paymentMethodId: pmId } });
+  };
+
+  // ---------------------------------------
+
   return (
     <div style={{
       padding: '2rem',
-      maxWidth: 480,
+      maxWidth: 500,
       margin: '40px auto',
       background: "#fafbfc",
       borderRadius: 10,
@@ -197,7 +325,6 @@ export default function UserProfilePage() {
       <h2>👤 User Profile</h2>
       {editMode ? (
         <form onSubmit={handleSave}>
-          {/* ...your existing table for user fields, minus address... */}
           <table style={{ width: "100%", borderCollapse: "collapse", marginTop: 20 }}>
             <tbody>
               <tr>
@@ -223,41 +350,26 @@ export default function UserProfilePage() {
                 </td>
               </tr>
               <tr>
+                <td style={{ fontWeight: "bold", padding: "8px 0" }}>Profile Address:</td>
+                <td style={{ padding: "8px 0" }}>
+                  <input type="text" name="address" value={form.address} onChange={handleChange} required />
+                </td>
+              </tr>
+              <tr>
                 <td style={{ fontWeight: "bold", padding: "8px 0" }}>Role:</td>
                 <td style={{ padding: "8px 0" }}>{currentUser.role}</td>
               </tr>
             </tbody>
           </table>
           <div style={{ marginTop: 20 }}>
-            <button
-              type="submit"
-              style={{
-                background: "#1976d2",
-                color: "#fff",
-                border: "none",
-                borderRadius: 4,
-                padding: "8px 20px",
-                marginRight: 12,
-                cursor: "pointer",
-                fontWeight: "bold"
-              }}
-            >
-              Save
-            </button>
-            <button
-              type="button"
-              onClick={handleCancel}
-              style={{
-                background: "#fff",
-                color: "#1976d2",
-                border: "1px solid #1976d2",
-                borderRadius: 4,
-                padding: "8px 20px",
-                cursor: "pointer"
-              }}
-            >
-              Cancel
-            </button>
+            <button type="submit" style={{
+              background: "#1976d2", color: "#fff", border: "none", borderRadius: 4,
+              padding: "8px 20px", marginRight: 12, cursor: "pointer", fontWeight: "bold"
+            }}>Save</button>
+            <button type="button" onClick={handleCancel} style={{
+              background: "#fff", color: "#1976d2", border: "1px solid #1976d2", borderRadius: 4,
+              padding: "8px 20px", cursor: "pointer"
+            }}>Cancel</button>
           </div>
         </form>
       ) : (
@@ -281,85 +393,132 @@ export default function UserProfilePage() {
                 <td style={{ padding: "8px 0" }}>{currentUser.phone || <i>(not set)</i>}</td>
               </tr>
               <tr>
+                <td style={{ fontWeight: "bold", padding: "8px 0" }}>Profile Address:</td>
+                <td style={{ padding: "8px 0" }}>{currentUser.address || <i>(not set)</i>}</td>
+              </tr>
+              <tr>
                 <td style={{ fontWeight: "bold", padding: "8px 0" }}>Role:</td>
                 <td style={{ padding: "8px 0" }}>{currentUser.role}</td>
               </tr>
             </tbody>
           </table>
           <div style={{ marginTop: 20 }}>
-            <button
-              type="button"
-              onClick={handleEdit}
-              style={{
-                background: "#1976d2",
-                color: "#fff",
-                border: "none",
-                borderRadius: 4,
-                padding: "8px 20px",
-                cursor: "pointer",
-                fontWeight: "bold"
-              }}
-            >
-              Edit Profile
-            </button>
+            <button type="button" onClick={handleEdit} style={{
+              background: "#1976d2", color: "#fff", border: "none", borderRadius: 4,
+              padding: "8px 20px", cursor: "pointer", fontWeight: "bold"
+            }}>Edit Profile</button>
           </div>
         </>
       )}
 
-      {/* ---- NEW: ADDRESS MANAGEMENT ---- */}
-      <h3 style={{ marginTop: 36 }}>Addresses</h3>
+      {/* ---- SHIPPING ADDRESSES ---- */}
+      <h3 style={{ marginTop: 36 }}>Shipping Addresses</h3>
       <ul>
-        {currentUser.addresses?.map((addr, i) => (
+        {currentUser.shippingAddresses?.map((addr, i) => (
           <li key={addr._id} style={{ marginBottom: 14, border: "1px solid #eee", borderRadius: 6, padding: 8 }}>
             <div>
-              <b>{addr.label || "Address"}:</b> {addr.address}, {addr.city}, {addr.country}
+              <b>{addr.label || "Address"}:</b>
+              {addr.recipient && (
+                  <span style={{ fontWeight: "normal" }}><i> {addr.recipient},</i></span>
+                )}              
+              {addr.address}, {addr.city}, {addr.country}
               {addr.isDefault && <span style={{ color: "green" }}> (Default Shipping)</span>}
-              {addr.isBilling && <span style={{ color: "blue" }}> (Billing)</span>}
             </div>
             <div>
-              <button onClick={() => openAddressEdit(i)} style={{ marginRight: 6 }}>Edit</button>
-              <button onClick={() => handleDeleteAddress(addr._id)} style={{ marginRight: 6 }}>Delete</button>
-              <button onClick={() => handleSetDefaultShipping(addr._id)} style={{ marginRight: 6 }}>Set as Default Shipping</button>
-              <button onClick={() => handleSetDefaultBilling(addr._id)}>Set as Default Billing</button>
+              <button onClick={() => openAddressEdit('shipping', i)} style={{ marginRight: 6 }}>Edit</button>
+              <button onClick={() => handleDeleteAddress('shipping', addr._id)} style={{ marginRight: 6 }}>Delete</button>
+              {!addr.isDefault && <button onClick={() => handleSetDefaultShipping(addr._id)}>Set as Default Shipping</button>}
             </div>
           </li>
         ))}
       </ul>
-      <button onClick={() => openAddressEdit(-1)}>Add Address</button>
-      {addressEditIdx !== null && (
-        <form onSubmit={handleSaveAddress} style={{ marginTop: 18, border: "1px solid #ddd", borderRadius: 6, padding: 14 }}>
-          <h4>{addressEditIdx === -1 ? "Add Address" : "Edit Address"}</h4>
-          <input name="label" placeholder="Label" value={addressForm.label} onChange={handleAddressFormChange} style={{ marginBottom: 6 }} />
-          <input name="recipient" placeholder="Recipient" value={addressForm.recipient} onChange={handleAddressFormChange} style={{ marginBottom: 6 }} />
-          <input name="address" placeholder="Address" value={addressForm.address} onChange={handleAddressFormChange} style={{ marginBottom: 6 }} required />
-          <input name="city" placeholder="City" value={addressForm.city} onChange={handleAddressFormChange} style={{ marginBottom: 6 }} required />
-          <input name="postalCode" placeholder="Postal Code" value={addressForm.postalCode} onChange={handleAddressFormChange} style={{ marginBottom: 6 }} required />
-          <input name="country" placeholder="Country" value={addressForm.country} onChange={handleAddressFormChange} style={{ marginBottom: 6 }} required />
-          <label>
-            <input
-              type="checkbox"
-              name="isDefault"
-              checked={addressForm.isDefault}
-              onChange={handleAddressFormChange}
-            />
-            Default Shipping
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="isBilling"
-              checked={addressForm.isBilling}
-              onChange={handleAddressFormChange}
-            />
-            Billing Address
-          </label>
+      <button onClick={() => openAddressEdit('shipping', -1)}>Add Shipping Address</button>
+      <AddressForm
+        type="shipping"
+        form={addressForm}
+        onChange={handleAddressFormChange}
+        onSubmit={handleSaveAddress}
+        onCancel={() => { setAddressEditIdx(null); setEditingType(null); }}
+        isEditing={editingType === 'shipping' && addressEditIdx !== null}
+      />
+
+      {/* ---- BILLING ADDRESSES ---- */}
+      <h3 style={{ marginTop: 36 }}>Billing Addresses</h3>
+      <ul>
+        {currentUser.billingAddresses?.map((addr, i) => (
+          <li key={addr._id} style={{ marginBottom: 14, border: "1px solid #eee", borderRadius: 6, padding: 8 }}>
+            <div>
+              <b>{addr.label || "Address"}:</b> 
+              {addr.recipient && (
+                  <span style={{ fontWeight: "normal" }}><i> {addr.recipient},</i></span>
+                )}              
+              {addr.address}, {addr.city}, {addr.country}
+              {addr.isDefault && <span style={{ color: "blue" }}> (Default Billing)</span>}
+            </div>
+            <div>
+              <button onClick={() => openAddressEdit('billing', i)} style={{ marginRight: 6 }}>Edit</button>
+              <button onClick={() => handleDeleteAddress('billing', addr._id)} style={{ marginRight: 6 }}>Delete</button>
+              {!addr.isDefault && <button onClick={() => handleSetDefaultBilling(addr._id)}>Set as Default Billing</button>}
+            </div>
+          </li>
+        ))}
+      </ul>
+      <button onClick={() => openAddressEdit('billing', -1)}>Add Billing Address</button>
+      <AddressForm
+        type="billing"
+        form={addressForm}
+        onChange={handleAddressFormChange}
+        onSubmit={handleSaveAddress}
+        onCancel={() => { setAddressEditIdx(null); setEditingType(null); }}
+        isEditing={editingType === 'billing' && addressEditIdx !== null}
+      />
+
+      {/* ---- PAYMENT METHODS ---- */}
+      <h3 style={{ marginTop: 36 }}>Payment Methods</h3>
+      <ul>
+        {currentUser.paymentMethods?.map((pm, i) => (
+          <li key={pm._id} style={{ marginBottom: 14, border: "1px solid #eee", borderRadius: 6, padding: 8 }}>
+            <div>
+              <b>{pm.cardType}:</b> **** **** **** {pm.cardNumber.slice(-4)}, {pm.cardholderName}, exp {pm.expMonth}/{pm.expYear}
+              {pm.isDefault && <span style={{ color: "green" }}> (Default)</span>}
+            </div>
+            <div>
+              <button onClick={() => openPaymentEdit(i)} style={{ marginRight: 6 }}>Edit</button>
+              <button onClick={() => handleDeletePaymentMethod(pm._id)} style={{ marginRight: 6 }}>Delete</button>
+              {!pm.isDefault && <button onClick={() => handleSetDefaultPaymentMethod(pm._id)}>Set as Default</button>}
+            </div>
+          </li>
+        ))}
+      </ul>
+      <button onClick={() => openPaymentEdit(-1)}>Add Payment Method</button>
+
+      {/* ---- PAYMENT METHOD EDIT FORM ---- */}
+      {editingPaymentIdx !== null && (
+        <form onSubmit={handleSavePaymentMethod} style={{ marginTop: 18, border: "1px solid #ddd", borderRadius: 6, padding: 14 }}>
+          <h4>{editingPaymentIdx === -1 ? "Add Payment Method" : "Edit Payment Method"}</h4>
+          <input name="cardType" placeholder="Card Type" value={paymentForm.cardType} onChange={handlePaymentFormChange} required />
+          <input name="cardNumber" placeholder="Card Number" value={paymentForm.cardNumber} onChange={handlePaymentFormChange} required />
+          <input name="cardholderName" placeholder="Cardholder Name" value={paymentForm.cardholderName} onChange={handlePaymentFormChange} required />
+          <input name="expMonth" placeholder="Exp Month" value={paymentForm.expMonth} onChange={handlePaymentFormChange} required />
+          <input name="expYear" placeholder="Exp Year" value={paymentForm.expYear} onChange={handlePaymentFormChange} required />
+          <input name="cvv" placeholder="CVV" value={paymentForm.cvv} onChange={handlePaymentFormChange} />
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                name="isDefault"
+                checked={paymentForm.isDefault}
+                onChange={handlePaymentFormChange}
+              />
+              Default Payment Method
+            </label>
+          </div>
           <div style={{ marginTop: 8 }}>
-            <button type="submit">{addressEditIdx === -1 ? "Add" : "Save"}</button>
-            <button type="button" onClick={() => setAddressEditIdx(null)} style={{ marginLeft: 8 }}>Cancel</button>
+            <button type="submit">{editingPaymentIdx === -1 ? "Add" : "Save"}</button>
+            <button type="button" onClick={() => setEditingPaymentIdx(null)} style={{ marginLeft: 8 }}>Cancel</button>
           </div>
         </form>
       )}
-      {/* ---- END ADDRESS ---- */}
 
       {message && (
         <div style={{ marginTop: 18, color: "#1976d2" }}>
