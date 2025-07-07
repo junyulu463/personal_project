@@ -564,10 +564,7 @@ export const SET_DEFAULT_PAYMENT_METHOD = gql`
   mutation SetDefaultPaymentMethod($userId: ID!, $paymentMethodId: ID!) {
     setDefaultPaymentMethod(userId: $userId, paymentMethodId: $paymentMethodId) {
       _id
-      defaultPaymentMethod {
-        _id
-        cardType
-      }
+      defaultPaymentMethodId
       paymentMethods {
         _id
         isDefault

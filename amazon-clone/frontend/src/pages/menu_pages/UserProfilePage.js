@@ -292,8 +292,8 @@ export default function UserProfilePage() {
 
   const handleSetDefaultPaymentMethod = async (pmId) => {
     //alert(JSON.stringify(addressPayload, null, 2));
-    alert(pmId);
     alert(currentUser._id);
+    alert(pmId);
     await setDefaultPaymentMethod({ variables: { userId: currentUser._id, paymentMethodId: pmId } });
   };
 
