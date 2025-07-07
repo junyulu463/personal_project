@@ -5,7 +5,8 @@ import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USERS, UPDATE_USER } from '../../graphql/userQueries';
-import AddressForm from './AddressForm.js';
+import AddressForm from './components/AddressForm.js';
+import CardTypeSelector from './components/CardTypeSelector';
 
 // ---- Address/Billing/Shipping Mutations ----
 import {
@@ -292,8 +293,6 @@ export default function UserProfilePage() {
 
   const handleSetDefaultPaymentMethod = async (pmId) => {
     //alert(JSON.stringify(addressPayload, null, 2));
-    alert(currentUser._id);
-    alert(pmId);
     await setDefaultPaymentMethod({ variables: { userId: currentUser._id, paymentMethodId: pmId } });
   };
 
@@ -302,7 +301,7 @@ export default function UserProfilePage() {
   return (
     <div style={{
       padding: '2rem',
-      maxWidth: 500,
+      maxWidth: 750,
       margin: '40px auto',
       background: "#fafbfc",
       borderRadius: 10,
@@ -496,12 +495,14 @@ export default function UserProfilePage() {
       {editingPaymentIdx !== null && (
         <form onSubmit={handleSavePaymentMethod} style={{ marginTop: 18, border: "1px solid #ddd", borderRadius: 6, padding: 14 }}>
           <h4>{editingPaymentIdx === -1 ? "Add Payment Method" : "Edit Payment Method"}</h4>
-          <input name="cardType" placeholder="Card Type" value={paymentForm.cardType} onChange={handlePaymentFormChange} required />
+          <CardTypeSelector value={paymentForm.cardType} onChange={e => setPaymentForm(f => ({ ...f, cardType: e.target.value }))} />
           <input name="cardNumber" placeholder="Card Number" value={paymentForm.cardNumber} onChange={handlePaymentFormChange} required />
           <input name="cardholderName" placeholder="Cardholder Name" value={paymentForm.cardholderName} onChange={handlePaymentFormChange} required />
-          <input name="expMonth" placeholder="Exp Month" value={paymentForm.expMonth} onChange={handlePaymentFormChange} required />
-          <input name="expYear" placeholder="Exp Year" value={paymentForm.expYear} onChange={handlePaymentFormChange} required />
-          <input name="cvv" placeholder="CVV" value={paymentForm.cvv} onChange={handlePaymentFormChange} />
+          <input name="expMonth" type="number" placeholder="Exp Month" value={paymentForm.expMonth} onChange={handlePaymentFormChange} min={1} 
+            max={12} required style={{ width: 80, marginRight: 8 }} />
+          <input name="expYear" type="number" placeholder="Exp Year" value={paymentForm.expYear} onChange={handlePaymentFormChange} min={2024}
+            max={2100} required style={{ width: 100, marginRight: 8 }} />
+          <input name="cvv" placeholder="CVV" value={paymentForm.cvv} onChange={handlePaymentFormChange} />         
           <div>
             <label>
               <input
