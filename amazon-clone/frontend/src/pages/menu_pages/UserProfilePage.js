@@ -5,8 +5,8 @@ import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USERS, UPDATE_USER } from '../../graphql/userQueries';
-import AddressForm from './components/AddressForm.js';
-import CardTypeSelector from './components/CardTypeSelector';
+import AddressForm from '../components/AddressForm';
+import CardTypeSelector from '../components/CardTypeSelector';
 
 // ---- Address/Billing/Shipping Mutations ----
 import {
