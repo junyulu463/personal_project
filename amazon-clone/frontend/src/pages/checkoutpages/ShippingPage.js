@@ -239,7 +239,7 @@ export default function ShippingPage() {
           }}
           onClick={() => {
             const selectedAddress = userAddresses.find(a => a._id === selectedAddressId);
-            alert("Shipping Address saved for checkout:\n" + JSON.stringify(selectedAddress, null, 2));
+            // alert("Shipping Address saved for checkout:\n" + JSON.stringify(selectedAddress, null, 2));
             setCheckoutData(d => ({ ...d, shippingAddress: selectedAddress }));
             if (orderId) {
               navigate(`/checkout/payment?orderId=${orderId}`);
