@@ -6,6 +6,9 @@ import { useQuery } from "@apollo/client";
 import { GET_USERS } from "../../graphql/userQueries";
 import {GET_ORDER } from "../../graphql/orderQueries";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { UPDATE_ORDER } from "../../graphql/orderQueries";
+
 
 // Subcomponent for each order
 function OrderEntry({ entry }) {
@@ -15,6 +18,38 @@ function OrderEntry({ entry }) {
   });
   const order = data?.getOrder;  
 
+  const [updateOrder] = useMutation(UPDATE_ORDER, {
+    refetchQueries: [{ query: GET_ORDER, variables: { id: entry.order } }],
+  });
+  useEffect(() => {
+    if (!order) return;
+    const allItemsDelivered =
+      order.orderItems.length > 0 &&
+      order.orderItems.every(item => item.isDelivered);
+    // Only update if state differs
+    if (allItemsDelivered && !order.isDelivered) {
+      updateOrder({
+        variables: {
+          id: order._id,
+          isDelivered: true,
+          deliveredAt:
+            order.orderItems
+              .map(i => i.deliveredAt)
+              .filter(Boolean)
+              .sort()
+              .slice(-1)[0] || new Date().toISOString(),
+        }
+      });
+    } else if (!allItemsDelivered && order.isDelivered) {
+      updateOrder({
+        variables: {
+          id: order._id,
+          isDelivered: false,
+          deliveredAt: null,
+        }
+      });
+    }
+  }, [order, updateOrder]);
   return (
     <li
       style={{

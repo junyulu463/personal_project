@@ -1,8 +1,9 @@
 // src/pages/menu_pages/OrderDetailPage.js
 import React from "react";
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { CANCEL_ORDER, GET_ORDER } from "../../graphql/orderQueries";
+import { UPDATE_ORDER, CANCEL_ORDER, GET_ORDER } from "../../graphql/orderQueries";
 import { useMutation } from "@apollo/client";
 
 export default function OrderDetailPage() {
@@ -24,9 +25,41 @@ export default function OrderDetailPage() {
       .sort()
       .slice(-1)[0];
 
+  const anyItemDelivered =
+  order &&
+  order.orderItems.length > 0 &&
+  order.orderItems.some(item => item.isDelivered);
+    
+
   const [cancelOrder] = useMutation(CANCEL_ORDER, {
     refetchQueries: [{ query: GET_ORDER, variables: { id } }],
-  });      
+  }); 
+  const [updateOrder] = useMutation(UPDATE_ORDER, {
+    refetchQueries: [{ query: GET_ORDER, variables: { id } }],
+  });
+
+
+  useEffect(() => {
+    if (!order) return;
+    if (allItemsDelivered && !order.isDelivered) {
+      updateOrder({
+        variables: {
+          id: order._id,
+          isDelivered: true,
+          deliveredAt: new Date().toISOString()
+        }
+      });
+    } else if (!allItemsDelivered && order.isDelivered) {
+      updateOrder({
+        variables: {
+          id: order._id,
+          isDelivered: false,
+          deliveredAt: null
+        }
+      });
+    }
+  }, [allItemsDelivered, order?.isDelivered,order, updateOrder]);  
+       
 
   const handleCancelOrder = async () => {
     if (!window.confirm("Are you sure you want to cancel this order?")) return;
@@ -136,10 +169,10 @@ export default function OrderDetailPage() {
               <strong>Paid With:</strong>{" "}
               {order.paymentMethod.cardType} ending in{" "}
               {order.paymentMethod.cardNumber.slice(-4)} (
-              {order.paymentMethod.nameOnCard})
+              {order.paymentMethod.cardholderName})
               <span style={{ marginLeft: 8 }}>
-                exp {order.paymentMethod.expiryMonth}/
-                {order.paymentMethod.expiryYear}
+                exp {order.paymentMethod.expMonth}/
+                {order.paymentMethod.expYear}
               </span>
             </div>
           )}
@@ -282,24 +315,26 @@ export default function OrderDetailPage() {
               )}
             </div>
 
-            {order && !allItemsDelivered && (
+            {order && (
               <button
                 onClick={handleCancelOrder}
                 style={{
                   marginTop: 18,
-                  background: "#d9534f",
+                  background: anyItemDelivered ? "#ccc" : "#d9534f",
                   color: "#fff",
                   border: "none",
                   borderRadius: 4,
                   padding: "10px 28px",
                   fontWeight: "bold",
-                  cursor: "pointer"
+                  cursor: anyItemDelivered ? "not-allowed" : "pointer"
                 }}
-                disabled={order.isDelivered}
+                disabled={anyItemDelivered}
+                title={anyItemDelivered ? "Cannot cancel: at least one item is delivered" : "Cancel Order"}
               >
                 Cancel Order
               </button>
             )}
+
 
             {order && !order.isPaid && (
               <button

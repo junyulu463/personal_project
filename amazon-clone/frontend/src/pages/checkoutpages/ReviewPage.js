@@ -110,13 +110,14 @@ export default function ReviewPage() {
         return;
       }
       if (orderId && orderData?.getOrder) {
+        alert("2");
         await updateOrder({
           variables: {
             id: orderId,
             orderItems,
-            shippingAddress,
-            billingAddress,
-            paymentMethod: paymentMethodForMutation,
+            shippingAddress: cleanShippingAddress,
+            billingAddress: cleanBillingAddress,
+            paymentMethod: cleanPayment,
             itemsPrice: subtotal,
             shippingPrice,
             taxPrice,
@@ -170,6 +171,9 @@ export default function ReviewPage() {
         expMonth: Number(paymentMethod.expMonth ?? paymentMethod.expiryMonth),
         expYear: Number(paymentMethod.expYear ?? paymentMethod.expiryYear),
       };
+      const cleanShippingAddress = cleanAddress(shippingAddress);
+      const cleanBillingAddress = cleanAddress(billingAddress);
+      const cleanPayment = cleanPaymentMethod(paymentMethodForMutation);      
       if (!shippingAddress || !paymentMethod) {
         alert("Shipping address or payment method missing.");
         return;
@@ -179,13 +183,14 @@ export default function ReviewPage() {
         return;
       }
       if (orderId && orderData?.getOrder) {
+        alert("4");
         await updateOrder({
           variables: {
             id: orderId,
             orderItems,
-            shippingAddress,
-            billingAddress,
-            paymentMethod: paymentMethodForMutation,
+            shippingAddress: cleanShippingAddress,
+            billingAddress: cleanBillingAddress,
+            paymentMethod: cleanPayment,
             itemsPrice: subtotal,
             shippingPrice,
             taxPrice,
@@ -195,13 +200,14 @@ export default function ReviewPage() {
           },
         });
       } else {
+        alert("3");
         const res = await addOrder({
           variables: {
             user: authUser._id,
             orderItems,
-            shippingAddress,
-            billingAddress,
-            paymentMethod: paymentMethodForMutation,
+            shippingAddress: cleanShippingAddress,
+            billingAddress: cleanBillingAddress,
+            paymentMethod: cleanPayment,
             itemsPrice: subtotal,
             shippingPrice,
             taxPrice,
