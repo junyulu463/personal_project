@@ -1,22 +1,67 @@
 import React, { useEffect } from "react";
 import { useCheckout } from "../../context/CheckoutContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { GET_ORDER } from "../../graphql/orderQueries";
 
 export default function ConfirmationPage() {
-  const { checkoutData, setCheckoutData } = useCheckout();
+  const { setCheckoutData } = useCheckout();
   const navigate = useNavigate();
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  const orderId = params.get("orderId");
 
+  // Clear checkout context on mount (resets for next purchase)
   useEffect(() => {
-    // Clear checkout context/order on mount
-    setCheckoutData({ shippingAddress: {}, billingAddress: {}, paymentMethod: "", order: null });
+    setCheckoutData({
+      shippingAddress: {},
+      billingAddress: {},
+      paymentMethod: "",
+      order: null,
+    });
   }, [setCheckoutData]);
 
-  const order = checkoutData.order;
+  // Fetch order from backend
+  const { data, loading, error } = useQuery(GET_ORDER, {
+    variables: { id: orderId },
+    skip: !orderId,
+    fetchPolicy: "network-only",
+  });
+
+  const order = data?.getOrder;
+
+  if (!orderId) {
+    return (
+      <div style={{ padding: 32, textAlign: "center" }}>
+        No order found.<br />
+        <button onClick={() => navigate("/")}>Return to Home</button>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div style={{ padding: 32, textAlign: "center" }}>
+        Loading order...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div style={{ padding: 32, color: "red", textAlign: "center" }}>
+        Failed to load order.<br />
+        {error.message}
+        <br />
+        <button onClick={() => navigate("/")}>Return to Home</button>
+      </div>
+    );
+  }
 
   if (!order) {
     return (
       <div style={{ padding: 32, textAlign: "center" }}>
-        No order found.<br />
+        Order not found.<br />
         <button onClick={() => navigate("/")}>Return to Home</button>
       </div>
     );
@@ -31,7 +76,12 @@ export default function ConfirmationPage() {
           <strong>Paid with:</strong> {pm.cardType} ****{pm.cardNumber?.slice(-4)}
         </div>
       );
-    if (typeof pm === "string") return <div><strong>Paid with:</strong> {pm}</div>;
+    if (typeof pm === "string")
+      return (
+        <div>
+          <strong>Paid with:</strong> {pm}
+        </div>
+      );
     return null;
   };
 
@@ -48,16 +98,26 @@ export default function ConfirmationPage() {
   };
 
   return (
-    <div style={{
-      maxWidth: 500, margin: "40px auto", background: "#fff", borderRadius: 10,
-      boxShadow: "0 2px 8px #eee", padding: 32, textAlign: "center"
-    }}>
+    <div
+      style={{
+        maxWidth: 500,
+        margin: "40px auto",
+        background: "#fff",
+        borderRadius: 10,
+        boxShadow: "0 2px 8px #eee",
+        padding: 32,
+        textAlign: "center",
+      }}
+    >
       <h2>Thank You for Your Order!</h2>
       <div style={{ margin: "24px 0" }}>
         <strong>Order ID:</strong> {order._id}
       </div>
       <div>
-        <strong>Total Paid:</strong> <span style={{ color: "#b12704" }}>${order.totalPrice?.toFixed(2)}</span>
+        <strong>Total Paid:</strong>{" "}
+        <span style={{ color: "#b12704" }}>
+          ${order.totalPrice?.toFixed(2)}
+        </span>
       </div>
       {order.shippingAddress && (
         <div style={{ margin: "16px 0 4px 0" }}>

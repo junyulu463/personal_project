@@ -41,9 +41,12 @@ export default function ShippingPage() {
   const userAddresses = currentUser?.shippingAddresses || [];
   const defaultAddressId = currentUser?.defaultShippingAddressId;
 
-  const [selectedAddressId, setSelectedAddressId] = useState(
-    checkoutData.shippingAddress?._id || currentUser?.defaultShippingAddressId || ""
+  const [selectedAddressId, setSelectedAddressId] = useState(() =>
+    checkoutData.shippingAddress?._id ||
+    currentUser?.defaultShippingAddressId ||
+    (userAddresses[0]?._id ?? "")
   );
+  
   
   // Edit/Add form state
   const [editingIdx, setEditingIdx] = useState(null); // null = not editing, -1 = add new
@@ -61,6 +64,39 @@ export default function ShippingPage() {
   useEffect(() => {
     if (currentUser && userAddresses.length === 0) setEditingIdx(-1);
   }, [currentUser, userAddresses.length]);
+  useEffect(() => {
+    // If only one address, always select it
+    if (userAddresses.length === 1) {
+      setSelectedAddressId(userAddresses[0]._id);
+    }
+    // If nothing is selected but addresses exist, select default or first
+    else if (!selectedAddressId && userAddresses.length > 0) {
+      setSelectedAddressId(
+        checkoutData.shippingAddress?._id ||
+        currentUser?.defaultShippingAddressId ||
+        userAddresses[0]._id
+      );
+    }
+    // If no addresses, clear selection
+    if (userAddresses.length === 0) setSelectedAddressId("");
+    // If the selected address was deleted, select default or first
+    if (
+      selectedAddressId &&
+      !userAddresses.some(a => a._id === selectedAddressId) &&
+      userAddresses.length > 0
+    ) {
+      setSelectedAddressId(
+        currentUser?.defaultShippingAddressId || userAddresses[0]._id
+      );
+    }
+  }, [
+    userAddresses,
+    selectedAddressId,
+    checkoutData.shippingAddress,
+    currentUser?.defaultShippingAddressId,
+  ]);
+  
+  
 
   // If not logged in, loading, error, etc.
   if (!authUser) return <div style={{ padding: 32 }}>Please log in.</div>;
@@ -254,7 +290,7 @@ export default function ShippingPage() {
 
 
       <div style={{ marginTop: 36 }}>
-        <button type="button" onClick={() => navigate(-1)}>
+        <button type="button" onClick={() => navigate("/cart")}>
           Back
         </button>
       </div>

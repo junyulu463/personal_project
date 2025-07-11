@@ -111,7 +111,7 @@ export default function ReviewPage() {
       }
       if (orderId && orderData?.getOrder) {
         alert("2");
-        await updateOrder({
+        const res = await updateOrder({
           variables: {
             id: orderId,
             orderItems,
@@ -126,11 +126,12 @@ export default function ReviewPage() {
             paidAt: new Date().toISOString(),
           },
         });
+        navigate(`/checkout/confirmation?orderId=${orderId}`);
       } else {
         alert("1");
-        alert("billingAddress:\n" + JSON.stringify(cleanBillingAddress, null, 2));
-        alert("shippingAddress:\n" + JSON.stringify(cleanShippingAddress, null, 2));
-        alert("payment:\n" + JSON.stringify(cleanPayment, null, 2));
+        // alert("billingAddress:\n" + JSON.stringify(cleanBillingAddress, null, 2));
+        // alert("shippingAddress:\n" + JSON.stringify(cleanShippingAddress, null, 2));
+        // alert("payment:\n" + JSON.stringify(cleanPayment, null, 2));
         const res = await addOrder({
           variables: {
             user: authUser._id,
@@ -155,8 +156,9 @@ export default function ReviewPage() {
           }
         });
         sessionStorage.removeItem("selectedCartIds");
+        navigate(`/checkout/confirmation?orderId=${res.data.addOrder._id}`);
       }
-      navigate("/checkout/confirmation");
+      // navigate("/checkout/confirmation");
     } catch (err) {
       alert("Order failed: " + err.message);
     }

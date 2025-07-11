@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCheckout } from "../../context/CheckoutContext";
 import { useAuth } from "../../context/AuthContext";
@@ -45,9 +45,15 @@ export default function PaymentPage() {
 
   // Get user data
   const currentUser = data?.getUsers?.find(u => u._id === authUser?._id);
-  const paymentMethods = currentUser?.paymentMethods || [];
+  const paymentMethods = useMemo(
+    () => currentUser?.paymentMethods || [],
+    [currentUser?.paymentMethods]
+  );
   const defaultPaymentId = currentUser?.defaultPaymentMethodId;
-  const billingAddresses = currentUser?.billingAddresses || [];
+  const billingAddresses = useMemo(
+    () => currentUser?.billingAddresses || [],
+    [currentUser?.billingAddresses]
+  );
   const defaultBillingId = currentUser?.defaultBillingAddressId;
 
   // UI State
@@ -55,13 +61,37 @@ export default function PaymentPage() {
     checkoutData.paymentMethod?._id || defaultPaymentId || (paymentMethods[0]?._id ?? "")
   );
   useEffect(() => {
-    if (!selectedPaymentId && paymentMethods.length > 0) {
+    // If only one payment method, always select it
+    if (paymentMethods.length === 1) {
+      setSelectedPaymentId(paymentMethods[0]._id);
+    }
+    // If nothing is selected but methods exist, select default or first
+    else if (!selectedPaymentId && paymentMethods.length > 0) {
       setSelectedPaymentId(
-        checkoutData.paymentMethod?._id || defaultPaymentId || paymentMethods[0]._id
+        checkoutData.paymentMethod?._id ||
+        defaultPaymentId ||
+        paymentMethods[0]._id
       );
     }
+    // If no methods, clear selection
     if (paymentMethods.length === 0) setSelectedPaymentId("");
-  }, [paymentMethods, selectedPaymentId, checkoutData.paymentMethod, defaultPaymentId]);
+    // If selected payment was deleted, select default or first
+    if (
+      selectedPaymentId &&
+      !paymentMethods.some(pm => pm._id === selectedPaymentId) &&
+      paymentMethods.length > 0
+    ) {
+      setSelectedPaymentId(
+        defaultPaymentId || paymentMethods[0]._id
+      );
+    }
+  }, [
+    paymentMethods,
+    selectedPaymentId,
+    checkoutData.paymentMethod,
+    defaultPaymentId,
+  ]);
+  
 
   // Add/Edit Payment Method
   const [editingIdx, setEditingIdx] = useState(null); // null = not editing, -1 = add new
@@ -218,8 +248,8 @@ export default function PaymentPage() {
       alert("Please select a billing address.");
       return;
     }
-    alert("paymentMethod for checkout:\n" + JSON.stringify(selectedPayment, null, 2));
-    alert("chosenBillingAddress for checkout:\n" + JSON.stringify(chosenBillingAddress, null, 2));
+    // alert("paymentMethod for checkout:\n" + JSON.stringify(selectedPayment, null, 2));
+    // alert("chosenBillingAddress for checkout:\n" + JSON.stringify(chosenBillingAddress, null, 2));
     setCheckoutData(d => ({
       ...d,
       paymentMethod: selectedPayment,
