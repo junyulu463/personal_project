@@ -6,6 +6,10 @@ const productResolver = {
   Query: {
     getProducts: async () => await Product.find(),
     getProduct: async (_, { id }) => await Product.findById(id),
+    getProductsByIds: async (_, { ids }) => {
+      // ids: array of strings
+      return await Product.find({ _id: { $in: ids } });
+    },    
     searchProducts: async (_, { query, from = 0, size = 20 }) => {
       const { body } = await opensearch.search({
         index: 'products',

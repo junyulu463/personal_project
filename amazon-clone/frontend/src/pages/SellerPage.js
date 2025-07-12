@@ -4,6 +4,9 @@ import { GET_PRODUCTS, DELETE_PRODUCT } from '../graphql/productQueries';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { GET_ORDERS } from '../graphql/orderQueries';
+import { FiPackage } from "react-icons/fi";
+
 
 // S3 deletion mutation
 const DELETE_S3_FILE = gql`
@@ -20,6 +23,13 @@ export default function SellerPage() {
   const [deleteS3File] = useMutation(DELETE_S3_FILE);
   const location = useLocation();
   const [pendingScroll, setPendingScroll] = React.useState(null);
+  // Near your other queries
+  const { data: ordersData } = useQuery(GET_ORDERS, {
+    variables: { sellerId: authUser?._id },
+    skip: !authUser?._id,
+    fetchPolicy: "network-only"
+  });
+  
 
   React.useEffect(() => {
     if (location.state?.refresh) {
@@ -98,17 +108,63 @@ export default function SellerPage() {
     );
   }
 
+  // Count sold items that are NOT delivered
+  let undeliveredCount = 0;
+  if (ordersData && ordersData.getOrders) {
+    // Loop through each order, sum items sold by this seller that are not delivered
+    ordersData.getOrders.forEach(order => {
+      if (Array.isArray(order.orderItems)) {
+        order.orderItems.forEach(item => {
+          if (
+            item.seller === authUser._id &&
+            (!item.isDelivered || item.isDelivered === false)
+          ) {
+            undeliveredCount += item.qty || 1;
+          }
+        });
+      }
+    });
+  }
+
   return (
     <div style={{ padding: "2rem" }}>
       <button onClick={() => navigate("/")} style={{ marginBottom: 20 }}>
         Back to Home
       </button>
+
       <button
         onClick={() => navigate(`/seller/orders`)}
-        style={{ marginLeft: 12, background: "#f5f5f5", border: "1px solid #ccc", borderRadius: 5, padding: "6px 18px", fontWeight: 500 }}
+        style={{
+          marginLeft: 12,
+          background: "#ffd700",
+          border: "1px solid #ccc",
+          borderRadius: 5,
+          padding: "6px 18px",
+          fontWeight: 500,
+          position: "relative"
+        }}
       >
+        <FiPackage size={20} style={{ marginRight: 6, verticalAlign: "middle" }} />
         View Sold Items
-      </button>      
+        {undeliveredCount > 0 && (
+          <span style={{
+            position: "absolute",
+            top: -6,
+            right: -6,
+            background: "#d9534f",
+            color: "#fff",
+            borderRadius: "50%",
+            padding: "2px 8px",
+            fontSize: 12,
+            fontWeight: 700,
+            boxShadow: "0 1px 5px rgba(0,0,0,0.11)"
+          }}>
+            {undeliveredCount}
+          </span>
+        )}
+      </button>
+
+
       <h1>Seller Dashboard</h1>
       <p>Welcome, {authUser.username}! Manage your products below.</p>
       <button onClick={() => navigate("/seller/add")}>

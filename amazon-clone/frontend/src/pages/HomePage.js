@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
 import { ADD_SEARCH_HISTORY, GET_USERS, REMOVE_SEARCH_HISTORY_ENTRY } from '../graphql/userQueries';
-import { SEARCH_PRODUCTS } from '../graphql/productQueries';
+import { GET_PRODUCTS_BY_IDS, SEARCH_PRODUCTS } from '../graphql/productQueries';
+import { GET_ORDERS_BY_IDS } from '../graphql/orderQueries'; // or wherever your order queries are
 
 export default function HomePage() {
   const { authUser, setAuthUser } = useAuth();
@@ -117,6 +118,218 @@ export default function HomePage() {
     setShowSuggestions(false);
   };
 
+  // Get current user's cart count
+  let cartCount = 0;
+  if (authUser && data) {
+    const currentUser = data.getUsers.find(u => u._id === authUser._id);
+    if (currentUser && Array.isArray(currentUser.cart)) {
+      cartCount = currentUser.cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    }
+  }
+
+  // Recently Viewed Items (show latest 8)
+  let viewHistory = [];
+  if (authUser && data) {
+    const currentUser = data.getUsers.find(u => u._id === authUser._id);
+    // alert(JSON.stringify(currentUser.productViewHistory, null, 2))
+    // alert("currentUser.productViewHistory.length = " + currentUser.productViewHistory.length);
+    if (currentUser && currentUser.productViewHistory) {
+      // Remove duplicate product IDs, most recent first
+      const seen = new Set();
+      viewHistory = currentUser.productViewHistory
+        .slice() // clone
+        .sort((a, b) => b.timestamp - a.timestamp)
+        .filter(entry => {
+          if (seen.has(entry.product)) return false;
+          //  alert(entry.product);
+          seen.add(entry.product);
+          return true;
+        })
+        .slice(0, 15); // Limit to 8
+    }
+    // alert("viewHistory.length = " + viewHistory.length);
+    // alert(JSON.stringify(viewHistory, null, 2))
+  }
+
+  // Collect product IDs from viewHistory
+  const viewedProductIds = viewHistory.map(entry => entry.product);
+  // alert(JSON.stringify(viewedProductIds, null, 2))
+
+  // Fetch product details only if there are IDs
+  const { data: viewedProductsData } = useQuery(GET_PRODUCTS_BY_IDS, {
+    variables: { ids: viewedProductIds },
+    skip: viewedProductIds.length === 0
+  });
+  // alert(JSON.stringify(viewedProductsData, null, 2))
+
+  // Map products by _id for quick lookup
+  const productMap = {};
+  if (viewedProductsData && viewedProductsData.getProductsByIds) {
+    for (const p of viewedProductsData.getProductsByIds) {
+      productMap[p._id] = p;
+    }
+  }
+
+
+  let currentUser = null;
+  if (authUser && data) {
+    currentUser = data.getUsers.find(u => u._id === authUser._id);
+  }
+  // alert(JSON.stringify(currentUser, null, 2))
+  // 1. Get all order IDs from orderHistory
+  const orderIds = (currentUser?.orderHistory || []).map(ref => ref.order);
+  //  alert(JSON.stringify(orderIds, null, 2));
+  // 2. Fetch all order objects by IDs
+  
+  const { data: ordersData } = useQuery(GET_ORDERS_BY_IDS, {
+    variables: { ids: orderIds },
+    skip: orderIds.length === 0
+  });
+  //  alert(JSON.stringify(ordersData, null, 2));
+  // 3. Collect unique product IDs from all orders
+  let orderHistoryProductIds = [];
+  if (ordersData?.getOrdersByIds) {
+    const seen = new Set();
+    // alert(JSON.stringify(ordersData.getOrdersByIds, null, 2))
+    for (const order of ordersData.getOrdersByIds) {
+      for (const item of order.orderItems) {
+        const pid = item.product;
+        if (!seen.has(pid)) {
+          orderHistoryProductIds.push(pid);
+          seen.add(pid);
+        }
+      }      
+    }
+    orderHistoryProductIds = orderHistoryProductIds.slice(0, 15); // Limit if you want
+    //alert(JSON.stringify(orderHistoryProductIds, null, 2));
+  }
+
+  // alert(JSON.stringify(orderHistoryProductIds, null, 2));
+
+  // Fetch order history products
+  const { data: orderProductsData } = useQuery(GET_PRODUCTS_BY_IDS, {
+    variables: { ids: orderHistoryProductIds },
+    skip: orderHistoryProductIds.length === 0
+  });
+
+  const orderProducts = orderProductsData?.getProductsByIds || []; 
+
+  function OrderHistoryRow({ products, navigate }) {
+    const rowRef = useRef();
+  
+    const scrollBy = (dir) => {
+      if (rowRef.current) {
+        rowRef.current.scrollBy({ left: dir * 260, behavior: "smooth" });
+      }
+    };
+  
+    return (
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        maxWidth: 1300,
+        margin: '0 auto',
+        background: '#fff',
+        padding: "0 0 40px 0"
+      }}>
+        {/* Left Arrow */}
+        <button
+          aria-label="scroll left"
+          style={{
+            position: "absolute",
+            left: 0,
+            top: "50%",
+            transform: "translateY(-50%)",
+            zIndex: 2,
+            minWidth: 44, minHeight: 44,
+            border: "1px solid #bbb",
+            borderRadius: "50%",
+            background: "#fff",
+            fontSize: 32,
+            color: "#222",
+            boxShadow: "0 1px 5px #eee",
+            cursor: "pointer"
+          }}
+          onClick={() => scrollBy(-1)}
+        >&#x2039;</button>
+  
+        {/* Product Row */}
+        <div
+          ref={rowRef}
+          style={{
+            display: "flex",
+            overflowX: "auto",
+            gap: 18,
+            padding: "16px 60px", // Give space for arrows!
+            scrollBehavior: "smooth",
+            width: "100%",
+          }}
+        >
+          {products.map(product => (
+            <div
+              key={product._id}
+              style={{
+                minWidth: 140,
+                maxWidth: 140,
+                borderRadius: 8,
+                padding: 12,
+                textAlign: "center",
+                cursor: "pointer",
+                transition: "box-shadow 0.18s"
+              }}
+              onClick={() => navigate(`/product/${product._id}`)}
+            >
+              <img
+                src={product.image}
+                alt={product.name}
+                style={{
+                  width: 100,
+                  height: 70,
+                  objectFit: "contain",
+                  borderRadius: 8,
+                  background: "#f9f9f9"
+                }}
+              />
+              <div style={{
+                fontWeight: 500,
+                fontSize: 12,
+                margin: "6px 0"
+              }}>{product.name}</div>
+              <div style={{
+                color: "#b12704",
+                fontWeight: 600,
+                fontSize: 12
+              }}>${product.price}</div>
+            </div>
+          ))}
+        </div>
+  
+        {/* Right Arrow */}
+        <button
+          aria-label="scroll right"
+          style={{
+            position: "absolute",
+            right: 0,
+            top: "50%",
+            transform: "translateY(-50%)",
+            zIndex: 2,
+            minWidth: 44, minHeight: 44,
+            border: "1px solid #bbb",
+            borderRadius: "50%",
+            background: "#fff",
+            fontSize: 32,
+            color: "#222",
+            boxShadow: "0 1px 5px #eee",
+            cursor: "pointer"
+          }}
+          onClick={() => scrollBy(1)}
+        >&#x203A;</button>
+      </div>
+    );
+  }
+  
+  
+  
   return (
     <div>
       {/* Header */}
@@ -133,22 +346,55 @@ export default function HomePage() {
             <span style={{ color: "#fff", marginRight: 16 }}>
               Hello, {authUser.username} {authUser.role && <>({authUser.role})</>}
             </span>
-            <button
-              style={{
-                marginRight: 12,
-                background: "#ffd700",
-                color: "#232f3e",
-                borderRadius: 4,
-                border: "none",
-                padding: "6px 12px",
-                fontWeight: "bold",
-                cursor: "pointer"
-              }}
-              onClick={() => navigate('/cart')}
-              title="Shopping Cart"
-            >
-              🛒 Shopping Cart
-            </button>            
+
+            <div style={{ position: "relative", display: "inline-block", marginRight: 12 }}>
+              <button
+                style={{
+                  background: "#ffd700",
+                  color: "#232f3e",
+                  borderRadius: 4,
+                  border: "none",
+                  padding: "6px 12px 6px 32px",
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                  position: "relative"
+                }}
+                onClick={() => navigate('/cart')}
+                title="Shopping Cart"
+              >
+                <span style={{
+                  position: "absolute",
+                  left: 8,
+                  top: "48%",
+                  transform: "translateY(-50%)",
+                  fontSize: 20
+                }}>🛒</span>
+                Cart
+                {cartCount > 0 && (
+                  <span style={{
+                    position: "absolute",
+                    top: -10,
+                    right: -10,
+                    background: "#0076ff",
+                    color: "#fff",
+                    borderRadius: "50%",
+                    minWidth: 22,
+                    height: 22,
+                    fontSize: 14,
+                    fontWeight: "bold",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    boxShadow: "0 1px 4px #3333",
+                    border: "2px solid #232f3e",
+                    zIndex: 1
+                  }}>
+                    {cartCount}
+                  </span>
+                )}
+              </button>
+            </div>
+
             <button
               style={{
                 marginRight: 12,
@@ -440,7 +686,196 @@ export default function HomePage() {
             </div>
           )}
         </div>
+
+        {/* products odered */}
+        {authUser && orderProducts.length > 0 && (
+          <div style={{
+            width: "100%",
+            maxWidth: 1300,
+            margin: "60px auto 0 auto",
+            borderTop: "1px solid #ddd",
+            paddingTop: 15,
+            background: "#fff"
+          }}>
+            {/* Header */}
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 10,
+              padding: "0 16px"
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <h2 style={{
+                  fontSize: 20,
+                  color: "#111",
+                  fontWeight: 700,
+                  margin: 0
+                }}>
+                  Ordered Products
+                </h2>
+                {/* Optional: add "View or edit your order history" link here */}
+              </div>
+            </div>
+            {/* Horizontally Scrollable Row */}
+            <OrderHistoryRow products={orderProducts} navigate={navigate} />
+          </div>
+        )}
+
+        {/*view history section*/}
+        {authUser && viewHistory.length > 0 && (
+          <div style={{
+            width: "100%",
+            maxWidth: 1300,
+            margin: "auto auto 0 auto",
+            borderTop: "1px solid #ddd",
+            paddingTop: 15,
+            background: "#fff"
+          }}>
+            {/* Header */}
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 10,
+              padding: "0 16px"
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <h2 style={{
+                  fontSize: 20,
+                  color: "#111",
+                  fontWeight: 700,
+                  margin: 0
+                }}>
+                  Browsing History
+                </h2>
+              </div>
+            </div>
+            {/* Horizontally Scrollable Row */}
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              position: "relative"
+            }}>
+              {/* Left Button (add scroll behavior if you want, else just hide if not needed) */}
+              <button
+                aria-label="scroll left"
+                style={{
+                  minWidth: 44, minHeight: 44,
+                  border: "1px solid #bbb",
+                  borderRadius: 10,
+                  background: "#fff",
+                  fontSize: 32,
+                  color: "#222",
+                  marginRight: 8,
+                  boxShadow: "0 1px 5px #eee",
+                  cursor: "pointer"
+                }}
+                // Optional: Implement scroll logic with a ref
+                disabled
+              >&#x2039;</button>
+
+              <div
+                style={{
+                  display: "flex",
+                  overflowX: "auto",
+                  // gap: 1,
+                  paddingBottom: 10,
+                  scrollBehavior: "smooth",
+                  width: "100%"
+                }}
+              >
+                {viewHistory.map(entry => {
+                  const product = productMap[entry.product];
+                  if (!product) return null;
+                  return (
+                    <div
+                      key={product._id}
+                      style={{
+                        minWidth: 140,
+                        maxWidth: 140,
+                        // border: "1px solid #eee",
+                        borderRadius: 8,
+                        // boxShadow: "0 2px 8pxrgb(142, 139, 139)",
+                        // background: "#fff",
+                        padding: 12,
+                        textAlign: "center",
+                        cursor: "pointer",
+                        transition: "box-shadow 0.18s"
+                      }}
+                      onClick={() => navigate(`/product/${product._id}`)}
+                    >
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        style={{
+                          width: 100,
+                          height: 70,
+                          objectFit: "contain",
+                          borderRadius: 8,
+                          // marginBottom: 1,
+                          // background: "#f9f9f9"
+                        }}
+                      />
+                      <div style={{
+                        fontWeight: 500,
+                        fontSize: 12,
+                        margin: "6px 0"
+                      }}>{product.name}</div>
+                      <div style={{
+                        color: "#b12704",
+                        fontWeight: 600,
+                        fontSize: 12
+                      }}>${product.price}</div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Right Button (add scroll logic if you want, else just hide if not needed) */}
+              <button
+                aria-label="scroll right"
+                style={{
+                  minWidth: 44, minHeight: 44,
+                  border: "1px solid #bbb",
+                  borderRadius: 10,
+                  background: "#fff",
+                  fontSize: 32,
+                  color: "#222",
+                  marginLeft: 8,
+                  boxShadow: "0 1px 5px #eee",
+                  cursor: "pointer"
+                }}
+                disabled
+              >&#x203A;</button>
+            </div>
+          </div>
+        )}
+
+
+
       </div>
+        {/* Footer */}
+        <footer
+          style={{
+            width: "100%",
+            marginTop: 60,
+            padding: "18px 0",
+            background: "#232f3e",
+            color: "#fff",
+            textAlign: "center",
+            fontSize: 16,
+            letterSpacing: "0.01em",
+            borderTop: "1px solid #444",
+            boxShadow: "0 -1px 10px #0001"
+          }}
+        >
+          © {new Date().getFullYear()} Amazon Clone. All rights reserved. <br />
+          This site is a personal project and not affiliated with Amazon.com.
+        </footer>
+
     </div>
+    
   );
 }

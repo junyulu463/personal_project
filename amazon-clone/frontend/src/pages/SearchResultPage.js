@@ -165,8 +165,22 @@ export default function SearchResultPage() {
     navigate(`/product/${productId}`);
   };
 
+  // Get current user's cart count
+  let cartCount = 0;
+  if (authUser && usersData) {
+    const currentUser = usersData.getUsers.find(u => u._id === authUser._id);
+    if (currentUser && Array.isArray(currentUser.cart)) {
+      cartCount = currentUser.cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    }
+  }
+
   return (
-    <div>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: '100vh',
+      background: '#fff'
+    }}>
       {/* Header (unchanged) */}
       <div style={{
         display: "flex", justifyContent: "flex-end", alignItems: "center",
@@ -177,22 +191,54 @@ export default function SearchResultPage() {
             <span style={{ color: "#fff", marginRight: 16 }}>
               Hello, {authUser.username} {authUser.role && <>({authUser.role})</>}
             </span>
-            <button
-              style={{
-                marginRight: 12,
-                background: "#ffd700",
-                color: "#232f3e",
-                borderRadius: 4,
-                border: "none",
-                padding: "6px 12px",
-                fontWeight: "bold",
-                cursor: "pointer"
-              }}
-              onClick={() => navigate('/cart')}
-              title="Shopping Cart"
-            >
-              🛒 Shopping Cart
-            </button> 
+            <div style={{ position: "relative", display: "inline-block", marginRight: 12 }}>
+              <button
+                style={{
+                  background: "#ffd700",
+                  color: "#232f3e",
+                  borderRadius: 4,
+                  border: "none",
+                  padding: "6px 12px 6px 32px",
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                  position: "relative"
+                }}
+                onClick={() => navigate('/cart')}
+                title="Shopping Cart"
+              >
+                <span style={{
+                  position: "absolute",
+                  left: 8,
+                  top: "48%",
+                  transform: "translateY(-50%)",
+                  fontSize: 20
+                }}>🛒</span>
+                Cart
+                {cartCount > 0 && (
+                  <span style={{
+                    position: "absolute",
+                    top: -10,
+                    right: -10,
+                    background: "#0076ff",
+                    color: "#fff",
+                    borderRadius: "50%",
+                    minWidth: 22,
+                    height: 22,
+                    fontSize: 14,
+                    fontWeight: "bold",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    boxShadow: "0 1px 4px #3333",
+                    border: "2px solid #232f3e",
+                    zIndex: 1
+                  }}>
+                    {cartCount}
+                  </span>
+                )}
+              </button>
+            </div>
+
             <button
               style={{
                 marginRight: 12,
@@ -543,6 +589,25 @@ export default function SearchResultPage() {
           <div>No products found.</div>
         )}
       </div>
+      <footer
+      style={{
+        width: "100%",
+        marginTop: "auto", // <--- This is key!
+        padding: "18px 0",
+        background: "#232f3e",
+        color: "#fff",
+        textAlign: "center",
+        fontSize: 16,
+        letterSpacing: "0.01em",
+        borderTop: "1px solid #444",
+        boxShadow: "0 -1px 10px #0001"
+      }}
+    >
+      © {new Date().getFullYear()} Amazon Clone. All rights reserved. <br />
+      This site is a personal project and not affiliated with Amazon.com.
+    </footer>
+
     </div>
+    
   );
 }

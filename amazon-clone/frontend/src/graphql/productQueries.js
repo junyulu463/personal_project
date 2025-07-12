@@ -56,6 +56,17 @@ export const GET_PRODUCTS = gql`
   }
 `;
 
+export const GET_PRODUCTS_BY_IDS = gql`
+  query GetProductsByIds($ids: [ID!]!) {
+    getProductsByIds(ids: $ids) {
+      _id
+      name
+      image
+      price
+    }
+  }
+`;
+
 export const SEARCH_PRODUCTS = gql`
   query SearchProducts($query: String!, $from: Int, $size: Int) {
     searchProducts(query: $query, from: $from, size: $size) {

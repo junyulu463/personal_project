@@ -6,6 +6,10 @@ const orderResolver = {
   Query: {
     getOrders: async () => await Order.find(),
     getOrder: async (_, { id }) => await Order.findById(id),
+    getOrdersByIds: async (_, { ids }) => {
+      console.log("laodaozheli");
+      return await Order.find({ _id: { $in: ids } });
+    }
   },
   Mutation: {
     addOrder: async (_, args) => {
@@ -21,7 +25,7 @@ const orderResolver = {
       }
       // 2. Save order
        console.log("2");
-      const order = new Order({
+       const order = new Order({
         user: args.user,
         orderItems: args.orderItems,
         shippingAddress: args.shippingAddress,

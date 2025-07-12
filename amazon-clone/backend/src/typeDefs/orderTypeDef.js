@@ -68,7 +68,9 @@ const orderTypeDef = gql`
   type Query {
     getOrders: [Order]
     getOrder(id: ID!): Order
+    getOrdersByIds(ids: [ID!]!): [Order!]!
   }
+    
 
   type Mutation {
     cancelOrder(orderId: ID!, productId: ID): Order

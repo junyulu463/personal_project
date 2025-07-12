@@ -1,5 +1,18 @@
 import { gql } from '@apollo/client';
 
+export const GET_ORDERS_BY_IDS = gql`
+  query GetOrdersByIds($ids: [ID!]!) {
+    getOrdersByIds(ids: $ids) {
+      _id
+      orderItems {
+        product
+        qty
+      }
+    }
+  }
+`;
+
+
 export const GET_ORDERS = gql`
   query {
     getOrders {
