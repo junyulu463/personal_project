@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
 import { ADD_SEARCH_HISTORY, GET_USERS, REMOVE_SEARCH_HISTORY_ENTRY } from '../graphql/userQueries';
-import { GET_PRODUCTS_BY_IDS, SEARCH_PRODUCTS } from '../graphql/productQueries';
+import { GET_RANDOM_PRODUCTS, GET_PRODUCTS_BY_IDS, SEARCH_PRODUCTS } from '../graphql/productQueries';
 import { GET_ORDERS_BY_IDS } from '../graphql/orderQueries'; // or wherever your order queries are
 
 export default function HomePage() {
@@ -229,8 +229,8 @@ export default function HomePage() {
         width: '100%',
         maxWidth: 1300,
         margin: '0 auto',
-        background: '#fff',
-        padding: "0 0 40px 0"
+        background: "transparent",
+        padding: "0 0 0 0"
       }}>
         {/* Left Arrow */}
         <button
@@ -327,8 +327,12 @@ export default function HomePage() {
       </div>
     );
   }
-  
-  
+
+  const { data: randomProductsData, loading: randomLoading, error: randomError } = useQuery(GET_RANDOM_PRODUCTS, {
+    variables: { size: 20 },
+  });
+  const randomProducts = randomProductsData?.getRandomProducts || [];
+  //alert(JSON.stringify(randomProducts.length, null, 2));  
   
   return (
     <div>
@@ -456,7 +460,10 @@ export default function HomePage() {
         padding: '2rem',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundImage: `url('https://amazonphotoes.s3.us-west-1.amazonaws.com/900w-g_eroZwhOcs.webp')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",        
       }}>
         <h1 style={{ color: "#131921" }}>Amazon Clone Home Page</h1>
         <p>Welcome to the Amazon-like store. Browse products, sign up or log in to shop!</p>
@@ -686,24 +693,100 @@ export default function HomePage() {
             </div>
           )}
         </div>
+          {/* Random Products Section */}
+          <div style={{
+              width: "100%",
+              maxWidth: 1300,
+              margin: "40px auto 0 auto",
+              padding: "16px 0",
+              backgroundImage: `url('https://amazonphotoes.s3.us-west-1.amazonaws.com/homepage_background_image.avif')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              // borderTop: "1px solid #ddd"
+            }}>
+            <h2 style={{ fontSize: 20, color: "#111", fontWeight: 700, margin: "0 0 18px 18px" }}>
+              Discover New Products
+            </h2>
+            {randomLoading ? (
+              <div style={{ textAlign: "center", padding: 32 }}>Loading random products…</div>
+            ) : randomError ? (
+              <div style={{ color: "red", textAlign: "center" }}>Error loading random products.</div>
+            ) : (
+              <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+                {[0, 1, 2, 3].map(rowIdx => (
+                  <div key={rowIdx} style={{ display: "flex", gap: 18, justifyContent: "center" }}>
+                    {randomProducts.slice(rowIdx * 5, (rowIdx + 1) * 5).map(product => (
+                      <div
+                        key={product._id}
+                        style={{
+                          minWidth: 150,
+                          maxWidth: 160,
+                          borderRadius: 8,
+                          padding: 14,
+                          textAlign: "center",
+                          cursor: "pointer",
+                          background: "transparent",
+                          transition: "box-shadow 0.18s",
+                          boxShadow: "0 1px 6px #e3e9ee",
+                        }}
+                        onClick={() => navigate(`/product/${product._id}`)}
+                      >
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          style={{
+                            width: 120,
+                            height: 90,
+                            objectFit: "contain",
+                            borderRadius: 6,
+                            marginBottom: 8,
+                            background: "transparent",
+                          }}
+                        />
+                        <div style={{
+                          fontWeight: 500,
+                          fontSize: 15,
+                          margin: "6px 0",
+                          display: "-webkit-box",
+                          WebkitLineClamp: 2,      // Limit to 2 lines
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          minHeight: 38,           // For alignment, adjust as needed
+                          lineHeight: "1.2"
+                        }}>
+                          {product.name}
+                        </div>
+                        <div style={{
+                          color: "#b12704",
+                          fontWeight: 600,
+                          fontSize: 15
+                        }}>${product.price}</div>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
 
         {/* products odered */}
         {authUser && orderProducts.length > 0 && (
           <div style={{
             width: "100%",
             maxWidth: 1300,
-            margin: "60px auto 0 auto",
-            borderTop: "1px solid #ddd",
+            margin: "20px auto 0 auto",
+            // borderTop: "1px solid #ddd",
             paddingTop: 15,
-            background: "#fff"
+            background: "transparent",
           }}>
             {/* Header */}
             <div style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              marginBottom: 10,
-              padding: "0 16px"
+              marginBottom: 0,
+              padding: "0 5px"
             }}>
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 <h2 style={{
@@ -728,9 +811,9 @@ export default function HomePage() {
             width: "100%",
             maxWidth: 1300,
             margin: "auto auto 0 auto",
-            borderTop: "1px solid #ddd",
+            // borderTop: "1px solid #ddd",
             paddingTop: 15,
-            background: "#fff"
+            background: "transparent",
           }}>
             {/* Header */}
             <div style={{
@@ -781,7 +864,7 @@ export default function HomePage() {
                   display: "flex",
                   overflowX: "auto",
                   // gap: 1,
-                  paddingBottom: 10,
+                  paddingBottom: 0,
                   scrollBehavior: "smooth",
                   width: "100%"
                 }}
@@ -860,14 +943,14 @@ export default function HomePage() {
         <footer
           style={{
             width: "100%",
-            marginTop: 60,
+            marginTop: 0,
             padding: "18px 0",
             background: "#232f3e",
             color: "#fff",
             textAlign: "center",
             fontSize: 16,
             letterSpacing: "0.01em",
-            borderTop: "1px solid #444",
+            // borderTop: "1px solid #444",
             boxShadow: "0 -1px 10px #0001"
           }}
         >

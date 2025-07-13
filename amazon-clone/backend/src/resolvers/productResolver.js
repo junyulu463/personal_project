@@ -4,6 +4,10 @@ const opensearch = require('../config/opensearch');
 
 const productResolver = {
   Query: {
+    getRandomProducts: async (_, { size }) => {
+      // Use aggregation $sample for random selection
+      return Product.aggregate([{ $sample: { size } }]);
+    },
     getProducts: async () => await Product.find(),
     getProduct: async (_, { id }) => await Product.findById(id),
     getProductsByIds: async (_, { ids }) => {

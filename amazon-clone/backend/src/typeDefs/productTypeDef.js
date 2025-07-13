@@ -32,6 +32,7 @@ const productTypeDef = gql`
     getProduct(id: ID!): Product
     searchProducts(query: String!, from: Int, size: Int): [Product]
     getProductsByIds(ids: [ID!]!): [Product]
+    getRandomProducts(size: Int!): [Product!]!
   }
 
   type Mutation {

@@ -206,3 +206,14 @@ export const ADD_PRODUCT_REVIEW = gql`
     }
   }
 `;
+
+export const GET_RANDOM_PRODUCTS = gql`
+  query GetRandomProducts($size: Int!) {
+    getRandomProducts(size: $size) {
+      _id
+      name
+      price
+      image
+    }
+  }
+`;
