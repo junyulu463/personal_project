@@ -4,8 +4,8 @@ import { ADD_PRODUCT } from '../graphql/productQueries';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from "react-router-dom";
 import ImageUpload from '../components/ImageUpload';
+import '../styles/AddProductPage.css'; // Import the CSS file
 
-// S3 deletion mutation
 const DELETE_S3_FILE = gql`
   mutation DeleteS3File($key: String!) {
     deleteS3File(key: $key)
@@ -35,19 +35,14 @@ export default function AddProductPage() {
   const [uploadedInSession, setUploadedInSession] = useState([]);
   const [replacedMainImages, setReplacedMainImages] = useState([]);
 
-
   const extractS3Key = (url) => {
     try {
-      const { pathname } = new URL(url);       // safer than regex
-      const key = decodeURIComponent(pathname.slice(1)); // remove the leading "/"
-      console.log("Extracted S3 key:", key);   // ✅ helpful log
-      return key;
-    } catch (err) {
-      console.error("Invalid URL for S3 key extraction:", url);
+      const { pathname } = new URL(url);
+      return decodeURIComponent(pathname.slice(1));
+    } catch {
       return null;
     }
   };
-  
 
   // Main image upload
   const handleMainImageUpload = (url) => {
@@ -115,74 +110,76 @@ export default function AddProductPage() {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
+    <div className="add-product-container">
       <h2>Add Product</h2>
-      <form onSubmit={handleSubmit} style={{ maxWidth: 500, border: '1px solid #ccc', padding: 16 }}>
+      <form onSubmit={handleSubmit} className="add-product-form">
         {/* Main image */}
-        <div style={{ margin: '0.5rem 0' }}>
+        <div className="add-product-section">
           <label>
             Main Image:
             <ImageUpload onUpload={handleMainImageUpload} />
-            </label>
-            {formProduct.image && (
-              <div>
-                <img src={formProduct.image} alt="Preview" width={120} style={{ display: "block", margin: "0.5rem 0" }} />
-                <div style={{ wordBreak: 'break-all', fontSize: 12, color: '#555', marginTop: 4 }}>
-                  <span>S3 URL:</span><br />
-                  <a href={formProduct.image} target="_blank" rel="noopener noreferrer">{formProduct.image}</a>
-                </div>
-                <button
-                  type="button"
-                  style={{ color: 'red', fontSize: 10, marginTop: 4 }}
-                  onClick={() => setFormProduct(prod => ({ ...prod, image: "" }))}
-                >
-                  Remove
-                </button>
+          </label>
+          {formProduct.image && (
+            <div className="add-product-preview">
+              <img src={formProduct.image} alt="Preview" width={120} />
+              <div className="add-product-url">
+                <span>S3 URL:</span><br />
+                <a href={formProduct.image} target="_blank" rel="noopener noreferrer">{formProduct.image}</a>
               </div>
-            )}
+              <button
+                type="button"
+                className="add-product-remove-btn"
+                onClick={() => setFormProduct(prod => ({ ...prod, image: "" }))}
+              >
+                Remove
+              </button>
+            </div>
+          )}
         </div>
         {/* Additional images */}
-        <div style={{ margin: '0.5rem 0' }}>
+        <div className="add-product-section">
           <label>
             Additional Images:
             <ImageUpload onUpload={handleImagesUpload} accept="image/*" />
           </label>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 6 }}>
+          <div className="add-product-row">
             {formProduct.images.map((img, idx) => (
-              <div key={idx} style={{ textAlign: 'center' }}>
+              <div key={idx} className="add-product-thumb">
                 <img src={img} alt={`Extra ${idx}`} width={60} />
-                <div style={{ fontSize: 10, wordBreak: 'break-all' }}>
+                <div className="add-product-url">
                   <a href={img} target="_blank" rel="noopener noreferrer">{img}</a>
                 </div>
-                <button type="button" onClick={() =>
-                  setFormProduct(prod => ({
-                    ...prod,
-                    images: prod.images.filter((_, i) => i !== idx)
-                  }))
-                } style={{ color: 'red', fontSize: 10 }}>Remove</button>
+                <button type="button" className="add-product-remove-btn"
+                  onClick={() =>
+                    setFormProduct(prod => ({
+                      ...prod,
+                      images: prod.images.filter((_, i) => i !== idx)
+                    }))
+                  }>Remove</button>
               </div>
             ))}
           </div>
         </div>
         {/* Videos */}
-        <div style={{ margin: '0.5rem 0' }}>
+        <div className="add-product-section">
           <label>
             Product Videos:
             <ImageUpload onUpload={handleVideosUpload} accept="video/*" />
           </label>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 6 }}>
+          <div className="add-product-row">
             {formProduct.videos.map((vid, idx) => (
-              <div key={idx} style={{ textAlign: 'center' }}>
-                <video src={vid} width={80} controls style={{ display: 'block', marginBottom: 4 }} />
-                <div style={{ fontSize: 10, wordBreak: 'break-all' }}>
+              <div key={idx} className="add-product-thumb">
+                <video src={vid} width={80} controls />
+                <div className="add-product-url">
                   <a href={vid} target="_blank" rel="noopener noreferrer">{vid}</a>
                 </div>
-                <button type="button" onClick={() =>
-                  setFormProduct(prod => ({
-                    ...prod,
-                    videos: prod.videos.filter((_, i) => i !== idx)
-                  }))
-                } style={{ color: 'red', fontSize: 10 }}>Remove</button>
+                <button type="button" className="add-product-remove-btn"
+                  onClick={() =>
+                    setFormProduct(prod => ({
+                      ...prod,
+                      videos: prod.videos.filter((_, i) => i !== idx)
+                    }))
+                  }>Remove</button>
               </div>
             ))}
           </div>
@@ -190,7 +187,7 @@ export default function AddProductPage() {
         {/* Text fields */}
         {Object.entries(initialProduct).map(([key, _]) =>
           (["image", "images", "videos"].includes(key) ? null : (
-            <div key={key} style={{ margin: '0.5rem 0' }}>
+            <div className="add-product-section" key={key}>
               <label>
                 {key[0].toUpperCase() + key.slice(1)}:
                 <input
@@ -206,10 +203,10 @@ export default function AddProductPage() {
             </div>
           ))
         )}
-        <button type="submit">Add Product</button>
-        <button type="button" onClick={handleCancel} style={{ marginLeft: 12 }}>Cancel</button>
+        <button type="submit" className="add-product-submit-btn">Add Product</button>
+        <button type="button" className="add-product-cancel-btn" onClick={handleCancel}>Cancel</button>
       </form>
-      {formError && <div style={{ color: 'red' }}>{formError}</div>}
+      {formError && <div className="add-product-error">{formError}</div>}
     </div>
   );
 }

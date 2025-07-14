@@ -1,14 +1,10 @@
-// src/pages/menu_pages/OrderHistoryPage.js
-
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_USERS } from "../../graphql/userQueries";
-import {GET_ORDER } from "../../graphql/orderQueries";
+import { GET_ORDER, UPDATE_ORDER } from "../../graphql/orderQueries";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "@apollo/client";
-import { UPDATE_ORDER } from "../../graphql/orderQueries";
-
+import "../../styles/OrderHistoryPage.css";
 
 // Subcomponent for each order
 function OrderEntry({ entry }) {
@@ -16,11 +12,12 @@ function OrderEntry({ entry }) {
   const { data, loading, error } = useQuery(GET_ORDER, {
     variables: { id: entry.order },
   });
-  const order = data?.getOrder;  
+  const order = data?.getOrder;
 
   const [updateOrder] = useMutation(UPDATE_ORDER, {
     refetchQueries: [{ query: GET_ORDER, variables: { id: entry.order } }],
   });
+
   useEffect(() => {
     if (!order) return;
     const allItemsDelivered =
@@ -50,38 +47,19 @@ function OrderEntry({ entry }) {
       });
     }
   }, [order, updateOrder]);
+
   return (
-    <li
-      style={{
-        marginBottom: 24,
-        borderBottom: "1px solid #eee",
-        paddingBottom: 16,
-        background: "#fafafa",
-        borderRadius: 6,
-        boxShadow: "0 1px 4px #f2f2f2",
-      }}
-    >
+    <li className="orderhistory-entry">
       <div>
         <strong>Order ID:</strong>{" "}
         <span
-          style={{
-            color: "#1976d2",
-            textDecoration: "underline",
-            cursor: "pointer",
-          }}
+          className="orderhistory-orderid"
           onClick={() => navigate(`/order/${entry.order}`)}
         >
           {entry.order}
         </span>
       </div>
-      <div
-        style={{
-          color: "#777",
-          fontSize: 13,
-          fontWeight: 400,
-          textDecoration: "none",
-        }}
-      >
+      <div className="orderhistory-time">
         {(() => {
           if (!entry.timestamp) return "(no date)";
           if (/^\d+$/.test(entry.timestamp)) {
@@ -91,15 +69,15 @@ function OrderEntry({ entry }) {
         })()}
       </div>
       {loading && (
-        <div style={{ color: "#aaa" }}>Loading order details...</div>
+        <div className="orderhistory-loading">Loading order details...</div>
       )}
       {error && (
-        <div style={{ color: "red" }}>Failed to load order.</div>
+        <div className="orderhistory-error">Failed to load order.</div>
       )}
       {order && (
         <>
           {/* Shipping Address */}
-          <div style={{ margin: "10px 0 2px 0" }}>
+          <div className="orderhistory-shipping">
             <strong>Shipping Address:</strong>{" "}
             {order.shippingAddress
               ? `${order.shippingAddress.address}, ${order.shippingAddress.city}, ${order.shippingAddress.postalCode}, ${order.shippingAddress.country}`
@@ -107,96 +85,80 @@ function OrderEntry({ entry }) {
           </div>
           {/* Billing Address */}
           {order.billingAddress && (
-            <div style={{ margin: "2px 0 10px 0" }}>
+            <div className="orderhistory-billing">
               <strong>Billing Address:</strong>{" "}
               {`${order.billingAddress.address}, ${order.billingAddress.city}, ${order.billingAddress.postalCode}, ${order.billingAddress.country}`}
             </div>
           )}
           {/* Payment Method Snapshot */}
           {order.paymentMethod && (
-            <div style={{ margin: "2px 0 10px 0" }}>
+            <div className="orderhistory-payment">
               <strong>Paid With:</strong>{" "}
               {order.paymentMethod.cardType} ending in {order.paymentMethod.cardNumber.slice(-4)}
             </div>
           )}
           {/* Items with per-item delivery */}
-          <div style={{ margin: "14px 0 6px 0" }}>
+          <div className="orderhistory-items">
             <strong>Items:</strong>
-            <ul style={{ listStyle: "none", paddingLeft: 0, marginTop: 10 }}>
+            <ul className="orderhistory-itemslist">
               {order.orderItems.map((item, idx) => (
                 <li
                   key={idx}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    marginBottom: 8,
-                    background: "#fff",
-                    borderRadius: 4,
-                    padding: 7,
-                    boxShadow: "0 1px 3px #eee",
-                    flexWrap: "wrap",
-                  }}
+                  className="orderhistory-itemrow"
+                  onClick={() => navigate(`/product/${item.product}`)}
+                  title="View Product"
                 >
                   <img
                     src={item.image}
                     alt={item.name}
-                    style={{
-                      width: 48,
-                      height: 48,
-                      objectFit: "cover",
-                      borderRadius: 6,
-                      marginRight: 14,
-                      border: "1px solid #eee",
-                      background: "#f7f7f7",
-                    }}
+                    className="orderhistory-itemimg"
                   />
-                  <div style={{ flex: 1, minWidth: 180 }}>
-                    <span style={{ fontWeight: 500 }}>{item.name}</span>
-                    <span style={{ marginLeft: 12, color: "#555" }}>
-                      × {item.qty}
-                    </span>
-                    {/* Per-item delivery status */}
-                    <div style={{ marginLeft: 12, color: item.isDelivered ? "#43a047" : "#ffa600", fontSize: 13 }}>
+                  <div className="orderhistory-iteminfo">
+                    <span className="orderhistory-itemname">{item.name}</span>
+                    <span className="orderhistory-itemqty">× {item.qty}</span>
+                    <span
+                      className={
+                        item.isDelivered
+                          ? "orderhistory-delivered"
+                          : "orderhistory-notdelivered"
+                      }
+                    >
                       {item.isDelivered ? "Delivered" : "Not Delivered"}
                       {item.deliveredAt && (
                         <span>
                           {" "} (on {new Date(Number(item.deliveredAt)).toLocaleDateString()})
                         </span>
                       )}
-                    </div>
-                    {/* Optionally show Seller */}
-                    {/* <div>Seller: {item.seller}</div> */}
+                    </span>
                   </div>
                 </li>
               ))}
             </ul>
           </div>
-          <div style={{ marginTop: 10 }}>
+          <div className="orderhistory-total">
             <strong>Total Paid:</strong>{" "}
-            <span style={{ color: "#b12704" }}>
-              ${order.totalPrice.toFixed(2)}
-            </span>
+            <span>${order.totalPrice.toFixed(2)}</span>
           </div>
           <div>
             <strong>Order Paid Status:</strong>{" "}
             {order.isPaid ? (
-              <span style={{ color: "#43a047" }}>Paid</span>
+              <span className="orderhistory-paid">Paid</span>
             ) : (
-              <span style={{ color: "#d9534f" }}>Not Paid</span>
+              <span className="orderhistory-notpaid">Not Paid</span>
             )}
             {order.paidAt && (
-              <span>
+              <span className="orderhistory-paidat">
                 {" "}
                 (on {new Date(Number(order.paidAt)).toLocaleDateString()})
               </span>
-            )}          
+            )}
           </div>
           <div>
             <strong>Status:</strong>{" "}
             {order.isDelivered ? (
-              <span style={{ color: "#43a047" }}>Delivered</span>
+              <span className="orderhistory-delivered">Delivered</span>
             ) : (
-              <span style={{ color: "#ffa600" }}>Not Delivered</span>
+              <span className="orderhistory-notdelivered">Not Delivered</span>
             )}
             {order.deliveredAt && (
               <span>
@@ -204,10 +166,9 @@ function OrderEntry({ entry }) {
                 (on {new Date(Number(order.deliveredAt)).toLocaleDateString()})
               </span>
             )}
-          </div>            
+          </div>
         </>
       )}
-
     </li>
   );
 }
@@ -217,7 +178,10 @@ export default function OrderHistoryPage() {
   const [orderHistory, setOrderHistory] = useState([]);
   const navigate = useNavigate();
 
-  const { data, loading, error, refetch } = useQuery(GET_USERS, { skip: !authUser, fetchPolicy: "network-only"  });
+  const { data, loading, error, refetch } = useQuery(GET_USERS, {
+    skip: !authUser,
+    fetchPolicy: "network-only",
+  });
 
   useEffect(() => {
     if (authUser) refetch();
@@ -230,30 +194,20 @@ export default function OrderHistoryPage() {
     }
   }, [data, authUser]);
 
-  if (!authUser) return <div style={{ padding: 32 }}>Please log in to view your order history.</div>;
-  if (loading) return <div style={{ padding: 32 }}>Loading...</div>;
-  if (error) return <div style={{ color: 'red', padding: 32 }}>Error: {error.message}</div>;
+  if (!authUser) return <div className="orderhistory-loginmsg">Please log in to view your order history.</div>;
+  if (loading) return <div className="orderhistory-loading">Loading...</div>;
+  if (error) return <div className="orderhistory-error">Error: {error.message}</div>;
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <button
-        onClick={() => navigate(-1)}
-        style={{
-          background: '#fff',
-          border: '1px solid #ddd',
-          borderRadius: 4,
-          padding: '8px 16px',
-          marginBottom: 24,
-          cursor: 'pointer'
-        }}
-      >
+    <div className="orderhistory-root">
+      <button className="orderhistory-backbtn" onClick={() => navigate(-1)}>
         ← Back
       </button>
-      <h2>📦 Order History</h2>
+      <h2 className="orderhistory-title">📦 Order History</h2>
       {orderHistory.length === 0 ? (
-        <div>No orders yet.</div>
+        <div className="orderhistory-empty">No orders yet.</div>
       ) : (
-        <ul style={{ listStyle: "none", padding: 0 }}>
+        <ul className="orderhistory-list">
           {orderHistory
             .slice()
             .sort((a, b) => b.timestamp - a.timestamp)

@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_USERS } from '../graphql/userQueries';
 import { useAuth } from '../context/AuthContext';
+import '../styles/LoginPage.css'; // Import the CSS
 
 export default function LoginPage() {
   const { setAuthUser } = useAuth();
@@ -23,16 +24,14 @@ export default function LoginPage() {
       return;
     }
 
-    // Find user by username/password
     const foundUser = data.getUsers.find(
       u => u.username === username && u.password === password
     );
     if (foundUser) {
-      // Save only the fields you want in auth context
       setAuthUser({
         _id: foundUser._id,
         username: foundUser.username,
-        role: foundUser.role,         // Make sure your GET_USERS returns "role"
+        role: foundUser.role,
         name: foundUser.name,
         email: foundUser.email,
       });
@@ -45,26 +44,33 @@ export default function LoginPage() {
   const handleCancel = () => navigate(from);
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>Log In</h2>
-      <form onSubmit={handleLogin} style={{ maxWidth: 350 }}>
-        <input
-          placeholder="Username"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-          required style={{ display: "block", margin: "1rem 0" }}
-        />
-        <input
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          required style={{ display: "block", margin: "1rem 0" }}
-        />
-        <button type="submit" style={{ marginRight: 12 }}>Log In</button>
-        <button type="button" onClick={handleCancel}>Cancel</button>
-      </form>
-      {error && <div style={{ color: "red", marginTop: 10 }}>{error}</div>}
+    <div className="login-bg">
+      <div className="login-card">
+        <h2 className="login-title">Log In</h2>
+        <form className="login-form" onSubmit={handleLogin}>
+          <input
+            className="login-input"
+            placeholder="Username"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            required
+            autoFocus
+          />
+          <input
+            className="login-input"
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            required
+          />
+          <div className="login-actions">
+            <button className="login-btn" type="submit">Log In</button>
+            <button className="login-btn secondary" type="button" onClick={handleCancel}>Cancel</button>
+          </div>
+        </form>
+        {error && <div className="login-error">{error}</div>}
+      </div>
     </div>
   );
 }

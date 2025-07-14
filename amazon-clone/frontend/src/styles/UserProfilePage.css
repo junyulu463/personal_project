@@ -1,0 +1,117 @@
+.userprofile-container {
+    padding: 2rem;
+    max-width: 750px;
+    margin: 40px auto;
+    background: #fafbfc;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px 0 #eee;
+  }
+  .userprofile-back-btn {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin-bottom: 24px;
+    cursor: pointer;
+  }
+  .userprofile-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  .userprofile-label {
+    font-weight: bold;
+    padding: 8px 0;
+  }
+  .userprofile-btn-row {
+    margin-top: 20px;
+  }
+  .userprofile-save-btn {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 20px;
+    margin-right: 12px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .userprofile-cancel-btn {
+    background: #fff;
+    color: #1976d2;
+    border: 1px solid #1976d2;
+    border-radius: 4px;
+    padding: 8px 20px;
+    cursor: pointer;
+  }
+  .userprofile-edit-btn {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .userprofile-section-header {
+    margin-top: 36px;
+  }
+  .userprofile-list {
+    list-style: none;
+    padding-left: 0;
+  }
+  .userprofile-list-item {
+    margin-bottom: 14px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 8px;
+  }
+  .userprofile-recipient {
+    font-weight: normal;
+  }
+  .userprofile-default-shipping {
+    color: green;
+  }
+  .userprofile-default-billing {
+    color: blue;
+  }
+  .userprofile-default-payment {
+    color: green;
+  }
+  .userprofile-inline-btn {
+    margin-right: 6px;
+  }
+  .userprofile-add-btn {
+    margin-bottom: 8px;
+    padding: 6px 14px;
+    border: 1px solid #888;
+    background: #f8f9fa;
+    color: #333;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .userprofile-payment-form {
+    margin-top: 18px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 14px;
+  }
+  .userprofile-exp-month {
+    width: 80px;
+    margin-right: 8px;
+  }
+  .userprofile-exp-year {
+    width: 100px;
+    margin-right: 8px;
+  }
+  .userprofile-message {
+    margin-top: 18px;
+    color: #1976d2;
+  }
+  .userprofile-msg {
+    padding: 32px;
+  }
+  .userprofile-error {
+    color: red;
+  }
+  

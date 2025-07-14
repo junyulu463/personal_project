@@ -1,0 +1,110 @@
+.edit-product-container {
+    padding: 2rem;
+    min-height: 100vh;
+    background: #f8fafc;
+  }
+  
+  .edit-product-form {
+    max-width: 500px;
+    border: 1px solid #ccc;
+    padding: 20px 16px;
+    background: #fff;
+    border-radius: 8px;
+    margin: 0 auto;
+    box-shadow: 0 1px 6px #ececec;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .edit-product-section {
+    margin: 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .edit-product-preview {
+    margin: 0.5rem 0 0.2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+  
+  .edit-product-url {
+    font-size: 11px;
+    word-break: break-all;
+    color: #555;
+    margin: 2px 0 2px 0;
+  }
+  
+  .edit-product-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  
+  .edit-product-thumb {
+    text-align: center;
+    background: #f4f7fa;
+    border-radius: 6px;
+    padding: 6px 2px;
+    box-shadow: 0 1px 2px #f0f1f3;
+  }
+  
+  .edit-product-remove-btn {
+    color: #fff;
+    background: #e53935;
+    border: none;
+    border-radius: 4px;
+    font-size: 11px;
+    margin-top: 3px;
+    cursor: pointer;
+    padding: 2px 8px;
+    transition: background .11s;
+  }
+  .edit-product-remove-btn:hover {
+    background: #b71c1c;
+  }
+  
+  .edit-product-submit-btn {
+    background: #1976d2;
+    color: #fff;
+    padding: 10px 0;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1.09rem;
+    margin-top: 14px;
+    cursor: pointer;
+    transition: background .14s;
+  }
+  .edit-product-submit-btn:hover {
+    background: #1258a6;
+  }
+  
+  .edit-product-cancel-btn {
+    background: #bbb;
+    color: #fff;
+    padding: 10px 0;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 1rem;
+    margin-top: 8px;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background .14s;
+  }
+  .edit-product-cancel-btn:hover {
+    background: #888;
+  }
+  
+  .edit-product-error {
+    color: #e53935;
+    font-weight: 500;
+    margin-top: 10px;
+  }
+  

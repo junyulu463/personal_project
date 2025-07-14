@@ -1,0 +1,118 @@
+.signup-bg {
+    min-height: 100vh;
+    background: #f5f6fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .signup-card {
+    background: #fff;
+    padding: 2.3rem 2.7rem 2rem 2.7rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 36px #0001, 0 1.5px 4px #ddd;
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .signup-title {
+    font-size: 1.6rem;
+    color: #222;
+    font-weight: 600;
+    margin-bottom: 1.3rem;
+    letter-spacing: 0.02em;
+  }
+  
+  .signup-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .signup-input {
+    font-size: 1rem;
+    padding: 12px 14px;
+    border: 1.5px solid #dedede;
+    border-radius: 7px;
+    background: #fafbfc;
+    outline: none;
+    transition: border .17s;
+  }
+  .signup-input:focus {
+    border-color: #007185;
+    background: #fff;
+  }
+  
+  .signup-address-block {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .signup-address-title {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 0.4rem;
+    margin-top: 0.2rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  
+  .signup-role-block {
+    margin: 0.3rem 0 0.2rem 0;
+  }
+  
+  .signup-select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1.5px solid #dedede;
+    font-size: 1rem;
+    background: #fafbfc;
+    color: #222;
+  }
+  
+  .signup-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.6rem;
+    margin-top: 0.3rem;
+  }
+  
+  .signup-btn {
+    padding: 8px 19px;
+    border-radius: 7px;
+    border: none;
+    background: #007185;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #eef1fa33;
+    transition: background .13s;
+  }
+  .signup-btn:hover {
+    background: #004e67;
+  }
+  .signup-btn.secondary {
+    background: #eee;
+    color: #222;
+    font-weight: 500;
+  }
+  .signup-btn.secondary:hover {
+    background: #dedede;
+  }
+  
+  .signup-error {
+    margin-top: 1rem;
+    color: #b12704;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 0.01em;
+  }
+  

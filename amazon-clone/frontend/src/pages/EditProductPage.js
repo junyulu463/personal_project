@@ -5,8 +5,8 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate, useParams } from "react-router-dom";
 import ImageUpload from '../components/ImageUpload';
 import { useLocation } from 'react-router-dom';
+import '../styles/EditProductPage.css'; // Import your CSS
 
-// S3 deletion mutation
 const DELETE_S3_FILE = gql`
   mutation DeleteS3File($key: String!) {
     deleteS3File(key: $key)
@@ -30,27 +30,11 @@ export default function EditProductPage() {
   const [toDeleteVideos, setToDeleteVideos] = useState([]);
   const [originalMedia, setOriginalMedia] = useState({ image: "", images: [], videos: [] });
 
-  // useEffect(() => {
-  //   if (data) {
-  //     const product = data.getProducts.find(prod => prod._id === id);
-  //     if (product) {
-  //       setFormProduct({ ...product });
-  //       setOriginalMedia({
-  //         image: product.image,
-  //         images: product.images || [],
-  //         videos: product.videos || [],
-  //       });
-  //     }
-  //   }
-  // }, [data, id]);
-
   useEffect(() => {
     if (data) {
       const product = data.getProducts.find(prod => prod._id === id);
       if (product) {
-        // Strip __typename
         const { __typename, ...cleanProduct } = product;
-  
         setFormProduct({ ...cleanProduct });
         setOriginalMedia({
           image: product.image,
@@ -60,32 +44,23 @@ export default function EditProductPage() {
       }
     }
   }, [data, id]);
-  
 
-  // const extractS3Key = (url) => {
-  //   const match = url.match(/\.amazonaws\.com\/(.+)$/);
-  //   return match ? match[1] : null;
-  // };
   const extractS3Key = (url) => {
     try {
-      const { pathname } = new URL(url);       // safer than regex
-      const key = decodeURIComponent(pathname.slice(1)); // remove the leading "/"
-      console.log("Extracted S3 key:", key);   // ✅ helpful log
-      return key;
-    } catch (err) {
-      console.error("Invalid URL for S3 key extraction:", url);
+      const { pathname } = new URL(url);
+      return decodeURIComponent(pathname.slice(1));
+    } catch {
       return null;
     }
   };
-  
 
   const handleMainImageUpload = (url) => {
     setFormProduct(prod => {
       if (prod.image && prod.image !== url) {
-          setToDeleteMainImages(prev =>
+        setToDeleteMainImages(prev =>
           prev.includes(prod.image) ? prev : [...prev, prod.image]
-             ); 
-            }       
+        );
+      }
       return { ...prod, image: url };
     });
     setUploadedInSession(list => [...list, url]);
@@ -111,10 +86,10 @@ export default function EditProductPage() {
 
   const removeMainImage = () => {
     if (formProduct.image) {
-         setToDeleteMainImages(prev =>
-           prev.includes(formProduct.image) ? prev : [...prev, formProduct.image]
-         );
-       }
+      setToDeleteMainImages(prev =>
+        prev.includes(formProduct.image) ? prev : [...prev, formProduct.image]
+      );
+    }
     setFormProduct(prod => ({ ...prod, image: "" }));
   };
 
@@ -133,65 +108,51 @@ export default function EditProductPage() {
       });
 
       for (const url of toDeleteMainImages) {
-         const key = extractS3Key(url);
-         if (key) await deleteS3File({ variables: { key } });
-       }
+        const key = extractS3Key(url);
+        if (key) await deleteS3File({ variables: { key } });
+      }
       for (const url of toDeleteImages) {
         const key = extractS3Key(url);
         if (key) await deleteS3File({ variables: { key } });
       }
-      // for (const url of toDeleteVideos) {
-      //   const key = extractS3Key(url);
-      //   if (key) await deleteS3File({ variables: { key } });
-      // }
       for (const url of toDeleteVideos) {
         const key = extractS3Key(url);
         if (key) {
           try {
             await deleteS3File({ variables: { key } });
-            console.log("Deleted video from S3:", key);
-          } catch (err) {
-            console.error("Failed to delete video:", key, err.message);
-          }
+          } catch {}
         }
       }
-      
 
-      // ✅ Additional cleanup for any leftover uploaded files
       const allDeletions = new Set([
         ...toDeleteMainImages,
         ...toDeleteImages,
         ...toDeleteVideos,
       ]);
-      
+
       for (const url of uploadedInSession) {
         const stillUsed =
           url === formProduct.image ||
           (formProduct.images && formProduct.images.includes(url)) ||
           (formProduct.videos && formProduct.videos.includes(url));
-      
-        // If not used and not already deleted, delete now
         if (!stillUsed && !allDeletions.has(url)) {
           const key = extractS3Key(url);
           if (key) await deleteS3File({ variables: { key } });
         }
       }
-      
 
       setToDeleteMainImages([]);
       setToDeleteImages([]);
       setToDeleteVideos([]);
       setUploadedInSession([]);
-      // In EditProductPage.js, after a successful update:
-      // navigate('/seller', { state: { refresh: true } });
+
       navigate('/seller', {
         state: {
           refresh: true,
-          scrollY: location.state?.scrollY || 0, // <- preserve scroll position
-          productId: id // optional: if you want to scroll to a specific product later
+          scrollY: location.state?.scrollY || 0,
+          productId: id
         }
-      });      
-      
+      });
     } catch (err) {
       setFormError(err.message || "Error saving product");
     }
@@ -208,97 +169,101 @@ export default function EditProductPage() {
         if (key) await deleteS3File({ variables: { key } });
       }
     }
-
     for (const url of toDeleteMainImages) {
       const key = extractS3Key(url);
       if (key) await deleteS3File({ variables: { key } });
     }
-
     setUploadedInSession([]);
     setToDeleteMainImages([]);
     setToDeleteImages([]);
     setToDeleteVideos([]);
     setFormProduct(null);
-    // navigate('/seller', { state: { refresh: true } });
     navigate('/seller', {
       state: {
         refresh: true,
-        scrollY: location.state?.scrollY || 0,  // 👈 carry over previous scroll position
-        productId: id // optional, useful if you're targeting the product
+        scrollY: location.state?.scrollY || 0,
+        productId: id
       }
     });
-    
   };
 
   if (loading || !formProduct) return <div>Loading...</div>;
 
   return (
-    <div style={{ padding: "2rem" }}>
+    <div className="edit-product-container">
       <h2>Edit Product</h2>
-      <form onSubmit={handleSubmit} style={{ maxWidth: 500, border: '1px solid #ccc', padding: 16 }}>
+      <form onSubmit={handleSubmit} className="edit-product-form">
         {/* Main image */}
-        <div style={{ margin: '0.5rem 0' }}>
+        <div className="edit-product-section">
           <label>
             Main Image:
             <ImageUpload onUpload={handleMainImageUpload} />
-            </label>
-            {formProduct.image && (
-              <div>
-                <img src={formProduct.image} alt="Preview" width={120} style={{ display: "block", margin: "0.5rem 0" }} />
-                <div style={{ wordBreak: 'break-all', fontSize: 12, color: '#555', marginTop: 4 }}>
-                  <span>S3 URL:</span><br />
-                  <a href={formProduct.image} target="_blank" rel="noopener noreferrer">{formProduct.image}</a>
-                </div>
-                <button
-                  type="button"
-                  style={{ color: 'red', fontSize: 10, marginTop: 4 }}
-                  onClick={removeMainImage}
-                >
-                  Remove
-                </button>
+          </label>
+          {formProduct.image && (
+            <div className="edit-product-preview">
+              <img src={formProduct.image} alt="Preview" width={120} />
+              <div className="edit-product-url">
+                <span>S3 URL:</span><br />
+                <a href={formProduct.image} target="_blank" rel="noopener noreferrer">{formProduct.image}</a>
               </div>
-            )}
+              <button
+                type="button"
+                className="edit-product-remove-btn"
+                onClick={removeMainImage}
+              >
+                Remove
+              </button>
+            </div>
+          )}
         </div>
         {/* Additional images */}
-        <div style={{ margin: '0.5rem 0' }}>
+        <div className="edit-product-section">
           <label>
             Additional Images:
             <ImageUpload onUpload={handleImagesUpload} accept="image/*" />
           </label>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 6 }}>
+          <div className="edit-product-row">
             {formProduct.images.map((img, idx) => (
-              <div key={idx} style={{ textAlign: 'center' }}>
+              <div key={idx} className="edit-product-thumb">
                 <img src={img} alt={`Extra ${idx}`} width={60} />
-                <div style={{ fontSize: 10, wordBreak: 'break-all' }}>
+                <div className="edit-product-url">
                   <a href={img} target="_blank" rel="noopener noreferrer">{img}</a>
                 </div>
-                <button type="button" onClick={() => removeFromArray('images', idx)} style={{ color: 'red', fontSize: 10 }}>Remove</button>
+                <button
+                  type="button"
+                  className="edit-product-remove-btn"
+                  onClick={() => removeFromArray('images', idx)}
+                >Remove</button>
               </div>
             ))}
           </div>
         </div>
         {/* Videos */}
-        <div style={{ margin: '0.5rem 0' }}>
+        <div className="edit-product-section">
           <label>
             Product Videos:
             <ImageUpload onUpload={handleVideosUpload} accept="video/*" />
           </label>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 6 }}>
+          <div className="edit-product-row">
             {formProduct.videos.map((vid, idx) => (
-              <div key={idx} style={{ textAlign: 'center' }}>
-                <video src={vid} width={80} controls style={{ display: 'block', marginBottom: 4 }} />
-                <div style={{ fontSize: 10, wordBreak: 'break-all' }}>
+              <div key={idx} className="edit-product-thumb">
+                <video src={vid} width={80} controls />
+                <div className="edit-product-url">
                   <a href={vid} target="_blank" rel="noopener noreferrer">{vid}</a>
                 </div>
-                <button type="button" onClick={() => removeFromArray('videos', idx)} style={{ color: 'red', fontSize: 10 }}>Remove</button>
+                <button
+                  type="button"
+                  className="edit-product-remove-btn"
+                  onClick={() => removeFromArray('videos', idx)}
+                >Remove</button>
               </div>
             ))}
           </div>
         </div>
         {/* Text fields */}
-        {formProduct && Object.entries(formProduct).map(([key, value]) =>
+        {formProduct && Object.entries(formProduct).map(([key]) =>
           (["image", "images", "videos", "_id", "seller"].includes(key) ? null : (
-            <div key={key} style={{ margin: '0.5rem 0' }}>
+            <div className="edit-product-section" key={key}>
               <label>
                 {key[0].toUpperCase() + key.slice(1)}:
                 <input
@@ -314,10 +279,10 @@ export default function EditProductPage() {
             </div>
           ))
         )}
-        <button type="submit">Update Product</button>
-        <button type="button" onClick={handleCancel} style={{ marginLeft: 12 }}>Cancel</button>
+        <button type="submit" className="edit-product-submit-btn">Update Product</button>
+        <button type="button" className="edit-product-cancel-btn" onClick={handleCancel}>Cancel</button>
       </form>
-      {formError && <div style={{ color: 'red' }}>{formError}</div>}
+      {formError && <div className="edit-product-error">{formError}</div>}
     </div>
   );
 }

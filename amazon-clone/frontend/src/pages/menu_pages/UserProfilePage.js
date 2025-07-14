@@ -7,8 +7,8 @@ import { useQuery, useMutation } from '@apollo/client';
 import { GET_USERS, UPDATE_USER } from '../../graphql/userQueries';
 import AddressForm from '../components/AddressForm';
 import CardTypeSelector from '../components/CardTypeSelector';
+import '../../styles/UserProfilePage.css';
 
-// ---- Address/Billing/Shipping Mutations ----
 import {
   ADD_SHIPPING_ADDRESS,
   UPDATE_SHIPPING_ADDRESS,
@@ -86,7 +86,6 @@ export default function UserProfilePage() {
     expYear: "",
     cvv: "",
     isDefault: false,
-    //billingAddress: { ... }
   });
 
   const [message, setMessage] = useState('');
@@ -102,10 +101,10 @@ export default function UserProfilePage() {
     }
   }, [currentUser]);
 
-  if (!authUser) return <div style={{ padding: 32 }}>Please log in to view your profile.</div>;
-  if (loading) return <div style={{ padding: 32 }}>Loading...</div>;
-  if (error) return <div style={{ color: 'red', padding: 32 }}>Error: {error.message}</div>;
-  if (!currentUser) return <div style={{ padding: 32 }}>User not found.</div>;
+  if (!authUser) return <div className="userprofile-msg">Please log in to view your profile.</div>;
+  if (loading) return <div className="userprofile-msg">Loading...</div>;
+  if (error) return <div className="userprofile-msg userprofile-error">Error: {error.message}</div>;
+  if (!currentUser) return <div className="userprofile-msg">User not found.</div>;
 
   // --------- Profile Edit Handlers ----------
   const handleEdit = () => { setEditMode(true); setMessage(""); };
@@ -181,7 +180,6 @@ export default function UserProfilePage() {
       } else {
         const addrId = currentUser.shippingAddresses[addressEditIdx]._id;
         const {__typename, _id, ...addressPayload } = addressForm;
-        //alert(JSON.stringify(addressPayload, null, 2));
         await updateShippingAddress({ variables: { userId: currentUser._id, addressId: addrId, address: addressPayload } });
       }
     } else if (editingType === 'billing') {
@@ -268,9 +266,7 @@ export default function UserProfilePage() {
         billingAddress: paymentForm.billingAddress || null,
       };
       const {__typename, _id, ...addressPayload } = paymentInput;
-      
       const pmId = currentUser.paymentMethods[editingPaymentIdx]._id;
-      //alert(JSON.stringify(addressPayload, null, 2)); 
       await updatePaymentMethod({ variables: { userId: currentUser._id, paymentMethodId: pmId, paymentMethod: addressPayload } });
     }
     setEditingPaymentIdx(null);
@@ -292,31 +288,16 @@ export default function UserProfilePage() {
   };
 
   const handleSetDefaultPaymentMethod = async (pmId) => {
-    //alert(JSON.stringify(addressPayload, null, 2));
     await setDefaultPaymentMethod({ variables: { userId: currentUser._id, paymentMethodId: pmId } });
   };
 
   // ---------------------------------------
 
   return (
-    <div style={{
-      padding: '2rem',
-      maxWidth: 750,
-      margin: '40px auto',
-      background: "#fafbfc",
-      borderRadius: 10,
-      boxShadow: "0 2px 16px 0 #eee"
-    }}>
+    <div className="userprofile-container">
       <button
         onClick={() => navigate(-1)}
-        style={{
-          background: '#fff',
-          border: '1px solid #ddd',
-          borderRadius: 4,
-          padding: '8px 16px',
-          marginBottom: 24,
-          cursor: 'pointer'
-        }}
+        className="userprofile-back-btn"
       >
         ← Back
       </button>
@@ -324,114 +305,105 @@ export default function UserProfilePage() {
       <h2>👤 User Profile</h2>
       {editMode ? (
         <form onSubmit={handleSave}>
-          <table style={{ width: "100%", borderCollapse: "collapse", marginTop: 20 }}>
+          <table className="userprofile-table">
             <tbody>
               <tr>
-                <td style={{ fontWeight: "bold", padding: "8px 0" }}>Username:</td>
-                <td style={{ padding: "8px 0" }}>{currentUser.username}</td>
+                <td className="userprofile-label">Username:</td>
+                <td>{currentUser.username}</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: "bold", padding: "8px 0" }}>Email:</td>
-                <td style={{ padding: "8px 0" }}>
+                <td className="userprofile-label">Email:</td>
+                <td>
                   <input type="email" name="email" value={form.email} onChange={handleChange} required />
                 </td>
               </tr>
               <tr>
-                <td style={{ fontWeight: "bold", padding: "8px 0" }}>Name:</td>
-                <td style={{ padding: "8px 0" }}>
+                <td className="userprofile-label">Name:</td>
+                <td>
                   <input type="text" name="name" value={form.name} onChange={handleChange} />
                 </td>
               </tr>
               <tr>
-                <td style={{ fontWeight: "bold", padding: "8px 0" }}>Phone:</td>
-                <td style={{ padding: "8px 0" }}>
+                <td className="userprofile-label">Phone:</td>
+                <td>
                   <input type="text" name="phone" value={form.phone} onChange={handleChange} />
                 </td>
               </tr>
               <tr>
-                <td style={{ fontWeight: "bold", padding: "8px 0" }}>Profile Address:</td>
-                <td style={{ padding: "8px 0" }}>
+                <td className="userprofile-label">Profile Address:</td>
+                <td>
                   <input type="text" name="address" value={form.address} onChange={handleChange} required />
                 </td>
               </tr>
               <tr>
-                <td style={{ fontWeight: "bold", padding: "8px 0" }}>Role:</td>
-                <td style={{ padding: "8px 0" }}>{currentUser.role}</td>
+                <td className="userprofile-label">Role:</td>
+                <td>{currentUser.role}</td>
               </tr>
             </tbody>
           </table>
-          <div style={{ marginTop: 20 }}>
-            <button type="submit" style={{
-              background: "#1976d2", color: "#fff", border: "none", borderRadius: 4,
-              padding: "8px 20px", marginRight: 12, cursor: "pointer", fontWeight: "bold"
-            }}>Save</button>
-            <button type="button" onClick={handleCancel} style={{
-              background: "#fff", color: "#1976d2", border: "1px solid #1976d2", borderRadius: 4,
-              padding: "8px 20px", cursor: "pointer"
-            }}>Cancel</button>
+          <div className="userprofile-btn-row">
+            <button type="submit" className="userprofile-save-btn">Save</button>
+            <button type="button" onClick={handleCancel} className="userprofile-cancel-btn">Cancel</button>
           </div>
         </form>
       ) : (
         <>
-          <table style={{ width: "100%", borderCollapse: "collapse", marginTop: 20 }}>
+          <table className="userprofile-table">
             <tbody>
               <tr>
-                <td style={{ fontWeight: "bold", padding: "8px 0" }}>Username:</td>
-                <td style={{ padding: "8px 0" }}>{currentUser.username}</td>
+                <td className="userprofile-label">Username:</td>
+                <td>{currentUser.username}</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: "bold", padding: "8px 0" }}>Email:</td>
-                <td style={{ padding: "8px 0" }}>{currentUser.email}</td>
+                <td className="userprofile-label">Email:</td>
+                <td>{currentUser.email}</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: "bold", padding: "8px 0" }}>Name:</td>
-                <td style={{ padding: "8px 0" }}>{currentUser.name || <i>(not set)</i>}</td>
+                <td className="userprofile-label">Name:</td>
+                <td>{currentUser.name || <i>(not set)</i>}</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: "bold", padding: "8px 0" }}>Phone:</td>
-                <td style={{ padding: "8px 0" }}>{currentUser.phone || <i>(not set)</i>}</td>
+                <td className="userprofile-label">Phone:</td>
+                <td>{currentUser.phone || <i>(not set)</i>}</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: "bold", padding: "8px 0" }}>Profile Address:</td>
-                <td style={{ padding: "8px 0" }}>{currentUser.address || <i>(not set)</i>}</td>
+                <td className="userprofile-label">Profile Address:</td>
+                <td>{currentUser.address || <i>(not set)</i>}</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: "bold", padding: "8px 0" }}>Role:</td>
-                <td style={{ padding: "8px 0" }}>{currentUser.role}</td>
+                <td className="userprofile-label">Role:</td>
+                <td>{currentUser.role}</td>
               </tr>
             </tbody>
           </table>
-          <div style={{ marginTop: 20 }}>
-            <button type="button" onClick={handleEdit} style={{
-              background: "#1976d2", color: "#fff", border: "none", borderRadius: 4,
-              padding: "8px 20px", cursor: "pointer", fontWeight: "bold"
-            }}>Edit Profile</button>
+          <div className="userprofile-btn-row">
+            <button type="button" onClick={handleEdit} className="userprofile-edit-btn">Edit Profile</button>
           </div>
         </>
       )}
 
       {/* ---- SHIPPING ADDRESSES ---- */}
-      <h3 style={{ marginTop: 36 }}>Shipping Addresses</h3>
-      <ul>
+      <h3 className="userprofile-section-header">Shipping Addresses</h3>
+      <ul className="userprofile-list">
         {currentUser.shippingAddresses?.map((addr, i) => (
-          <li key={addr._id} style={{ marginBottom: 14, border: "1px solid #eee", borderRadius: 6, padding: 8 }}>
+          <li key={addr._id} className="userprofile-list-item">
             <div>
               <b>{addr.label || "Address"}:</b>
               {addr.recipient && (
-                  <span style={{ fontWeight: "normal" }}><i> {addr.recipient},</i></span>
-                )}              
+                <span className="userprofile-recipient"><i> {addr.recipient},</i></span>
+              )}              
               {addr.address}, {addr.city}, {addr.country}
-              {addr.isDefault && <span style={{ color: "green" }}> (Default Shipping)</span>}
+              {addr.isDefault && <span className="userprofile-default-shipping"> (Default Shipping)</span>}
             </div>
             <div>
-              <button onClick={() => openAddressEdit('shipping', i)} style={{ marginRight: 6 }}>Edit</button>
-              <button onClick={() => handleDeleteAddress('shipping', addr._id)} style={{ marginRight: 6 }}>Delete</button>
-              {!addr.isDefault && <button onClick={() => handleSetDefaultShipping(addr._id)}>Set as Default Shipping</button>}
+              <button onClick={() => openAddressEdit('shipping', i)} className="userprofile-inline-btn">Edit</button>
+              <button onClick={() => handleDeleteAddress('shipping', addr._id)} className="userprofile-inline-btn">Delete</button>
+              {!addr.isDefault && <button onClick={() => handleSetDefaultShipping(addr._id)} className="userprofile-inline-btn">Set as Default Shipping</button>}
             </div>
           </li>
         ))}
       </ul>
-      <button onClick={() => openAddressEdit('shipping', -1)}>Add Shipping Address</button>
+      <button onClick={() => openAddressEdit('shipping', -1)} className="userprofile-add-btn">Add Shipping Address</button>
       <AddressForm
         type="shipping"
         form={addressForm}
@@ -442,27 +414,27 @@ export default function UserProfilePage() {
       />
 
       {/* ---- BILLING ADDRESSES ---- */}
-      <h3 style={{ marginTop: 36 }}>Billing Addresses</h3>
-      <ul>
+      <h3 className="userprofile-section-header">Billing Addresses</h3>
+      <ul className="userprofile-list">
         {currentUser.billingAddresses?.map((addr, i) => (
-          <li key={addr._id} style={{ marginBottom: 14, border: "1px solid #eee", borderRadius: 6, padding: 8 }}>
+          <li key={addr._id} className="userprofile-list-item">
             <div>
               <b>{addr.label || "Address"}:</b> 
               {addr.recipient && (
-                  <span style={{ fontWeight: "normal" }}><i> {addr.recipient},</i></span>
-                )}              
+                <span className="userprofile-recipient"><i> {addr.recipient},</i></span>
+              )}              
               {addr.address}, {addr.city}, {addr.country}
-              {addr.isDefault && <span style={{ color: "blue" }}> (Default Billing)</span>}
+              {addr.isDefault && <span className="userprofile-default-billing"> (Default Billing)</span>}
             </div>
             <div>
-              <button onClick={() => openAddressEdit('billing', i)} style={{ marginRight: 6 }}>Edit</button>
-              <button onClick={() => handleDeleteAddress('billing', addr._id)} style={{ marginRight: 6 }}>Delete</button>
-              {!addr.isDefault && <button onClick={() => handleSetDefaultBilling(addr._id)}>Set as Default Billing</button>}
+              <button onClick={() => openAddressEdit('billing', i)} className="userprofile-inline-btn">Edit</button>
+              <button onClick={() => handleDeleteAddress('billing', addr._id)} className="userprofile-inline-btn">Delete</button>
+              {!addr.isDefault && <button onClick={() => handleSetDefaultBilling(addr._id)} className="userprofile-inline-btn">Set as Default Billing</button>}
             </div>
           </li>
         ))}
       </ul>
-      <button onClick={() => openAddressEdit('billing', -1)}>Add Billing Address</button>
+      <button onClick={() => openAddressEdit('billing', -1)} className="userprofile-add-btn">Add Billing Address</button>
       <AddressForm
         type="billing"
         form={addressForm}
@@ -473,35 +445,33 @@ export default function UserProfilePage() {
       />
 
       {/* ---- PAYMENT METHODS ---- */}
-      <h3 style={{ marginTop: 36 }}>Payment Methods</h3>
-      <ul>
+      <h3 className="userprofile-section-header">Payment Methods</h3>
+      <ul className="userprofile-list">
         {currentUser.paymentMethods?.map((pm, i) => (
-          <li key={pm._id} style={{ marginBottom: 14, border: "1px solid #eee", borderRadius: 6, padding: 8 }}>
+          <li key={pm._id} className="userprofile-list-item">
             <div>
               <b>{pm.cardType}:</b> **** **** **** {pm.cardNumber.slice(-4)}, {pm.cardholderName}, exp {pm.expMonth}/{pm.expYear}
-              {pm.isDefault && <span style={{ color: "green" }}> (Default)</span>}
+              {pm.isDefault && <span className="userprofile-default-payment"> (Default)</span>}
             </div>
             <div>
-              <button onClick={() => openPaymentEdit(i)} style={{ marginRight: 6 }}>Edit</button>
-              <button onClick={() => handleDeletePaymentMethod(pm._id)} style={{ marginRight: 6 }}>Delete</button>
-              {!pm.isDefault && <button onClick={() => handleSetDefaultPaymentMethod(pm._id)}>Set as Default</button>}
+              <button onClick={() => openPaymentEdit(i)} className="userprofile-inline-btn">Edit</button>
+              <button onClick={() => handleDeletePaymentMethod(pm._id)} className="userprofile-inline-btn">Delete</button>
+              {!pm.isDefault && <button onClick={() => handleSetDefaultPaymentMethod(pm._id)} className="userprofile-inline-btn">Set as Default</button>}
             </div>
           </li>
         ))}
       </ul>
-      <button onClick={() => openPaymentEdit(-1)}>Add Payment Method</button>
+      <button onClick={() => openPaymentEdit(-1)} className="userprofile-add-btn">Add Payment Method</button>
 
       {/* ---- PAYMENT METHOD EDIT FORM ---- */}
       {editingPaymentIdx !== null && (
-        <form onSubmit={handleSavePaymentMethod} style={{ marginTop: 18, border: "1px solid #ddd", borderRadius: 6, padding: 14 }}>
+        <form onSubmit={handleSavePaymentMethod} className="userprofile-payment-form">
           <h4>{editingPaymentIdx === -1 ? "Add Payment Method" : "Edit Payment Method"}</h4>
           <CardTypeSelector value={paymentForm.cardType} onChange={e => setPaymentForm(f => ({ ...f, cardType: e.target.value }))} />
           <input name="cardNumber" placeholder="Card Number" value={paymentForm.cardNumber} onChange={handlePaymentFormChange} required />
           <input name="cardholderName" placeholder="Cardholder Name" value={paymentForm.cardholderName} onChange={handlePaymentFormChange} required />
-          <input name="expMonth" type="number" placeholder="Exp Month" value={paymentForm.expMonth} onChange={handlePaymentFormChange} min={1} 
-            max={12} required style={{ width: 80, marginRight: 8 }} />
-          <input name="expYear" type="number" placeholder="Exp Year" value={paymentForm.expYear} onChange={handlePaymentFormChange} min={2024}
-            max={2100} required style={{ width: 100, marginRight: 8 }} />
+          <input name="expMonth" type="number" placeholder="Exp Month" value={paymentForm.expMonth} onChange={handlePaymentFormChange} min={1} max={12} required className="userprofile-exp-month" />
+          <input name="expYear" type="number" placeholder="Exp Year" value={paymentForm.expYear} onChange={handlePaymentFormChange} min={2024} max={2100} required className="userprofile-exp-year" />
           <input name="cvv" placeholder="CVV" value={paymentForm.cvv} onChange={handlePaymentFormChange} />         
           <div>
             <label>
@@ -514,15 +484,15 @@ export default function UserProfilePage() {
               Default Payment Method
             </label>
           </div>
-          <div style={{ marginTop: 8 }}>
+          <div className="userprofile-btn-row">
             <button type="submit">{editingPaymentIdx === -1 ? "Add" : "Save"}</button>
-            <button type="button" onClick={() => setEditingPaymentIdx(null)} style={{ marginLeft: 8 }}>Cancel</button>
+            <button type="button" onClick={() => setEditingPaymentIdx(null)} className="userprofile-cancel-btn">Cancel</button>
           </div>
         </form>
       )}
 
       {message && (
-        <div style={{ marginTop: 18, color: "#1976d2" }}>
+        <div className="userprofile-message">
           {message}
         </div>
       )}

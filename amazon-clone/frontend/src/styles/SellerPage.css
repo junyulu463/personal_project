@@ -1,0 +1,136 @@
+.seller-page-main {
+    padding: 2rem;
+    background: #f8fafc;
+    min-height: 100vh;
+  }
+  
+  .seller-page-denied {
+    padding: 2rem;
+  }
+  
+  .seller-page-topbar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 12px;
+  }
+  
+  .seller-back-btn {
+    background: #fff;
+    color: #232f3e;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 6px 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: box-shadow .15s;
+  }
+  
+  .seller-back-btn:hover {
+    box-shadow: 0 2px 10px #0001;
+  }
+  
+  .seller-orders-btn {
+    position: relative;
+    margin-left: 12px;
+    background: #ffd700;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 6px 18px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  .seller-orders-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #d9534f;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.11);
+  }
+  
+  .seller-add-btn {
+    margin-bottom: 18px;
+    margin-top: 8px;
+    background: #37b24d;
+    color: #fff;
+    padding: 8px 24px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .seller-add-btn:hover {
+    background: #2f9e44;
+  }
+  
+  .seller-products-list {
+    margin-top: 18px;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .seller-product-card {
+    background: #fff;
+    margin-bottom: 1.5rem;
+    border: 1px solid #eee;
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 6px #f1f1f1;
+    position: relative;
+    transition: box-shadow .17s;
+  }
+  .seller-product-card:hover {
+    box-shadow: 0 4px 24px #e3e9ee;
+  }
+  
+  .seller-images-row,
+  .seller-videos-row {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+  }
+  
+  .seller-edit-btn {
+    margin-right: 8px;
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .12s;
+  }
+  .seller-edit-btn:hover {
+    background: #155b98;
+  }
+  
+  .seller-delete-btn {
+    background: #e53935;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .12s;
+  }
+  .seller-delete-btn:hover {
+    background: #ba2623;
+  }
+  
+  .seller-error {
+    color: red;
+    margin: 18px 0;
+    font-weight: 500;
+  }
+  

@@ -1,0 +1,157 @@
+.orderhistory-root {
+    padding: 2rem;
+    background: #fafbfc;
+    min-height: 100vh;
+  }
+  .orderhistory-backbtn {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin-bottom: 24px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #333;
+    transition: background .13s;
+  }
+  .orderhistory-backbtn:hover {
+    background: #f3f7fa;
+  }
+  .orderhistory-title {
+    font-size: 1.4rem;
+    color: #232f3e;
+    margin-bottom: 1.6rem;
+  }
+  .orderhistory-list {
+    list-style: none;
+    padding: 0;
+  }
+  .orderhistory-entry {
+    margin-bottom: 24px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 16px;
+    background: #fafafa;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px #f2f2f2;
+    transition: box-shadow .13s;
+  }
+  .orderhistory-orderid {
+    color: #1976d2;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .orderhistory-orderid:hover {
+    color: #09428b;
+  }
+  .orderhistory-time {
+    color: #777;
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 7px;
+  }
+  .orderhistory-shipping,
+  .orderhistory-billing,
+  .orderhistory-payment {
+    margin: 8px 0 2px 0;
+    font-size: 1.02rem;
+  }
+  .orderhistory-items {
+    margin: 16px 0 10px 0;
+  }
+  .orderhistory-itemslist {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 10px;
+  }
+  .orderhistory-itemrow {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    background: #fff;
+    border-radius: 4px;
+    padding: 7px;
+    box-shadow: 0 1px 3px #eee;
+    flex-wrap: wrap;
+    cursor: pointer;
+    transition: background .11s;
+  }
+  .orderhistory-itemrow:hover {
+    background: #f3fafd;
+  }
+  .orderhistory-itemimg {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 14px;
+    border: 1px solid #eee;
+    background: #f7f7f7;
+  }
+  .orderhistory-iteminfo {
+    flex: 1;
+    min-width: 180px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 9px;
+  }
+  .orderhistory-itemname {
+    font-weight: 500;
+    color: #1a2331;
+  }
+  .orderhistory-itemqty {
+    color: #555;
+  }
+  .orderhistory-delivered {
+    color: #43a047;
+    font-weight: 500;
+  }
+  .orderhistory-notdelivered {
+    color: #ffa600;
+    font-weight: 500;
+  }
+  .orderhistory-total {
+    margin-top: 8px;
+    font-size: 1.1rem;
+    color: #232f3e;
+  }
+  .orderhistory-paid {
+    color: #43a047;
+    font-weight: 600;
+  }
+  .orderhistory-notpaid {
+    color: #d9534f;
+    font-weight: 600;
+  }
+  .orderhistory-paidat {
+    margin-left: 8px;
+    color: #888;
+    font-size: .98em;
+  }
+  .orderhistory-empty,
+  .orderhistory-loginmsg {
+    color: #888;
+    font-size: 1.13rem;
+    padding: 28px 0;
+  }
+  .orderhistory-loading,
+  .orderhistory-error {
+    color: #b12704;
+    font-size: 1.11rem;
+    padding: 32px 0 12px 0;
+  }
+  @media (max-width: 800px) {
+    .orderhistory-root {
+      padding: 1rem 0.4rem;
+    }
+    .orderhistory-entry {
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+    .orderhistory-itemimg {
+      width: 36px;
+      height: 36px;
+      margin-right: 7px;
+    }
+  }
+  

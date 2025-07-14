@@ -1,0 +1,359 @@
+.searchpage-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #fafbfc;
+  }
+  
+  .searchpage-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1rem;
+    background: #232f3e;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .searchpage-user {
+    color: #fff;
+    margin-right: 16px;
+    font-size: 1.1rem;
+  }
+  .searchpage-cartwrap {
+    position: relative;
+    display: inline-block;
+    margin-right: 12px;
+  }
+  .searchpage-cartbtn {
+    background: #ffd700;
+    color: #232f3e;
+    border-radius: 4px;
+    border: none;
+    padding: 6px 12px 6px 32px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    font-size: 1rem;
+  }
+  .searchpage-carticon {
+    position: absolute;
+    left: 8px;
+    top: 48%;
+    transform: translateY(-50%);
+    font-size: 20px;
+  }
+  .searchpage-cartcount {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #0076ff;
+    color: #fff;
+    border-radius: 50%;
+    min-width: 22px;
+    height: 22px;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 4px #3333;
+    border: 2px solid #232f3e;
+    z-index: 1;
+  }
+  .searchpage-menubtn, .searchpage-logout,
+  .searchpage-admin, .searchpage-seller,
+  .searchpage-login, .searchpage-signup {
+    margin-right: 12px;
+    background: #fff;
+    color: #232f3e;
+    border-radius: 4px;
+    border: none;
+    padding: 6px 12px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .searchpage-menu {
+    position: absolute;
+    top: 3.5rem;
+    right: 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+    width: 200px;
+  }
+  .searchpage-menu ul {
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+  }
+  .searchpage-menu li {
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: background .13s;
+  }
+  .searchpage-menu li:hover {
+    background: #f3fafd;
+  }
+  
+  .searchpage-main {
+    flex: 1;
+    padding: 2rem;
+    background: #fafbfc;
+  }
+  
+  .searchpage-backbtn {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin-bottom: 24px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #333;
+    transition: background .13s;
+  }
+  .searchpage-backbtn:hover {
+    background: #f3f7fa;
+  }
+  
+  .searchpage-title {
+    font-size: 1.4rem;
+    color: #232f3e;
+    margin-bottom: 1rem;
+  }
+  
+  .searchpage-searchwrap {
+    position: relative;
+    margin: 2rem 0;
+    width: 400px;
+  }
+  .searchpage-searchform {
+    display: flex;
+    border: 2px solid #007185;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,0.07);
+  }
+  .searchpage-searchform input {
+    padding: 14px 18px;
+    font-size: 1.1rem;
+    border: none;
+    flex: 1;
+    outline: none;
+    background: none;
+    font-weight: 500;
+  }
+  .searchpage-searchform button {
+    padding: 0 30px;
+    border: none;
+    background: #febd69;
+    color: #232f3e;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 0;
+    transition: background 0.15s;
+  }
+  .searchpage-searchform button:hover {
+    background: #ffa81a;
+  }
+  
+  .searchpage-dropdown {
+    position: absolute;
+    top: 54px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    z-index: 999;
+    max-height: 260px;
+    overflow-y: auto;
+  }
+  .searchpage-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .searchpage-suggestitem {
+    padding: 14px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #f4f4f4;
+    display: flex;
+    align-items: center;
+    transition: background 0.15s;
+  }
+  .searchpage-suggestitem:hover {
+    background: #f3fafd;
+  }
+  .searchpage-suggestitem img {
+    margin-right: 12px;
+    border-radius: 4px;
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+  }
+  .searchpage-suggestname {
+    font-weight: 500;
+  }
+  .searchpage-suggestprice {
+    font-size: .95rem;
+    color: #666;
+  }
+  
+  .searchpage-historyitem {
+    padding: 14px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #f4f4f4;
+    font-size: 1.05rem;
+    letter-spacing: .03em;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    transition: background 0.15s;
+  }
+  .searchpage-historyitem.active,
+  .searchpage-historyitem:hover {
+    background: #f3fafd;
+    font-weight: 600;
+  }
+  .history-delete-cross {
+    font-size: 22px;
+    color: #222;
+    margin-left: 10px;
+    cursor: pointer;
+    opacity: .8;
+    user-select: none;
+    border-radius: 5px;
+    padding: 2px 5px;
+    transition: background .12s;
+    line-height: 1;
+  }
+  .history-delete-cross:hover {
+    background: #eee;
+  }
+  .searchpage-historymore {
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    color: #1976d2;
+    border-top: 1px solid #f2f2f2;
+    background: #fff;
+    font-weight: 500;
+    font-size: 1.07rem;
+    transition: background .12s;
+  }
+  .searchpage-historymore:hover {
+    background: #e3f1ff;
+  }
+  
+  .searchpage-resultlist {
+    list-style: none;
+    padding: 0;
+    margin-top: 18px;
+  }
+  .searchpage-resultitem {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    padding: 16px;
+    cursor: pointer;
+    transition: background 0.15s;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+  }
+  .searchpage-resultitem:hover {
+    background: #f3f7fa;
+  }
+  .searchpage-productmain {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .searchpage-productmain img {
+    width: 120px;
+    border-radius: 4px;
+    object-fit: cover;
+    margin-right: 18px;
+  }
+  .searchpage-productmain h3 {
+    margin: 0 0 6px 0;
+    font-size: 1.2rem;
+    color: #232f3e;
+  }
+  .searchpage-productmain p {
+    margin: 0;
+    color: #444;
+    font-size: 1.02rem;
+  }
+  .searchpage-productinfo {
+    min-width: 160px;
+    text-align: right;
+    color: #222;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+  .searchpage-productprice {
+    font-weight: bold;
+    color: #f38600;
+    font-size: 1.14rem;
+    margin-bottom: 6px;
+  }
+  
+  .searchpage-pagination {
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .searchpage-pagination button {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background .13s;
+  }
+  .searchpage-pagination button:disabled {
+    background: #bbb;
+    cursor: not-allowed;
+  }
+  .searchpage-pagination span {
+    font-size: 1.05rem;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .searchpage-loading,
+  .searchpage-error,
+  .searchpage-noproducts {
+    padding: 28px 0;
+    color: #888;
+    font-size: 1.13rem;
+  }
+  
+  .searchpage-footer {
+    width: 100%;
+    margin-top: auto;
+    padding: 18px 0;
+    background: #232f3e;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: .01em;
+    border-top: 1px solid #444;
+    box-shadow: 0 -1px 10px #0001;
+  }
+  

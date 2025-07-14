@@ -6,17 +6,12 @@ import { GET_USERS, REMOVE_MANY_FROM_CART } from "../../graphql/userQueries";
 import { GET_PRODUCTS } from "../../graphql/productQueries";
 import { ADD_ORDER, UPDATE_ORDER, GET_ORDER } from "../../graphql/orderQueries";
 import { useNavigate, useLocation } from "react-router-dom";
-
-// Optional: Card icons (if you have an icon component)
 import { FaCcVisa, FaCcMastercard, FaCcAmex, FaCcDiscover } from "react-icons/fa";
+import "../../styles/ReviewPage.css";
+
 function cleanAddress(address) {
   if (!address) return address;
-  const {
-    __typename,
-    _id,
-    isDefault,    // Remove isDefault if present
-    ...cleaned
-  } = address;
+  const { __typename, _id, isDefault, ...cleaned } = address;
   return cleaned;
 }
 function cleanPaymentMethod(pm) {
@@ -24,7 +19,6 @@ function cleanPaymentMethod(pm) {
   const { __typename, _id, isDefault, cvv, billingAddress, ...cleaned } = pm;
   return cleaned;
 }
-
 
 export default function ReviewPage() {
   const { checkoutData, setCheckoutData } = useCheckout();
@@ -34,19 +28,16 @@ export default function ReviewPage() {
   const params = new URLSearchParams(search);
   const orderId = params.get("orderId");
 
-  // Load cart and products
   const { data } = useQuery(GET_USERS, { skip: !authUser });
   const { data: productsData } = useQuery(GET_PRODUCTS, { fetchPolicy: "network-only" });
   const [removeManyFromCart] = useMutation(REMOVE_MANY_FROM_CART, {
     refetchQueries: [{ query: GET_USERS }]
   });
 
-  // If editing, get current order data
   const { data: orderData } = useQuery(GET_ORDER, { variables: { id: orderId }, skip: !orderId });
   const [addOrder, { loading: adding }] = useMutation(ADD_ORDER, { refetchQueries: [{ query: GET_USERS }] });
   const [updateOrder, { loading: updating }] = useMutation(UPDATE_ORDER, { refetchQueries: [{ query: GET_USERS }] });
 
-  // Selected cart IDs
   const selectedCartIds = React.useMemo(() => {
     const val = sessionStorage.getItem("selectedCartIds");
     if (!val) return [];
@@ -85,12 +76,9 @@ export default function ReviewPage() {
     };
   });
 
-  // ----------- Handlers -----------
-
   const handlePlaceOrder = async () => {
     try {
       const { shippingAddress, paymentMethod, billingAddress } = checkoutData;
-      // For mutation: flatten structure if needed, depending on backend schema
       const paymentMethodForMutation = {
         ...paymentMethod,
         cardholderName: paymentMethod.cardholderName || paymentMethod.nameOnCard,
@@ -104,14 +92,12 @@ export default function ReviewPage() {
         alert("Shipping address or payment method missing.");
         return;
       }
-
       if (!orderId && cart.length === 0) {
         alert("No items selected.");
         return;
       }
       if (orderId && orderData?.getOrder) {
-        alert("2");
-        const res = await updateOrder({
+        await updateOrder({
           variables: {
             id: orderId,
             orderItems,
@@ -128,10 +114,6 @@ export default function ReviewPage() {
         });
         navigate(`/checkout/confirmation?orderId=${orderId}`);
       } else {
-        alert("1");
-        // alert("billingAddress:\n" + JSON.stringify(cleanBillingAddress, null, 2));
-        // alert("shippingAddress:\n" + JSON.stringify(cleanShippingAddress, null, 2));
-        // alert("payment:\n" + JSON.stringify(cleanPayment, null, 2));
         const res = await addOrder({
           variables: {
             user: authUser._id,
@@ -158,7 +140,6 @@ export default function ReviewPage() {
         sessionStorage.removeItem("selectedCartIds");
         navigate(`/checkout/confirmation?orderId=${res.data.addOrder._id}`);
       }
-      // navigate("/checkout/confirmation");
     } catch (err) {
       alert("Order failed: " + err.message);
     }
@@ -185,7 +166,6 @@ export default function ReviewPage() {
         return;
       }
       if (orderId && orderData?.getOrder) {
-        alert("4");
         await updateOrder({
           variables: {
             id: orderId,
@@ -202,7 +182,6 @@ export default function ReviewPage() {
           },
         });
       } else {
-        alert("3");
         const res = await addOrder({
           variables: {
             user: authUser._id,
@@ -233,14 +212,12 @@ export default function ReviewPage() {
     }
   };
 
-  if (!authUser) return <div style={{ padding: 32 }}>Please log in.</div>;
+  if (!authUser) return <div className="reviewpage-loginmsg">Please log in.</div>;
 
-  // ----------- UI Renderers -----------
-
-  const renderAddress = (addr, color = "#333") => {
-    if (!addr) return <span style={{ color: "#888" }}>(not set)</span>;
+  const renderAddress = (addr) => {
+    if (!addr) return <span className="reviewpage-missing">(not set)</span>;
     return (
-      <div style={{ color }}>
+      <div className="reviewpage-address">
         {addr.recipient && <span>{addr.recipient}, </span>}
         {addr.label && <span>{addr.label}, </span>}
         {addr.address}, {addr.city}, {addr.postalCode}, {addr.country}
@@ -249,15 +226,13 @@ export default function ReviewPage() {
   };
 
   const renderPaymentMethod = (pm) => {
-    if (!pm) return <span style={{ color: "#888" }}>(not set)</span>;
-    // You can show icons if you wish
+    if (!pm) return <span className="reviewpage-missing">(not set)</span>;
     const icon = {
-      Visa: <FaCcVisa color="#1a1f71" style={{ fontSize: 22, marginRight: 5 }} />,
-      MasterCard: <FaCcMastercard color="#eb001b" style={{ fontSize: 22, marginRight: 5 }} />,
-      AMEX: <FaCcAmex color="#2e77bb" style={{ fontSize: 22, marginRight: 5 }} />,
-      Discover: <FaCcDiscover color="#86b817" style={{ fontSize: 22, marginRight: 5 }} />,
+      Visa: <FaCcVisa color="#1a1f71" className="reviewpage-cardicon" />,
+      MasterCard: <FaCcMastercard color="#eb001b" className="reviewpage-cardicon" />,
+      AMEX: <FaCcAmex color="#2e77bb" className="reviewpage-cardicon" />,
+      Discover: <FaCcDiscover color="#86b817" className="reviewpage-cardicon" />,
     }[pm.cardType] || null;
-
     return (
       <div>
         <div>
@@ -275,83 +250,61 @@ export default function ReviewPage() {
   };
 
   return (
-    <div style={{ maxWidth: 700, margin: "40px auto", background: "#fff", borderRadius: 10, boxShadow: "0 2px 8px #eee", padding: 32 }}>
-      <h2>Review Your Order</h2>
-      <div style={{ marginBottom: 28 }}>
+    <div className="reviewpage-root">
+      <h2 className="reviewpage-title">Review Your Order</h2>
+      <div className="reviewpage-block">
         <strong>Shipping Address:</strong>
         {renderAddress(checkoutData.shippingAddress)}
       </div>
-      <div style={{ marginBottom: 28 }}>
+      <div className="reviewpage-block">
         <strong>Billing Address:</strong>
         {renderAddress(checkoutData.billingAddress)}
       </div>
-      <div style={{ marginBottom: 28 }}>
+      <div className="reviewpage-block">
         <strong>Payment Method:</strong>
         {renderPaymentMethod(checkoutData.paymentMethod)}
       </div>
-      <div style={{ marginBottom: 28 }}>
+      <div className="reviewpage-block">
         <strong>Items:</strong>
         <ul>
           {(orderId && orderData?.getOrder ? orderData.getOrder.orderItems : cart).map((item, i) => {
             const prod = productsById[item.product];
             const quantity = item.qty !== undefined ? item.qty : item.quantity;
             return (
-              <li key={i} style={{ marginBottom: 8 }}>
-                {prod?.name || item.name} x {quantity} @ ${prod?.price?.toFixed(2) || item.price?.toFixed(2)} = <strong>${prod ? (prod.price * quantity).toFixed(2) : (item.price * quantity).toFixed(2)}</strong>
+              <li key={i} className="reviewpage-itemrow">
+                <span>{prod?.name || item.name}</span>
+                <span>x {quantity}</span>
+                <span>@ ${prod?.price?.toFixed(2) || item.price?.toFixed(2)}</span>
+                <span className="reviewpage-itemtotal">
+                  = <strong>${prod ? (prod.price * quantity).toFixed(2) : (item.price * quantity).toFixed(2)}</strong>
+                </span>
               </li>
             );
           })}
         </ul>
       </div>
-      <div style={{ marginBottom: 24 }}>
-        <strong>Subtotal:</strong> ${subtotal.toFixed(2)}<br />
-        <strong>Shipping:</strong> ${shippingPrice.toFixed(2)}<br />
-        <strong>Tax:</strong> ${taxPrice.toFixed(2)}<br />
-        <strong>Total:</strong> <span style={{ color: "#b12704" }}>${totalPrice.toFixed(2)}</span>
+      <div className="reviewpage-summary">
+        <div><strong>Subtotal:</strong> ${subtotal.toFixed(2)}</div>
+        <div><strong>Shipping:</strong> ${shippingPrice.toFixed(2)}</div>
+        <div><strong>Tax:</strong> ${taxPrice.toFixed(2)}</div>
+        <div><strong>Total:</strong> <span className="reviewpage-grandtotal">${totalPrice.toFixed(2)}</span></div>
       </div>
-      <div style={{ display: "flex", gap: 12 }}>
-        <button type="button" onClick={() => navigate("/checkout/payment")}>Back</button>
+      <div className="reviewpage-actions">
+        <button type="button" className="reviewpage-backbtn" onClick={() => navigate("/checkout/payment")}>Back</button>
         <button
+          className="reviewpage-placeorder"
           onClick={handlePlaceOrder}
           disabled={adding || updating}
-          style={{ background: "#ffd814", marginLeft: 12 }}
         >
           {(adding || updating) ? "Placing Order..." : "Place Your Order"}
         </button>
         <button
+          className="reviewpage-paylater"
           onClick={handlePlaceOrderPayLater}
           disabled={adding || updating}
-          style={{ background: "#f7ca00", color: "#222", marginLeft: 12 }}
         >
           {(adding || updating) ? "Saving..." : "Save Order & Pay Later"}
         </button>
-      </div>
-      <div style={{
-        margin: "28px 0",
-        padding: "16px",
-        background: "#f8f8f8",
-        borderRadius: 8,
-        fontFamily: "monospace",
-        fontSize: 13,
-        overflowX: "auto",
-        whiteSpace: "pre"
-      }}>
-        <strong>Order Payload Preview:</strong>
-        <pre style={{ marginTop: 10 }}>
-          {JSON.stringify({
-            user: authUser?._id,
-            orderItems,
-            shippingAddress: checkoutData.shippingAddress,
-            billingAddress: checkoutData.billingAddress,
-            paymentMethod: checkoutData.paymentMethod,
-            itemsPrice: subtotal,
-            shippingPrice,
-            taxPrice,
-            totalPrice,
-            isPaid: true,
-            paidAt: new Date().toISOString()
-          }, null, 2)}
-        </pre>
       </div>
     </div>
   );

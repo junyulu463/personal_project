@@ -1,0 +1,198 @@
+.orderdetail-root {
+    padding: 2rem;
+    background: #fafbfc;
+    min-height: 100vh;
+  }
+  .orderdetail-backbtn {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin-bottom: 24px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #333;
+    transition: background .13s;
+  }
+  .orderdetail-backbtn:hover {
+    background: #f3f7fa;
+  }
+  .orderdetail-title {
+    font-size: 1.35rem;
+    color: #232f3e;
+    margin-bottom: 1.5rem;
+  }
+  .orderdetail-loading, .orderdetail-error {
+    color: #b12704;
+    font-size: 1.11rem;
+    padding: 32px 0 12px 0;
+  }
+  .orderdetail-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px #f2f2f2;
+    padding: 24px;
+    margin-top: 16px;
+    max-width: 730px;
+  }
+  .orderdetail-row {
+    margin-bottom: 16px;
+    font-size: 1.04rem;
+  }
+  .orderdetail-addr {
+    margin-left: 16px;
+    color: #333;
+  }
+  .orderdetail-addrlabel {
+    margin-left: 8px;
+    color: #888;
+    font-size: 0.95em;
+  }
+  .orderdetail-itemslist {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+  .orderdetail-itemrow {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    background: #fafafa;
+    border-radius: 4px;
+    padding: 8px 8px 8px 4px;
+    box-shadow: 0 1px 2px #eee;
+    cursor: pointer;
+    transition: background .11s;
+  }
+  .orderdetail-itemrow:hover {
+    background: #f3fafd;
+  }
+  .orderdetail-itemimg {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 14px;
+    border: 1px solid #eee;
+    background: #f7f7f7;
+  }
+  .orderdetail-iteminfo {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 9px;
+  }
+  .orderdetail-itemname {
+    font-weight: 500;
+    color: #1a2331;
+  }
+  .orderdetail-itemqty {
+    color: #555;
+  }
+  .orderdetail-itemseller {
+    color: #777;
+    font-size: 0.98em;
+  }
+  .orderdetail-itemstatus {
+    margin-left: 10px;
+    font-size: 0.97em;
+  }
+  .orderdetail-delivered {
+    color: #43a047;
+    font-weight: 500;
+  }
+  .orderdetail-notdelivered {
+    color: #ffa600;
+    font-weight: 500;
+  }
+  .orderdetail-itemprice {
+    min-width: 70px;
+    font-size: 1.07rem;
+    text-align: right;
+    color: #333;
+  }
+  .orderdetail-cancelitem {
+    margin-left: 18px;
+    background: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 14px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background .12s;
+  }
+  .orderdetail-cancelitem:hover {
+    background: #d22320;
+  }
+  .orderdetail-total {
+    color: #b12704;
+    font-weight: 500;
+    font-size: 1.14rem;
+    margin-left: 8px;
+  }
+  .orderdetail-paid {
+    color: #43a047;
+    font-weight: 600;
+  }
+  .orderdetail-notpaid {
+    color: #d9534f;
+    font-weight: 600;
+  }
+  .orderdetail-paidat {
+    margin-left: 8px;
+    color: #888;
+    font-size: .98em;
+  }
+  .orderdetail-actions {
+    display: flex;
+    gap: 18px;
+    margin-top: 22px;
+  }
+  .orderdetail-cancelorder {
+    background: #d9534f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 28px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.07rem;
+    transition: background .13s;
+  }
+  .orderdetail-cancelorder:disabled,
+  .orderdetail-cancelorder[disabled] {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  .orderdetail-paynow {
+    background: #ffd814;
+    color: #222;
+    border: 1px solid #e2b400;
+    border-radius: 4px;
+    padding: 10px 28px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.07rem;
+    margin-left: 4px;
+    transition: background .13s;
+  }
+  .orderdetail-paynow:hover {
+    background: #ffe87a;
+  }
+  @media (max-width: 750px) {
+    .orderdetail-root {
+      padding: 0.5rem;
+    }
+    .orderdetail-card {
+      padding: 12px;
+    }
+    .orderdetail-itemimg {
+      width: 38px;
+      height: 38px;
+      margin-right: 8px;
+    }
+  }
+  

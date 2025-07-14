@@ -16,6 +16,7 @@ import {
 } from "../../graphql/userQueries";
 import CardTypeSelector from "../components/CardTypeSelector";
 import AddressForm from "../components/AddressForm";
+import "../../styles/PaymentPage.css";
 
 export default function PaymentPage() {
   const { search } = useLocation();
@@ -31,13 +32,11 @@ export default function PaymentPage() {
     skip: !authUser?._id,
   });
 
-  // Payment Method Mutations
+  // Payment/Billing Mutations
   const [addPaymentMethod] = useMutation(ADD_PAYMENT_METHOD, { onCompleted: refetch });
   const [updatePaymentMethod] = useMutation(UPDATE_PAYMENT_METHOD, { onCompleted: refetch });
   const [deletePaymentMethod] = useMutation(DELETE_PAYMENT_METHOD, { onCompleted: refetch });
   const [setDefaultPaymentMethod] = useMutation(SET_DEFAULT_PAYMENT_METHOD, { onCompleted: refetch });
-
-  // Billing Address Mutations
   const [addBillingAddress] = useMutation(ADD_BILLING_ADDRESS, { onCompleted: refetch });
   const [updateBillingAddress] = useMutation(UPDATE_BILLING_ADDRESS, { onCompleted: refetch });
   const [deleteBillingAddress] = useMutation(DELETE_BILLING_ADDRESS, { onCompleted: refetch });
@@ -45,15 +44,9 @@ export default function PaymentPage() {
 
   // Get user data
   const currentUser = data?.getUsers?.find(u => u._id === authUser?._id);
-  const paymentMethods = useMemo(
-    () => currentUser?.paymentMethods || [],
-    [currentUser?.paymentMethods]
-  );
+  const paymentMethods = useMemo(() => currentUser?.paymentMethods || [], [currentUser?.paymentMethods]);
   const defaultPaymentId = currentUser?.defaultPaymentMethodId;
-  const billingAddresses = useMemo(
-    () => currentUser?.billingAddresses || [],
-    [currentUser?.billingAddresses]
-  );
+  const billingAddresses = useMemo(() => currentUser?.billingAddresses || [], [currentUser?.billingAddresses]);
   const defaultBillingId = currentUser?.defaultBillingAddressId;
 
   // UI State
@@ -61,29 +54,20 @@ export default function PaymentPage() {
     checkoutData.paymentMethod?._id || defaultPaymentId || (paymentMethods[0]?._id ?? "")
   );
   useEffect(() => {
-    // If only one payment method, always select it
     if (paymentMethods.length === 1) {
       setSelectedPaymentId(paymentMethods[0]._id);
-    }
-    // If nothing is selected but methods exist, select default or first
-    else if (!selectedPaymentId && paymentMethods.length > 0) {
+    } else if (!selectedPaymentId && paymentMethods.length > 0) {
       setSelectedPaymentId(
-        checkoutData.paymentMethod?._id ||
-        defaultPaymentId ||
-        paymentMethods[0]._id
+        checkoutData.paymentMethod?._id || defaultPaymentId || paymentMethods[0]._id
       );
     }
-    // If no methods, clear selection
     if (paymentMethods.length === 0) setSelectedPaymentId("");
-    // If selected payment was deleted, select default or first
     if (
       selectedPaymentId &&
       !paymentMethods.some(pm => pm._id === selectedPaymentId) &&
       paymentMethods.length > 0
     ) {
-      setSelectedPaymentId(
-        defaultPaymentId || paymentMethods[0]._id
-      );
+      setSelectedPaymentId(defaultPaymentId || paymentMethods[0]._id);
     }
   }, [
     paymentMethods,
@@ -91,7 +75,6 @@ export default function PaymentPage() {
     checkoutData.paymentMethod,
     defaultPaymentId,
   ]);
-  
 
   // Add/Edit Payment Method
   const [editingIdx, setEditingIdx] = useState(null); // null = not editing, -1 = add new
@@ -105,7 +88,7 @@ export default function PaymentPage() {
     isDefault: false,
   });
 
-  // Billing Address Management
+  // Billing Address
   const [useShippingAsBilling, setUseShippingAsBilling] = useState(true);
   const [selectedBillingId, setSelectedBillingId] = useState(
     checkoutData.billingAddress?._id || defaultBillingId || (billingAddresses[0]?._id ?? "")
@@ -130,7 +113,6 @@ export default function PaymentPage() {
     isDefault: false,
   });
 
-  // Use shipping as billing address effect
   useEffect(() => {
     if (useShippingAsBilling && checkoutData.shippingAddress) {
       setSelectedBillingId("");
@@ -186,7 +168,7 @@ export default function PaymentPage() {
     await setDefaultPaymentMethod({ variables: { userId: currentUser._id, paymentMethodId: pmId } });
   };
 
-  // --- Billing Address Handlers (same as shipping/profile) ---
+  // --- Billing Address Handlers ---
   const handleBillingOpenEdit = idx => {
     setBillingEditingIdx(idx);
     if (idx === -1) {
@@ -248,8 +230,6 @@ export default function PaymentPage() {
       alert("Please select a billing address.");
       return;
     }
-    // alert("paymentMethod for checkout:\n" + JSON.stringify(selectedPayment, null, 2));
-    // alert("chosenBillingAddress for checkout:\n" + JSON.stringify(chosenBillingAddress, null, 2));
     setCheckoutData(d => ({
       ...d,
       paymentMethod: selectedPayment,
@@ -263,61 +243,34 @@ export default function PaymentPage() {
   };
 
   // --- Render ---
-  if (!authUser) return <div style={{ padding: 32 }}>Please log in.</div>;
-  if (loading) return <div style={{ padding: 32 }}>Loading...</div>;
-  if (error) return <div style={{ color: "red", padding: 32 }}>Error: {error.message}</div>;
-  if (!currentUser) return <div style={{ padding: 32 }}>User not found.</div>;
+  if (!authUser) return <div className="paymentpage-message">Please log in.</div>;
+  if (loading) return <div className="paymentpage-message">Loading...</div>;
+  if (error) return <div className="paymentpage-message" style={{ color: "red" }}>Error: {error.message}</div>;
+  if (!currentUser) return <div className="paymentpage-message">User not found.</div>;
 
   return (
-    <div
-      style={{
-        maxWidth: 650,
-        margin: "40px auto",
-        background: "#fff",
-        borderRadius: 10,
-        boxShadow: "0 2px 8px #eee",
-        padding: 32,
-      }}
-    >
+    <div className="paymentpage-root">
       <h2>Payment Method</h2>
-      <ul style={{ padding: 0, listStyle: "none" }}>
+      <ul className="paymentpage-cardlist">
         {paymentMethods.map((pm, i) => (
           <li
             key={pm._id}
-            style={{
-              marginBottom: 16,
-              border: "1px solid #eee",
-              borderRadius: 6,
-              padding: 12,
-              background: pm._id === defaultPaymentId ? "#f6fafd" : "#fafbfc",
-            }}
+            className={`paymentpage-card ${pm._id === defaultPaymentId ? "default" : ""}`}
           >
             <div>
               <b>{pm.cardType}:</b> **** **** **** {pm.cardNumber.slice(-4)}, {pm.cardholderName}, exp {pm.expMonth}/{pm.expYear}
-              {pm.isDefault && <span style={{ color: "green" }}> (Default)</span>}
+              {pm.isDefault && <span className="paymentpage-card-default"> (Default)</span>}
             </div>
-            <div style={{ marginTop: 8 }}>
-              <button onClick={() => handleOpenEdit(i)} style={{ marginRight: 6 }}>
-                Edit
-              </button>
-              <button onClick={() => handleDeletePayment(pm._id)} style={{ marginRight: 6 }}>
-                Delete
-              </button>
+            <div className="paymentpage-card-actions">
+              <button onClick={() => handleOpenEdit(i)}>Edit</button>
+              <button onClick={() => handleDeletePayment(pm._id)}>Delete</button>
               {!pm.isDefault && (
-                <button onClick={() => handleSetDefaultPayment(pm._id)} style={{ marginRight: 6 }}>
-                  Set as Default
-                </button>
+                <button onClick={() => handleSetDefaultPayment(pm._id)}>Set as Default</button>
               )}
               <button
                 type="button"
+                className={`paymentpage-selectbtn${selectedPaymentId === pm._id ? " selected" : ""}`}
                 onClick={() => setSelectedPaymentId(pm._id)}
-                style={{
-                  marginLeft: 6,
-                  background: selectedPaymentId === pm._id ? "#ffd814" : "#fff",
-                  fontWeight: selectedPaymentId === pm._id ? "bold" : "normal",
-                  border: selectedPaymentId === pm._id ? "2px solid #ffd814" : undefined,
-                  borderRadius: 4,
-                }}
               >
                 {selectedPaymentId === pm._id ? "Selected" : "Use this card"}
               </button>
@@ -325,29 +278,17 @@ export default function PaymentPage() {
           </li>
         ))}
       </ul>
-      <button
-        onClick={() => handleOpenEdit(-1)}
-        style={{
-          background: "#fff",
-          border: "1px solid #ddd",
-          borderRadius: 4,
-          padding: "8px 16px",
-          marginBottom: 16,
-          marginTop: 10,
-          cursor: "pointer",
-        }}
-      >
+      <button className="paymentpage-addbtn" onClick={() => handleOpenEdit(-1)}>
         Add New Card
       </button>
-      {/* Add/Edit Payment Method Form */}
       {editingIdx !== null && (
-        <form onSubmit={handleSavePayment} style={{ marginTop: 18, border: "1px solid #ddd", borderRadius: 6, padding: 14 }}>
+        <form className="paymentpage-editform" onSubmit={handleSavePayment}>
           <h4>{editingIdx === -1 ? "Add Payment Method" : "Edit Payment Method"}</h4>
           <CardTypeSelector value={paymentForm.cardType} onChange={e => setPaymentForm(f => ({ ...f, cardType: e.target.value }))} />
           <input name="cardNumber" placeholder="Card Number" value={paymentForm.cardNumber} onChange={handlePaymentFormChange} required />
           <input name="cardholderName" placeholder="Cardholder Name" value={paymentForm.cardholderName} onChange={handlePaymentFormChange} required />
-          <input name="expMonth" type="number" placeholder="Exp Month" value={paymentForm.expMonth} onChange={handlePaymentFormChange} min={1} max={12} required style={{ width: 80, marginRight: 8 }} />
-          <input name="expYear" type="number" placeholder="Exp Year" value={paymentForm.expYear} onChange={handlePaymentFormChange} min={2024} max={2100} required style={{ width: 100, marginRight: 8 }} />
+          <input name="expMonth" type="number" placeholder="Exp Month" value={paymentForm.expMonth} onChange={handlePaymentFormChange} min={1} max={12} required />
+          <input name="expYear" type="number" placeholder="Exp Year" value={paymentForm.expYear} onChange={handlePaymentFormChange} min={2024} max={2100} required />
           <input name="cvv" placeholder="CVV" value={paymentForm.cvv} onChange={handlePaymentFormChange} />         
           <div>
             <label>
@@ -360,21 +301,20 @@ export default function PaymentPage() {
               Default Payment Method
             </label>
           </div>
-          <div style={{ marginTop: 8 }}>
+          <div className="paymentpage-formbtns">
             <button type="submit">{editingIdx === -1 ? "Add" : "Save"}</button>
-            <button type="button" onClick={() => setEditingIdx(null)} style={{ marginLeft: 8 }}>Cancel</button>
+            <button type="button" onClick={() => setEditingIdx(null)}>Cancel</button>
           </div>
         </form>
       )}
 
       {/* Billing Address Section */}
-      <div style={{ marginTop: 32 }}>
+      <div className="paymentpage-billingcheckbox">
         <label>
           <input
             type="checkbox"
             checked={useShippingAsBilling}
             onChange={e => setUseShippingAsBilling(e.target.checked)}
-            style={{ marginRight: 6 }}
           />
           Use shipping address as billing address
         </label>
@@ -382,47 +322,28 @@ export default function PaymentPage() {
 
       {!useShippingAsBilling && (
         <>
-          {/* Billing Address Selection and Management */}
-          <ul style={{ padding: 0, listStyle: "none" }}>
+          <ul className="paymentpage-billinglist">
             {billingAddresses.map((addr, i) => (
               <li
                 key={addr._id}
-                style={{
-                  marginBottom: 14,
-                  border: "1px solid #eee",
-                  borderRadius: 6,
-                  padding: 8,
-                  background: addr._id === defaultBillingId ? "#f6fafd" : "#fafbfc",
-                }}
+                className={`paymentpage-billingcard${addr._id === defaultBillingId ? " default" : ""}`}
               >
                 <div>
                   <b>{addr.label || "Address"}:</b>{" "}
                   {addr.recipient && <span>{addr.recipient}, </span>}
                   {addr.address}, {addr.city}, {addr.postalCode}, {addr.country}
-                  {addr.isDefault && <span style={{ color: "blue" }}> (Default Billing)</span>}
+                  {addr.isDefault && <span className="paymentpage-billing-default"> (Default Billing)</span>}
                 </div>
-                <div style={{ marginTop: 8 }}>
-                  <button onClick={() => handleBillingOpenEdit(i)} style={{ marginRight: 6 }}>
-                    Edit
-                  </button>
-                  <button onClick={() => handleDeleteBilling(addr._id)} style={{ marginRight: 6 }}>
-                    Delete
-                  </button>
+                <div className="paymentpage-billing-actions">
+                  <button onClick={() => handleBillingOpenEdit(i)}>Edit</button>
+                  <button onClick={() => handleDeleteBilling(addr._id)}>Delete</button>
                   {!addr.isDefault && (
-                    <button onClick={() => handleSetDefaultBilling(addr._id)} style={{ marginRight: 6 }}>
-                      Set as Default
-                    </button>
+                    <button onClick={() => handleSetDefaultBilling(addr._id)}>Set as Default</button>
                   )}
                   <button
                     type="button"
+                    className={`paymentpage-selectbtn${selectedBillingId === addr._id ? " selected" : ""}`}
                     onClick={() => setSelectedBillingId(addr._id)}
-                    style={{
-                      marginLeft: 6,
-                      background: selectedBillingId === addr._id ? "#ffd814" : "#fff",
-                      fontWeight: selectedBillingId === addr._id ? "bold" : "normal",
-                      border: selectedBillingId === addr._id ? "2px solid #ffd814" : undefined,
-                      borderRadius: 4,
-                    }}
                   >
                     {selectedBillingId === addr._id ? "Selected" : "Use this address"}
                   </button>
@@ -430,18 +351,7 @@ export default function PaymentPage() {
               </li>
             ))}
           </ul>
-          <button
-            onClick={() => handleBillingOpenEdit(-1)}
-            style={{
-              background: "#fff",
-              border: "1px solid #ddd",
-              borderRadius: 4,
-              padding: "8px 16px",
-              marginBottom: 16,
-              marginTop: 10,
-              cursor: "pointer",
-            }}
-          >
+          <button className="paymentpage-addbtn" onClick={() => handleBillingOpenEdit(-1)}>
             Add New Billing Address
           </button>
           <AddressForm
@@ -455,7 +365,7 @@ export default function PaymentPage() {
         </>
       )}
 
-      <div style={{ display: "flex", gap: 12, marginTop: 32 }}>
+      <div className="paymentpage-bottomrow">
         <button
           type="button"
           onClick={() =>
@@ -469,15 +379,7 @@ export default function PaymentPage() {
         <button
           type="button"
           disabled={!selectedPaymentId || (!useShippingAsBilling && !selectedBillingId)}
-          style={{
-            background: "#ffd814",
-            fontWeight: "bold",
-            borderRadius: 4,
-            padding: "8px 24px",
-            marginRight: 12,
-            opacity: selectedPaymentId && (useShippingAsBilling || selectedBillingId) ? 1 : 0.5,
-            cursor: selectedPaymentId && (useShippingAsBilling || selectedBillingId) ? "pointer" : "not-allowed"
-          }}
+          className="paymentpage-nextbtn"
           onClick={handleNext}
         >
           Next

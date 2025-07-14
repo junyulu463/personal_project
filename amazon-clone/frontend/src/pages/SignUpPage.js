@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_USER, GET_USERS } from '../graphql/userQueries';
 import { useAuth } from '../context/AuthContext';
+import '../styles/SignUpPage.css';
 
 const initialForm = {
   username: "",
@@ -36,7 +37,7 @@ export default function SignUpPage() {
     e.preventDefault();
     setError('');
 
-    // Combine address fields (no state)
+    // Combine address fields
     const addressParts = [
       form.street,
       form.city,
@@ -74,36 +75,44 @@ export default function SignUpPage() {
   const handleCancel = () => navigate(from);
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSignUp} style={{ maxWidth: 350 }}>
-        {/* Basic Info */}
-        <input placeholder="Username" name="username" value={form.username} onChange={handleChange} required />
-        <input placeholder="Password" name="password" type="password" value={form.password} onChange={handleChange} required />
-        <input placeholder="Email" name="email" value={form.email} onChange={handleChange} required />
-        <input placeholder="Name" name="name" value={form.name} onChange={handleChange} />
-        <input placeholder="Phone" name="phone" value={form.phone} onChange={handleChange} />
+    <div className="signup-bg">
+      <div className="signup-card">
+        <h2 className="signup-title">Sign Up</h2>
+        <form className="signup-form" onSubmit={handleSignUp}>
+          {/* Basic Info */}
+          <input className="signup-input" placeholder="Username" name="username" value={form.username} onChange={handleChange} required />
+          <input className="signup-input" placeholder="Password" name="password" type="password" value={form.password} onChange={handleChange} required />
+          <input className="signup-input" placeholder="Email" name="email" value={form.email} onChange={handleChange} required />
+          <input className="signup-input" placeholder="Name" name="name" value={form.name} onChange={handleChange} />
+          <input className="signup-input" placeholder="Phone" name="phone" value={form.phone} onChange={handleChange} />
 
-        {/* Address Fields */}
-        <div>
-          <h3>Address:</h3>
-          <input placeholder="Street Address" name="street" value={form.street} onChange={handleChange} required />
-          <input placeholder="City" name="city" value={form.city} onChange={handleChange} required />
-          <input placeholder="Country" name="country" value={form.country} onChange={handleChange} required />
-          <input placeholder="Postal Code" name="postalCode" value={form.postalCode} onChange={handleChange} required />
-        </div>
-        {/* Role dropdown */}
-          <label>
-            Role:&nbsp;
-            <select name="role" value={form.role} onChange={handleChange} style={{ width: 120 }}>
-              <option value="buyer">Buyer</option>
-              <option value="seller">Seller</option>
-            </select>
-          </label>
-        <button type="submit" style={{ marginRight: 12 }}>Sign Up</button>
-        <button type="button" onClick={handleCancel}>Cancel</button>
-      </form>
-      {error && <div style={{ color: "red", marginTop: 10 }}>{error}</div>}
+          {/* Address Fields */}
+          <div className="signup-address-block">
+            <h3 className="signup-address-title">Address:</h3>
+            <input className="signup-input" placeholder="Street Address" name="street" value={form.street} onChange={handleChange} required />
+            <input className="signup-input" placeholder="City" name="city" value={form.city} onChange={handleChange} required />
+            <input className="signup-input" placeholder="Country" name="country" value={form.country} onChange={handleChange} required />
+            <input className="signup-input" placeholder="Postal Code" name="postalCode" value={form.postalCode} onChange={handleChange} required />
+          </div>
+
+          {/* Role dropdown */}
+          <div className="signup-role-block">
+            <label>
+              Role:&nbsp;
+              <select className="signup-select" name="role" value={form.role} onChange={handleChange}>
+                <option value="buyer">Buyer</option>
+                <option value="seller">Seller</option>
+              </select>
+            </label>
+          </div>
+
+          <div className="signup-actions">
+            <button className="signup-btn" type="submit">Sign Up</button>
+            <button className="signup-btn secondary" type="button" onClick={handleCancel}>Cancel</button>
+          </div>
+        </form>
+        {error && <div className="signup-error">{error}</div>}
+      </div>
     </div>
   );
 }

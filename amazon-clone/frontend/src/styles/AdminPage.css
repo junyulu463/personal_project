@@ -1,0 +1,108 @@
+.admin-container {
+    padding: 2rem;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+  
+  .admin-back-btn {
+    margin-bottom: 1.3rem;
+    padding: 7px 19px;
+    border-radius: 6px;
+    background: #eee;
+    border: 1px solid #bbb;
+    color: #222;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background 0.13s;
+  }
+  .admin-back-btn:hover {
+    background: #d8e9fa;
+  }
+  
+  .admin-title {
+    margin-bottom: 0.6rem;
+  }
+  
+  .admin-users-title {
+    margin-top: 2rem;
+  }
+  
+  .admin-table-wrap {
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #f1f3f9;
+    margin-top: 14px;
+    background: #fff;
+  }
+  
+  .admin-table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 850px;
+    background: #fff;
+  }
+  
+  .admin-table th, .admin-table td {
+    border: 1px solid #eee;
+    padding: 9px 8px;
+    font-size: 15px;
+  }
+  
+  .admin-table th {
+    font-weight: 700;
+    color: #232f3e;
+    background: #fafbfc;
+  }
+  
+  .admin-table td {
+    background: #fff;
+  }
+  
+  .admin-edit-btn,
+  .admin-save-btn,
+  .admin-cancel-btn,
+  .admin-delete-btn {
+    padding: 6px 15px;
+    border-radius: 5px;
+    border: none;
+    margin-right: 7px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  .admin-edit-btn {
+    background: #007185;
+    color: #fff;
+  }
+  
+  .admin-save-btn {
+    background: #0d6efd;
+    color: #fff;
+  }
+  
+  .admin-cancel-btn {
+    background: #eee;
+    color: #444;
+    margin-right: 5px;
+  }
+  
+  .admin-delete-btn {
+    background: #e53935;
+    color: #fff;
+    margin-right: 0;
+  }
+  
+  .admin-edit-btn:hover {
+    background: #00565a;
+  }
+  .admin-save-btn:hover {
+    background: #0852a4;
+  }
+  .admin-cancel-btn:hover {
+    background: #ccc;
+  }
+  .admin-delete-btn:hover {
+    background: #ba2822;
+  }
+  

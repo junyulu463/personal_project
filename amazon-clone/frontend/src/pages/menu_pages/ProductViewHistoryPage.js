@@ -8,6 +8,7 @@ import {
 } from "../../graphql/userQueries";
 import { GET_PRODUCTS } from "../../graphql/productQueries";
 import { useNavigate } from "react-router-dom";
+import "../../styles/ProductViewHistoryPage.css";
 
 export default function ProductViewHistoryPage() {
   const { authUser } = useAuth();
@@ -51,9 +52,9 @@ export default function ProductViewHistoryPage() {
     }
   }, [data, authUser]);
 
-  if (!authUser) return <div>Please log in to view your product view history.</div>;
-  if (loading || loadingProducts) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (!authUser) return <div className="pvh-loginmsg">Please log in to view your product view history.</div>;
+  if (loading || loadingProducts) return <div className="pvh-loading">Loading...</div>;
+  if (error) return <div className="pvh-error">Error: {error.message}</div>;
 
   const handleDeleteEntry = async (entryId) => {
     if (!authUser?._id || !entryId) return;
@@ -70,70 +71,48 @@ export default function ProductViewHistoryPage() {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
+    <div className="pvh-root">
       <button
+        className="pvh-backbtn"
         onClick={() => navigate(-1)}
-        style={{
-          background: '#fff',
-          border: '1px solid #ddd',
-          borderRadius: 4,
-          padding: '8px 16px',
-          marginBottom: 24,
-          cursor: 'pointer'
-        }}
       >
         ← Back
       </button>
-      <h2>👀 Product View History</h2>
+      <h2 className="pvh-title">👀 Product View History</h2>
       <button
+        className="pvh-clearbtn"
         onClick={handleClearAll}
         disabled={viewHistory.length === 0}
-        style={{
-          marginBottom: 18,
-          padding: "6px 14px",
-          border: "1px solid #888",
-          background: "#f8f9fa",
-          color: "#333",
-          borderRadius: 4,
-          cursor: viewHistory.length === 0 ? "not-allowed" : "pointer"
-        }}
       >
         Clear All
       </button>
       {viewHistory.length === 0 ? (
-        <div>No products viewed yet.</div>
+        <div className="pvh-empty">No products viewed yet.</div>
       ) : (
-        <ul style={{ listStyle: "none", padding: 0 }}>
+        <ul className="pvh-list">
           {viewHistory
             .slice()
             .sort((a, b) => b.timestamp - a.timestamp)
             .map((entry) => {
               const prod = productsById[entry.product];
               return (
-                <li key={entry._id} style={{
-                  marginBottom: 12,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  borderBottom: "1px solid #eee",
-                  paddingBottom: 8,
-                  cursor: prod ? "pointer" : "default"
-                }}
-                onClick={() => prod && navigate(`/product/${prod._id}`)}
+                <li
+                  key={entry._id}
+                  className="pvh-listitem"
+                  onClick={() => prod && navigate(`/product/${prod._id}`)}
+                  tabIndex={0}
                 >
-                  <div style={{ display: "flex", alignItems: "center" }}>
+                  <div className="pvh-itemmain">
                     {prod?.image &&
                       <img
                         src={prod.image}
                         alt={prod.name}
-                        width={50}
-                        height={50}
-                        style={{ objectFit: "cover", borderRadius: 6, marginRight: 12, border: "1px solid #ddd" }}
+                        className="pvh-img"
                       />
                     }
                     <div>
-                      <div style={{ fontWeight: 600 }}>{prod ? prod.name : <span style={{ color: "#888" }}>Unknown Product</span>}</div>
-                      <div style={{ color: "#777", fontSize: 13 }}>
+                      <div className="pvh-name">{prod ? prod.name : <span className="pvh-unknown">Unknown Product</span>}</div>
+                      <div className="pvh-viewedat">
                         Viewed At: {(() => {
                           if (!entry.timestamp) return "(no date)";
                           if (/^\d+$/.test(entry.timestamp)) {
@@ -145,17 +124,9 @@ export default function ProductViewHistoryPage() {
                     </div>
                   </div>
                   <button
-                    style={{
-                      marginLeft: 12,
-                      padding: "4px 12px",
-                      border: "1px solid #d9534f",
-                      background: "#fff",
-                      color: "#d9534f",
-                      borderRadius: 4,
-                      cursor: "pointer"
-                    }}
+                    className="pvh-deletebtn"
                     onClick={e => {
-                      e.stopPropagation(); // Prevent product navigation
+                      e.stopPropagation();
                       handleDeleteEntry(entry._id);
                     }}
                   >

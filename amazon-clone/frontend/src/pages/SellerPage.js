@@ -2,13 +2,11 @@ import React from 'react';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import { GET_PRODUCTS, DELETE_PRODUCT } from '../graphql/productQueries';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { GET_ORDERS } from '../graphql/orderQueries';
 import { FiPackage } from "react-icons/fi";
+import '../styles/SellerPage.css';  // <-- import the CSS file!
 
-
-// S3 deletion mutation
 const DELETE_S3_FILE = gql`
   mutation DeleteS3File($key: String!) {
     deleteS3File(key: $key)
@@ -23,13 +21,11 @@ export default function SellerPage() {
   const [deleteS3File] = useMutation(DELETE_S3_FILE);
   const location = useLocation();
   const [pendingScroll, setPendingScroll] = React.useState(null);
-  // Near your other queries
   const { data: ordersData } = useQuery(GET_ORDERS, {
     variables: { sellerId: authUser?._id },
     skip: !authUser?._id,
     fetchPolicy: "network-only"
   });
-  
 
   React.useEffect(() => {
     if (location.state?.refresh) {
@@ -38,9 +34,9 @@ export default function SellerPage() {
       window.history.replaceState({}, document.title);
     }
   }, [location.state, refetch]);
+
   React.useEffect(() => {
     if (pendingScroll !== null && data?.getProducts?.length > 0) {
-      // Wait until DOM renders before scrolling
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           window.scrollTo({ top: pendingScroll, behavior: 'auto' });
@@ -49,25 +45,19 @@ export default function SellerPage() {
       });
     }
   }, [pendingScroll, data]);
-    
+
   const extractS3Key = (url) => {
     try {
-      const { pathname } = new URL(url);       // safer than regex
-      const key = decodeURIComponent(pathname.slice(1)); // remove the leading "/"
-      console.log("Extracted S3 key:", key);   // ✅ helpful log
+      const { pathname } = new URL(url);
+      const key = decodeURIComponent(pathname.slice(1));
       return key;
-    } catch (err) {
-      console.error("Invalid URL for S3 key extraction:", url);
+    } catch {
       return null;
     }
   };
-  
 
-  // Delete product and associated media from S3
   const handleDelete = async (id) => {
     try {
-      // Find product to delete its images/videos from S3
-    // Always refetch latest data before deleting
       await refetch();
       const latest = await refetch();
       const products = latest.data.getProducts;
@@ -85,9 +75,7 @@ export default function SellerPage() {
           if (key) {
             try {
               await deleteS3File({ variables: { key } });
-            } catch (err) {
-              console.warn('Failed to delete S3 file:', url, err.message);
-            }
+            } catch {}
           }
         }
       }
@@ -100,7 +88,7 @@ export default function SellerPage() {
 
   if (!authUser || authUser.role !== "seller") {
     return (
-      <div style={{ padding: "2rem" }}>
+      <div className="seller-page-denied">
         <h2>Access Denied</h2>
         <p>You do not have permission to view this page.</p>
         <button onClick={() => navigate("/")}>Back to Home</button>
@@ -108,10 +96,8 @@ export default function SellerPage() {
     );
   }
 
-  // Count sold items that are NOT delivered
   let undeliveredCount = 0;
   if (ordersData && ordersData.getOrders) {
-    // Loop through each order, sum items sold by this seller that are not delivered
     ordersData.getOrders.forEach(order => {
       if (Array.isArray(order.orderItems)) {
         order.orderItems.forEach(item => {
@@ -127,88 +113,65 @@ export default function SellerPage() {
   }
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <button onClick={() => navigate("/")} style={{ marginBottom: 20 }}>
-        Back to Home
-      </button>
-
-      <button
-        onClick={() => navigate(`/seller/orders`)}
-        style={{
-          marginLeft: 12,
-          background: "#ffd700",
-          border: "1px solid #ccc",
-          borderRadius: 5,
-          padding: "6px 18px",
-          fontWeight: 500,
-          position: "relative"
-        }}
-      >
-        <FiPackage size={20} style={{ marginRight: 6, verticalAlign: "middle" }} />
-        View Sold Items
-        {undeliveredCount > 0 && (
-          <span style={{
-            position: "absolute",
-            top: -6,
-            right: -6,
-            background: "#d9534f",
-            color: "#fff",
-            borderRadius: "50%",
-            padding: "2px 8px",
-            fontSize: 12,
-            fontWeight: 700,
-            boxShadow: "0 1px 5px rgba(0,0,0,0.11)"
-          }}>
-            {undeliveredCount}
-          </span>
-        )}
-      </button>
-
+    <div className="seller-page-main">
+      <div className="seller-page-topbar">
+        <button onClick={() => navigate("/")} className="seller-back-btn">
+          Back to Home
+        </button>
+        <button
+          onClick={() => navigate(`/seller/orders`)}
+          className="seller-orders-btn"
+        >
+          <FiPackage size={20} style={{ marginRight: 6, verticalAlign: "middle" }} />
+          View Sold Items
+          {undeliveredCount > 0 && (
+            <span className="seller-orders-badge">
+              {undeliveredCount}
+            </span>
+          )}
+        </button>
+      </div>
 
       <h1>Seller Dashboard</h1>
       <p>Welcome, {authUser.username}! Manage your products below.</p>
-      <button onClick={() => navigate("/seller/add")}>
+      <button className="seller-add-btn" onClick={() => navigate("/seller/add")}>
         Add Product
       </button>
 
       {loading && <p>Loading...</p>}
-      {error && <p style={{ color: 'red' }}>{error.message}</p>}
+      {error && <p className="seller-error">{error.message}</p>}
 
-      <ul>
+      <ul className="seller-products-list">
         {data && data.getProducts.filter(prod => prod.seller === authUser._id).map(product => (
-          <li key={product._id} style={{ marginBottom: '1.5rem', border: '1px solid #eee', padding: '1rem', borderRadius: 6 }}>
+          <li key={product._id} className="seller-product-card">
             <strong>Name:</strong> {product.name}<br />
             <strong>Description:</strong>
             <div style={{ whiteSpace: 'pre-line', marginBottom: 8 }}>
               {product.description}
             </div>
-
             <strong>Price:</strong> ${product.price}<br />
             <strong>Stock:</strong> {product.countInStock}<br />
             {product.image && <img src={product.image} alt="Product" width={120} />}<br />
-            {/* List additional images */}
             {product.images && product.images.length > 0 && (
               <div>
                 <span>More Images:</span>
-                <div style={{ display: 'flex', gap: 4 }}>
+                <div className="seller-images-row">
                   {product.images.map((img, idx) => (
                     <img key={idx} src={img} alt={`More ${idx}`} width={40} />
                   ))}
                 </div>
               </div>
             )}
-            {/* List videos */}
             {product.videos && product.videos.length > 0 && (
               <div>
                 <span>Videos:</span>
-                <div style={{ display: 'flex', gap: 4 }}>
+                <div className="seller-videos-row">
                   {product.videos.map((vid, idx) => (
                     <video key={idx} src={vid} width={60} controls />
                   ))}
                 </div>
               </div>
             )}
-            {/* <button onClick={() => navigate(`/seller/edit/${product._id}`)} style={{ marginRight: 8 }}>Edit</button> */}
             <button
               onClick={() =>
                 navigate(`/seller/edit/${product._id}`, {
@@ -218,11 +181,16 @@ export default function SellerPage() {
                   }
                 })
               }
-              style={{ marginRight: 8 }}
+              className="seller-edit-btn"
             >
               Edit
-            </button>           
-            <button onClick={() => handleDelete(product._id)} style={{ color: 'red' }}>Delete</button>
+            </button>
+            <button
+              onClick={() => handleDelete(product._id)}
+              className="seller-delete-btn"
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>

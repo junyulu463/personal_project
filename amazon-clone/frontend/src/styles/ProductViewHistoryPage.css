@@ -1,0 +1,130 @@
+.pvh-root {
+    padding: 2rem;
+    background: #fafbfc;
+    min-height: 100vh;
+  }
+  .pvh-backbtn {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin-bottom: 24px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #333;
+    transition: background .13s;
+  }
+  .pvh-backbtn:hover {
+    background: #f3f7fa;
+  }
+  .pvh-title {
+    font-size: 1.4rem;
+    color: #232f3e;
+    margin-bottom: 1.2rem;
+  }
+  .pvh-clearbtn {
+    margin-bottom: 18px;
+    padding: 6px 14px;
+    border: 1px solid #888;
+    background: #f8f9fa;
+    color: #333;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background .13s;
+  }
+  .pvh-clearbtn:disabled {
+    color: #aaa;
+    border-color: #eee;
+    background: #f8f9fa;
+    cursor: not-allowed;
+  }
+  .pvh-list {
+    list-style: none;
+    padding: 0;
+  }
+  .pvh-listitem {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    background: #fff;
+    border-radius: 6px;
+    padding-left: 6px;
+    padding-right: 6px;
+    cursor: pointer;
+    transition: background .11s;
+  }
+  .pvh-listitem:hover, .pvh-listitem:focus {
+    background: #f3fafd;
+    outline: none;
+  }
+  .pvh-itemmain {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .pvh-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 12px;
+    border: 1px solid #ddd;
+    background: #f7f7f7;
+  }
+  .pvh-name {
+    font-weight: 600;
+    color: #222;
+    font-size: 1.07rem;
+  }
+  .pvh-unknown {
+    color: #888;
+  }
+  .pvh-viewedat {
+    color: #777;
+    font-size: 13px;
+  }
+  .pvh-deletebtn {
+    margin-left: 12px;
+    padding: 4px 12px;
+    border: 1px solid #d9534f;
+    background: #fff;
+    color: #d9534f;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: .98rem;
+    font-weight: 500;
+    transition: background .11s, color .11s;
+  }
+  .pvh-deletebtn:hover {
+    background: #ffe5e5;
+    color: #a41515;
+    border-color: #c9302c;
+  }
+  .pvh-empty,
+  .pvh-loginmsg {
+    color: #888;
+    font-size: 1.13rem;
+    padding: 28px 0;
+  }
+  .pvh-loading,
+  .pvh-error {
+    color: #b12704;
+    font-size: 1.11rem;
+    padding: 32px 0 12px 0;
+  }
+  @media (max-width: 800px) {
+    .pvh-root {
+      padding: 1rem 0.4rem;
+    }
+    .pvh-img {
+      width: 38px;
+      height: 38px;
+      margin-right: 7px;
+    }
+  }
+  

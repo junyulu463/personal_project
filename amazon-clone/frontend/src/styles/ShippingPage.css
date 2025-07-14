@@ -1,0 +1,138 @@
+.shippingpage-root {
+    max-width: 540px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #eee;
+    padding: 32px;
+    min-height: 480px;
+  }
+  .shippingpage-title {
+    font-size: 1.3rem;
+    color: #232f3e;
+    margin-bottom: 1.6rem;
+    text-align: center;
+  }
+  .shippingpage-addrlist {
+    padding: 0;
+    list-style: none;
+  }
+  .shippingpage-addritem {
+    margin-bottom: 16px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 12px;
+    background: #fafbfc;
+  }
+  .shippingpage-addritem.default {
+    background: #f6fafd;
+    border: 1.5px solid #79c2ff;
+  }
+  .shippingpage-defaultmark {
+    color: green;
+    font-weight: 600;
+    margin-left: 5px;
+  }
+  .shippingpage-addractions {
+    margin-top: 8px;
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+  }
+  .shippingpage-addractions button {
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background .13s;
+  }
+  .shippingpage-addractions button.selected,
+  .shippingpage-addractions button.selected:hover {
+    background: #ffd814;
+    border: 2px solid #ffd814;
+    font-weight: bold;
+  }
+  .shippingpage-addractions button:hover {
+    background: #f3f7fa;
+  }
+  .shippingpage-addbtn {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin-bottom: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #1976d2;
+    font-weight: 600;
+    transition: background .13s;
+  }
+  .shippingpage-addbtn:hover {
+    background: #f3fafd;
+  }
+  .shippingpage-nextwrap {
+    margin-top: 24px;
+    text-align: center;
+  }
+  .shippingpage-nextbtn {
+    background: #ffd814;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 8px 24px;
+    border: none;
+    font-size: 1.1rem;
+    opacity: 1;
+    cursor: pointer;
+    transition: background .13s;
+  }
+  .shippingpage-nextbtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .shippingpage-backwrap {
+    margin-top: 36px;
+    text-align: center;
+  }
+  .shippingpage-backbtn {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 18px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #232f3e;
+    font-weight: 500;
+    transition: background .13s;
+  }
+  .shippingpage-backbtn:hover {
+    background: #f3fafd;
+  }
+  .shippingpage-message {
+    padding: 32px;
+    color: #666;
+    font-size: 1.08rem;
+    text-align: center;
+  }
+  .shippingpage-message.error {
+    color: #d9534f;
+    font-weight: bold;
+  }
+  @media (max-width: 650px) {
+    .shippingpage-root {
+      padding: 12px;
+      margin: 12px;
+      min-width: unset;
+    }
+    .shippingpage-title {
+      font-size: 1.09rem;
+    }
+    .shippingpage-addractions button {
+      font-size: .97rem;
+      padding: 6px 9px;
+    }
+  }
+  

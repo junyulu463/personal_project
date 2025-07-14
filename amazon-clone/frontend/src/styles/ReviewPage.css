@@ -1,0 +1,115 @@
+.reviewpage-root {
+    max-width: 700px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #eee;
+    padding: 32px;
+  }
+  .reviewpage-title {
+    margin-bottom: 24px;
+    font-size: 1.55rem;
+    color: #232f3e;
+    font-weight: 700;
+  }
+  .reviewpage-block {
+    margin-bottom: 28px;
+    font-size: 1.08rem;
+    color: #232f3e;
+  }
+  .reviewpage-address {
+    margin-top: 5px;
+    color: #222;
+    font-size: 1.04rem;
+    line-height: 1.55;
+  }
+  .reviewpage-missing {
+    color: #888;
+    font-style: italic;
+  }
+  .reviewpage-cardicon {
+    font-size: 22px !important;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  .reviewpage-block ul {
+    margin-top: 8px;
+    margin-bottom: 0;
+    padding-left: 18px;
+  }
+  .reviewpage-itemrow {
+    margin-bottom: 7px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 1.04rem;
+  }
+  .reviewpage-itemtotal {
+    margin-left: 8px;
+    font-weight: bold;
+  }
+  .reviewpage-summary {
+    margin-bottom: 24px;
+    font-size: 1.08rem;
+    border-top: 1px solid #eee;
+    padding-top: 14px;
+    color: #232f3e;
+  }
+  .reviewpage-grandtotal {
+    color: #b12704;
+    font-weight: 600;
+    font-size: 1.14rem;
+    margin-left: 5px;
+  }
+  .reviewpage-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .reviewpage-backbtn,
+  .reviewpage-placeorder,
+  .reviewpage-paylater {
+    padding: 11px 28px;
+    font-size: 1rem;
+    border-radius: 4px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background .15s, color .13s;
+  }
+  .reviewpage-backbtn {
+    background: #eaeaea;
+    color: #222;
+  }
+  .reviewpage-backbtn:hover {
+    background: #d5d5d5;
+  }
+  .reviewpage-placeorder {
+    background: #ffd814;
+    color: #222;
+  }
+  .reviewpage-placeorder:hover {
+    background: #f7ca00;
+  }
+  .reviewpage-paylater {
+    background: #f7ca00;
+    color: #222;
+  }
+  .reviewpage-paylater:hover {
+    background: #ffd814;
+  }
+  .reviewpage-loginmsg {
+    padding: 32px;
+    color: #b12704;
+    font-size: 1.13rem;
+  }
+  @media (max-width: 800px) {
+    .reviewpage-root {
+      max-width: 99vw;
+      padding: 14px;
+    }
+    .reviewpage-title {
+      font-size: 1.17rem;
+    }
+  }
+  

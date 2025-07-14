@@ -1,10 +1,8 @@
-// src/pages/menu_pages/OrderDetailPage.js
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { UPDATE_ORDER, CANCEL_ORDER, GET_ORDER } from "../../graphql/orderQueries";
-import { useMutation } from "@apollo/client";
+import "../../styles/OrderDetailPage.css";
 
 export default function OrderDetailPage() {
   const { id } = useParams();
@@ -17,7 +15,6 @@ export default function OrderDetailPage() {
     order.orderItems.length > 0 &&
     order.orderItems.every(item => item.isDelivered);
 
-// Optionally, to get the latest deliveredAt among all items:
   const latestDeliveredAt =
     order?.orderItems
       ?.map(item => item.deliveredAt)
@@ -26,18 +23,16 @@ export default function OrderDetailPage() {
       .slice(-1)[0];
 
   const anyItemDelivered =
-  order &&
-  order.orderItems.length > 0 &&
-  order.orderItems.some(item => item.isDelivered);
-    
+    order &&
+    order.orderItems.length > 0 &&
+    order.orderItems.some(item => item.isDelivered);
 
   const [cancelOrder] = useMutation(CANCEL_ORDER, {
     refetchQueries: [{ query: GET_ORDER, variables: { id } }],
-  }); 
+  });
   const [updateOrder] = useMutation(UPDATE_ORDER, {
     refetchQueries: [{ query: GET_ORDER, variables: { id } }],
   });
-
 
   useEffect(() => {
     if (!order) return;
@@ -58,8 +53,7 @@ export default function OrderDetailPage() {
         }
       });
     }
-  }, [allItemsDelivered, order?.isDelivered,order, updateOrder]);  
-       
+  }, [allItemsDelivered, order?.isDelivered, order, updateOrder]);
 
   const handleCancelOrder = async () => {
     if (!window.confirm("Are you sure you want to cancel this order?")) return;
@@ -71,60 +65,40 @@ export default function OrderDetailPage() {
       alert("Cancel failed: " + err.message);
     }
   };
-  
+
   const handleCancelItem = async (productId) => {
     if (!window.confirm("Are you sure you want to cancel this item?")) return;
     try {
       await cancelOrder({ variables: { orderId: order._id, productId } });
       alert("Item canceled.");
-      // Optionally refetch or reload
     } catch (err) {
       alert("Cancel failed: " + err.message);
     }
-  };  
+  };
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <button
-        onClick={() => navigate(-1)}
-        style={{
-          background: "#fff",
-          border: "1px solid #ddd",
-          borderRadius: 4,
-          padding: "8px 16px",
-          marginBottom: 24,
-          cursor: "pointer",
-        }}
-      >
+    <div className="orderdetail-root">
+      <button className="orderdetail-backbtn" onClick={() => navigate(-1)}>
         ← Back
       </button>
-
-      <h2>Order Details</h2>
-      {loading && <div>Loading...</div>}
-      {error && <div style={{ color: "red" }}>Error: {error.message}</div>}
+      <h2 className="orderdetail-title">Order Details</h2>
+      {loading && <div className="orderdetail-loading">Loading...</div>}
+      {error && <div className="orderdetail-error">Error: {error.message}</div>}
       {order && (
-        <div
-          style={{
-            background: "#fafafa",
-            borderRadius: 8,
-            boxShadow: "0 1px 4px #f2f2f2",
-            padding: 24,
-            marginTop: 16,
-          }}
-        >
-          <div style={{ marginBottom: 14 }}>
+        <div className="orderdetail-card">
+          <div className="orderdetail-row">
             <strong>Order ID:</strong> {order._id}
           </div>
-          <div style={{ marginBottom: 14 }}>
+          <div className="orderdetail-row">
             <strong>Order Date:</strong>{" "}
             {order.createdAt
               ? new Date(Number(order.createdAt)).toLocaleString()
               : "-"}
           </div>
           {/* Shipping Address */}
-          <div style={{ marginBottom: 14 }}>
+          <div className="orderdetail-row">
             <strong>Shipping Address:</strong>
-            <div style={{ marginLeft: 16 }}>
+            <div className="orderdetail-addr">
               {order.shippingAddress.recipient && (
                 <span>
                   <b>{order.shippingAddress.recipient}</b>
@@ -134,7 +108,7 @@ export default function OrderDetailPage() {
               {order.shippingAddress.address}, {order.shippingAddress.city},{" "}
               {order.shippingAddress.postalCode}, {order.shippingAddress.country}
               {order.shippingAddress.label && (
-                <span style={{ marginLeft: 8, color: "#888" }}>
+                <span className="orderdetail-addrlabel">
                   ({order.shippingAddress.label})
                 </span>
               )}
@@ -142,9 +116,9 @@ export default function OrderDetailPage() {
           </div>
           {/* Billing Address */}
           {order.billingAddress && (
-            <div style={{ marginBottom: 14 }}>
+            <div className="orderdetail-row">
               <strong>Billing Address:</strong>
-              <div style={{ marginLeft: 16 }}>
+              <div className="orderdetail-addr">
                 {order.billingAddress.recipient && (
                   <span>
                     <b>{order.billingAddress.recipient}</b>
@@ -155,17 +129,16 @@ export default function OrderDetailPage() {
                 {order.billingAddress.postalCode},{" "}
                 {order.billingAddress.country}
                 {order.billingAddress.label && (
-                  <span style={{ marginLeft: 8, color: "#888" }}>
+                  <span className="orderdetail-addrlabel">
                     ({order.billingAddress.label})
                   </span>
                 )}
               </div>
             </div>
           )}
-
           {/* Payment Method */}
           {order.paymentMethod && (
-            <div style={{ marginBottom: 14 }}>
+            <div className="orderdetail-row">
               <strong>Paid With:</strong>{" "}
               {order.paymentMethod.cardType} ending in{" "}
               {order.paymentMethod.cardNumber.slice(-4)} (
@@ -176,55 +149,35 @@ export default function OrderDetailPage() {
               </span>
             </div>
           )}
-
           {/* Items List, per-item delivery status */}
-          <div style={{ marginBottom: 18 }}>
+          <div className="orderdetail-row">
             <strong>Items:</strong>
-            <ul style={{ listStyle: "none", padding: 0, marginTop: 10 }}>
+            <ul className="orderdetail-itemslist">
               {order.orderItems.map((item, idx) => (
                 <li
                   key={idx}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    marginBottom: 8,
-                    background: "#fff",
-                    borderRadius: 4,
-                    padding: 7,
-                    boxShadow: "0 1px 3px #eee",
-                    cursor: "pointer", // Make the whole row look clickable
-                  }}
+                  className="orderdetail-itemrow"
                   onClick={() => navigate(`/product/${item.product}`)}
                   title="View Product"
                 >
                   <img
                     src={item.image}
                     alt={item.name}
-                    style={{
-                      width: 48,
-                      height: 48,
-                      objectFit: "cover",
-                      borderRadius: 6,
-                      marginRight: 14,
-                      border: "1px solid #eee",
-                      background: "#f7f7f7",
-                    }}
+                    className="orderdetail-itemimg"
                   />
-                  <div style={{ flex: 1 }}>
-                    <span style={{ fontWeight: 500 }}>{item.name}</span>
-                    <span style={{ marginLeft: 12, color: "#555" }}>
+                  <div className="orderdetail-iteminfo">
+                    <span className="orderdetail-itemname">{item.name}</span>
+                    <span className="orderdetail-itemqty">
                       × {item.qty}
                     </span>
-                    {/* Seller ID shown if needed */}
                     {item.seller && (
-                      <span style={{ marginLeft: 12, color: "#777" }}>
+                      <span className="orderdetail-itemseller">
                         Seller: {item.seller}
                       </span>
                     )}
-                    {/* Per-item delivery status */}
-                    <span style={{ marginLeft: 14 }}>
+                    <span className="orderdetail-itemstatus">
                       {item.isDelivered ? (
-                        <span style={{ color: "#43a047" }}>
+                        <span className="orderdetail-delivered">
                           Delivered
                           {item.deliveredAt && (
                             <span>
@@ -236,11 +189,13 @@ export default function OrderDetailPage() {
                           )}
                         </span>
                       ) : (
-                        <span style={{ color: "#ffa600" }}>Not Delivered</span>
+                        <span className="orderdetail-notdelivered">
+                          Not Delivered
+                        </span>
                       )}
                     </span>
                   </div>
-                  <div>
+                  <div className="orderdetail-itemprice">
                     <strong>
                       {typeof item.price === "number"
                         ? `$${item.price.toFixed(2)}`
@@ -249,110 +204,79 @@ export default function OrderDetailPage() {
                         : "-"}
                     </strong>
                   </div>
-
                   {!item.isDelivered && (
                     <button
+                      className="orderdetail-cancelitem"
                       onClick={e => {
                         e.stopPropagation();
                         handleCancelItem(item.product);
-                      }}
-                      style={{
-                        marginLeft: 24,
-                        background: "#f44336",
-                        color: "#fff",
-                        border: "none",
-                        borderRadius: 4,
-                        padding: "5px 14px",
-                        fontWeight: "bold",
-                        cursor: "pointer"
                       }}
                     >
                       Cancel Item
                     </button>
                   )}
-
                 </li>
               ))}
             </ul>
           </div>
-          <div style={{ marginBottom: 14 }}>
+          <div className="orderdetail-row">
             <strong>Total Paid:</strong>{" "}
-            <span style={{ color: "#b12704" }}>
+            <span className="orderdetail-total">
               ${order.totalPrice.toFixed(2)}
             </span>
           </div>
-
-          {/* PAID/NOT PAID SECTION */}
-          <div style={{ marginBottom: 14 }}>
+          {/* Payment Status */}
+          <div className="orderdetail-row">
             <strong>Payment Status:</strong>{" "}
             {order.isPaid ? (
-              <span style={{ color: "#43a047", fontWeight: 600 }}>Paid</span>
+              <span className="orderdetail-paid">Paid</span>
             ) : (
-              <span style={{ color: "#d9534f", fontWeight: 600 }}>
-                Not Paid
-              </span>
+              <span className="orderdetail-notpaid">Not Paid</span>
             )}
             {order.paidAt && order.isPaid && (
-              <span style={{ marginLeft: 8, color: "#888" }}>
+              <span className="orderdetail-paidat">
                 (on {new Date(order.paidAt).toLocaleString()})
               </span>
             )}
           </div>
-
-            {/* Overall order delivery status */}
-            <div>
-              <strong>Status:</strong>{" "}
-              {allItemsDelivered ? (
-                <span style={{ color: "#43a047" }}>Delivered</span>
-              ) : (
-                <span style={{ color: "#ffa600" }}>Not Delivered</span>
-              )}
-              {allItemsDelivered && latestDeliveredAt && (
-                <span>
-                  {" "}
-                  (on {new Date(Number(latestDeliveredAt)).toLocaleDateString()})
-                </span>
-              )}
-            </div>
-
-            {order && (
-              <button
-                onClick={handleCancelOrder}
-                style={{
-                  marginTop: 18,
-                  background: anyItemDelivered ? "#ccc" : "#d9534f",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: 4,
-                  padding: "10px 28px",
-                  fontWeight: "bold",
-                  cursor: anyItemDelivered ? "not-allowed" : "pointer"
-                }}
-                disabled={anyItemDelivered}
-                title={anyItemDelivered ? "Cannot cancel: at least one item is delivered" : "Cancel Order"}
-              >
-                Cancel Order
-              </button>
+          {/* Order delivery status */}
+          <div className="orderdetail-row">
+            <strong>Status:</strong>{" "}
+            {allItemsDelivered ? (
+              <span className="orderdetail-delivered">Delivered</span>
+            ) : (
+              <span className="orderdetail-notdelivered">Not Delivered</span>
             )}
-
-
-            {order && !order.isPaid && (
+            {allItemsDelivered && latestDeliveredAt && (
+              <span>
+                {" "}
+                (on {new Date(Number(latestDeliveredAt)).toLocaleDateString()})
+              </span>
+            )}
+          </div>
+          {/* Cancel and Pay Now */}
+          <div className="orderdetail-actions">
+            <button
+              className="orderdetail-cancelorder"
+              onClick={handleCancelOrder}
+              disabled={anyItemDelivered}
+              title={
+                anyItemDelivered
+                  ? "Cannot cancel: at least one item is delivered"
+                  : "Cancel Order"
+              }
+            >
+              Cancel Order
+            </button>
+            {!order.isPaid && (
               <button
+                className="orderdetail-paynow"
                 onClick={() => navigate(`/checkout/shipping?orderId=${order._id}`)}
-                style={{
-                  background: "#ffd814",
-                  color: "#222",
-                  border: "1px solid #e2b400",
-                  borderRadius: 4,
-                  padding: "10px 28px",
-                  fontWeight: "bold",
-                  cursor: "pointer",
-                  margin: "18px 0 0 0",
-                }}
               >
                 Pay Now
               </button>
             )}
+          </div>
         </div>
       )}
     </div>
