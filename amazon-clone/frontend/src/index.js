@@ -7,7 +7,8 @@ import { CheckoutProvider } from './context/CheckoutContext';
 
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
+  //uri: 'http://localhost:4000/graphql',
+  uri: process.env.REACT_APP_API_URL,
   cache: new InMemoryCache(),
 });
 

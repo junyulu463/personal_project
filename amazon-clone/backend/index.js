@@ -27,9 +27,11 @@ async function startServer() {
   mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
       console.log('✅ MongoDB connected');
-      app.listen({ port: 4000 }, () =>
-        console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+      const PORT = process.env.PORT || 4000;  // <--- Use the port AWS provides
+      app.listen(PORT, () =>
+        console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`)
       );
+      
     })
     .catch(err => console.error('❌ MongoDB connection error:', err));
 }
